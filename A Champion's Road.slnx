@@ -1,3 +1,6 @@
 <Solution>
+  <Folder Name="/A Champions Road/">
+    <Project Path="A Champions Road/A Champion's Road.csproj" />
+  </Folder>
   <Project Path="A Champion's Road/A Champion's Road.csproj" />
 </Solution>
