@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Julio\\Desktop\\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\\A Champions Road\\A Champion's Road.csproj": {}
+    "C:\\Users\\Julio\\Desktop\\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\\A Champions Road\\A Champions Road.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Julio\\Desktop\\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\\A Champions Road\\A Champion's Road.csproj": {
+    "C:\\Users\\Julio\\Desktop\\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\\A Champions Road\\A Champions Road.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Julio\\Desktop\\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\\A Champions Road\\A Champion's Road.csproj",
-        "projectName": "A Champion's Road",
-        "projectPath": "C:\\Users\\Julio\\Desktop\\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\\A Champions Road\\A Champion's Road.csproj",
+        "projectUniqueName": "C:\\Users\\Julio\\Desktop\\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\\A Champions Road\\A Champions Road.csproj",
+        "projectName": "A Champions Road",
+        "projectPath": "C:\\Users\\Julio\\Desktop\\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\\A Champions Road\\A Champions Road.csproj",
         "packagesPath": "C:\\Users\\Julio\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\Julio\\Desktop\\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\\A Champions Road\\obj\\",
         "projectStyle": "PackageReference",
