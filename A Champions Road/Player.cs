@@ -9,10 +9,14 @@ public class Player
     
 public Vector2 Position;
 public Texture2D textura;
+public Texture2D texturaAlternativa;
+public Texture2D texturaNormal;
 public float Speed = 10f;
-public Player(Texture2D texture, Vector2 initialPosition)
+public Player(Texture2D texture, Texture2D altTexture, Texture2D normalTexture, Vector2 initialPosition)
     {
         this.textura = texture;
+        this.texturaAlternativa = altTexture;
+        this.texturaNormal = normalTexture;
         Position = initialPosition;
     }  
 
@@ -28,6 +32,14 @@ public void Update(GameTime gameTime)
         if (kState.IsKeyDown(Keys.D))
         {
             Position.X += Speed; // Se mueve a la derecha
+        }
+        if (kState.IsKeyDown(Keys.P)) 
+        {
+            textura = texturaAlternativa; // golpe izq
+        }
+        if(kState.IsKeyUp(Keys.P))
+        {
+            textura = texturaNormal;
         }
     }
 

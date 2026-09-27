@@ -1,3 +1,9 @@
 {
-    "dotnet.defaultSolution": "A Champion's Road.slnx"
+    "dotnet.defaultSolution": "A Champion's Road.slnx",
+    "files.exclude": {
+        "**/*.rpyc": true,
+        "**/*.rpa": true,
+        "**/*.rpymc": true,
+        "**/cache/": true
+    }
 }

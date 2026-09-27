@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("A Champion\'s Road")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f9228047d272b25847936e92e8c7d7efc8de3c52")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+24b77516a5e450a1c6bfd3e4fdb804ea3f11feef")]
 [assembly: System.Reflection.AssemblyProductAttribute("A Champion\'s Road")]
 [assembly: System.Reflection.AssemblyTitleAttribute("A Champion\'s Road")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

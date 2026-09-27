@@ -16,6 +16,8 @@ namespace A_Champion_s_Road
         // Declaración del objeto jugador y de su textura (imagen)
         private Player _player;
         private Texture2D _playerTexture;
+        private Texture2D _playerAltTexture;
+        private Texture2D _playerNormalTexture;
 
         public Game1()
         {
@@ -44,9 +46,10 @@ namespace A_Champion_s_Road
 
             // Carga la textura del protagonista desde la pipeline de contenido de MonoGame
             _playerTexture = Content.Load<Texture2D>("backSprite-danteVega2");
-            
+            _playerAltTexture = Content.Load<Texture2D>("backSprite-punch1-danteVega");
+            _playerNormalTexture = Content.Load<Texture2D>("backSprite-danteVega2");
             // Instancia el objeto Player pasándole su textura y su posición inicial (X: 400, Y: 300)
-            _player = new Player(_playerTexture, new Vector2(200, 180));
+            _player = new Player(_playerTexture, _playerAltTexture, _playerNormalTexture, new Vector2(200, 180));
         }
 
         // Método que se ejecuta continuamente en cada fotograma (frame) para actualizar la lógica

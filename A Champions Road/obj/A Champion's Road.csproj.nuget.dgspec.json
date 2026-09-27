@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Julio\\Desktop\\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\\A Champions Road\\A Champion's Road.csproj": {}
+    "C:\\Users\\PC Humilde\\Desktop\\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\\A Champions Road\\A Champion's Road.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Julio\\Desktop\\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\\A Champions Road\\A Champion's Road.csproj": {
+    "C:\\Users\\PC Humilde\\Desktop\\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\\A Champions Road\\A Champion's Road.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Julio\\Desktop\\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\\A Champions Road\\A Champion's Road.csproj",
+        "projectUniqueName": "C:\\Users\\PC Humilde\\Desktop\\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\\A Champions Road\\A Champion's Road.csproj",
         "projectName": "A Champion's Road",
-        "projectPath": "C:\\Users\\Julio\\Desktop\\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\\A Champions Road\\A Champion's Road.csproj",
-        "packagesPath": "C:\\Users\\Julio\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Julio\\Desktop\\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\\A Champions Road\\obj\\",
+        "projectPath": "C:\\Users\\PC Humilde\\Desktop\\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\\A Champions Road\\A Champion's Road.csproj",
+        "packagesPath": "C:\\Users\\PC Humilde\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\PC Humilde\\Desktop\\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\\A Champions Road\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Julio\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\PC Humilde\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -66,6 +66,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[9.0.14, 9.0.14]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[9.0.14, 9.0.14]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[9.0.14, 9.0.14]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[9.0.14, 9.0.14]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
