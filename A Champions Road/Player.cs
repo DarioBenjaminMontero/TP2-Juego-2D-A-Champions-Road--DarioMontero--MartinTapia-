@@ -12,17 +12,22 @@ public class Player
 public Vector2 Position;
 public Texture2D textura;
 public Texture2D texturaAlternativa;
+public Texture2D texturaAlternativa2;
 public Texture2D texturaNormal;
+public int limiteIzquierda, limiteDerecha;
 public float Speed = 10f;
 
 
-public Player(Texture2D texture, Texture2D altTexture, Texture2D normalTexture, Vector2 initialPosition)
+public Player(Texture2D texture, Texture2D altTexture, Texture2D altTexture2, Texture2D normalTexture, Vector2 initialPosition)
     {
         
         this.textura = texture;
         this.texturaAlternativa = altTexture;
+        this.texturaAlternativa2 = altTexture2;
         this.texturaNormal = normalTexture;
         Position = initialPosition;
+        limiteDerecha = 290;
+        limiteIzquierda = 140;
     }  
 public enum PlayerState
     {
@@ -45,33 +50,51 @@ if(currentState == PlayerState.Idle)
             {
                 currentState = PlayerState.Idle;
                 textura = texturaNormal;
-                Position.X -= Speed;
+                
+                if(Position.X - Speed > limiteIzquierda)
+                    {
+                        Position.X -= Speed;
+                    }
+                    else
+    {
+        Position.X = limiteIzquierda; 
+    }
             }
             else if(kState.IsKeyDown(Keys.D))
             {
                 currentState = PlayerState.Idle;
                 textura = texturaNormal;
-Position.X += Speed;
+                if(Position.X + Speed < limiteDerecha)
+                    {
+                        Position.X += Speed;
+                    }
+                    else {
+        Position.X = limiteDerecha; 
+    }
+
             }
             }
             
 
-            if (!kState.IsKeyDown(Keys.P))
-            {
-                 
-                currentState = PlayerState.Idle;
-                textura = texturaNormal;
-
-            }
-            else if(kState.IsKeyDown(Keys.P))
-            {
-                currentState = PlayerState.PunchingLeft;
-                textura = texturaAlternativa;
-
-            }
+            if (kState.IsKeyDown(Keys.O))
+{
+    currentState = PlayerState.PunchingLeft;
+    textura = texturaAlternativa;
+}
+else if (kState.IsKeyDown(Keys.P))
+{
+    currentState = PlayerState.PunchingRight;
+    textura = texturaAlternativa2;
+}
+else
+{
+    currentState = PlayerState.Idle;
+    textura = texturaNormal;
+}
+            
     }
 
-    // 4. El Draw (su forma de pintarse en pantalla)
+    
     public void Draw(SpriteBatch spriteBatch)
     {
         spriteBatch.Draw(textura, Position, Color.White);
