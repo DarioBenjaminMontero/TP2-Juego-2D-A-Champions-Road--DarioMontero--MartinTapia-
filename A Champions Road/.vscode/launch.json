@@ -8,7 +8,7 @@
         "name": "C#: A_Champion_s_Road Debug",
         "type": "dotnet",
         "request": "launch",
-        "projectPath": "${workspaceFolder}/A_Champion_s_Road.csproj"
+        "projectPath": "${workspaceFolder}/A_Champions_Road.csproj"
       }
     ],
   }
