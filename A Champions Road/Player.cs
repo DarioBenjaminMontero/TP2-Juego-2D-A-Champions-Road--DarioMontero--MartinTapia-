@@ -1,3 +1,6 @@
+
+
+
 using System.Runtime.Serialization.Formatters;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -26,8 +29,8 @@ public Player(Texture2D texture, Texture2D altTexture, Texture2D altTexture2, Te
         this.texturaAlternativa2 = altTexture2;
         this.texturaNormal = normalTexture;
         Position = initialPosition;
-        limiteDerecha = 290;
-        limiteIzquierda = 140;
+        limiteDerecha = 600;
+        limiteIzquierda = 400;
     }  
 public enum PlayerState
     {
@@ -103,4 +106,3 @@ else
     
 
 }
-

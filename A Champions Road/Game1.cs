@@ -20,6 +20,7 @@ namespace A_Champion_s_Road
         private Texture2D _playerAltTexture2;
         private Texture2D _playerNormalTexture;
 
+private Texture2D _ring;
         public Game1()
         {
             // Inicializa el administrador de gráficos para la ventana
@@ -30,6 +31,13 @@ namespace A_Champion_s_Road
             
             // Permite que el cursor del mouse sea visible dentro de la ventana del juego
             IsMouseVisible = true;
+       
+     _graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+    _graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+
+    // 2. Quita los bordes de la ventana de Windows
+     _graphics.HardwareModeSwitch = false;
+    _graphics.IsFullScreen = true;
         }
 
         // Método que se ejecuta una sola vez al iniciar la aplicación antes de cargar contenido
@@ -44,14 +52,14 @@ namespace A_Champion_s_Road
         {
             // Inicializa el SpriteBatch pasándole el dispositivo gráfico actual
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
+_ring = Content.Load<Texture2D>("ring3");
             // Carga la textura del protagonista desde la pipeline de contenido de MonoGame
             _playerTexture = Content.Load<Texture2D>("backSprite-danteVega2");
             _playerAltTexture = Content.Load<Texture2D>("backSprite-punch1-danteVega");
             _playerAltTexture2 = Content.Load<Texture2D>("backSprite-punch2-danteVega");
             _playerNormalTexture = Content.Load<Texture2D>("backSprite-danteVega2");
             // Instancia el objeto Player pasándole su textura y su posición inicial (X: 400, Y: 300)
-            _player = new Player(_playerTexture, _playerAltTexture, _playerAltTexture2, _playerNormalTexture, new Vector2(200, 180));
+            _player = new Player(_playerTexture, _playerAltTexture, _playerAltTexture2, _playerNormalTexture, new Vector2(500, 470));
         }
 
         // Método que se ejecuta continuamente en cada fotograma (frame) para actualizar la lógica
@@ -75,10 +83,14 @@ namespace A_Champion_s_Road
 
             // Comienza el lote de renderizado de sprites
             _spriteBatch.Begin();
-            
+
             // Dibuja al jugador utilizando el SpriteBatch
-            _player.Draw(_spriteBatch);
             
+             Rectangle fullscreenBounds = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+    
+    // Suponiendo que tu variable de textura se llama "texturaRing"
+    _spriteBatch.Draw(_ring, fullscreenBounds, Color.White);
+            _player.Draw(_spriteBatch);
             // Finaliza el lote de renderizado (necesario para que se muestren los gráficos en pantalla)
             _spriteBatch.End();
 
