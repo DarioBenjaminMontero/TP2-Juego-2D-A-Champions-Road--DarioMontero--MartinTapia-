@@ -59,7 +59,7 @@ _ring = Content.Load<Texture2D>("ring3");
             _playerAltTexture2 = Content.Load<Texture2D>("backSprite-punch2-danteVega");
             _playerNormalTexture = Content.Load<Texture2D>("backSprite-danteVega2");
             // Instancia el objeto Player pasándole su textura y su posición inicial (X: 400, Y: 300)
-            _player = new Player(_playerTexture, _playerAltTexture, _playerAltTexture2, _playerNormalTexture, new Vector2(500, 470));
+            _player = new Player(_playerTexture, _playerAltTexture, _playerAltTexture2, _playerNormalTexture, new Vector2((Window.ClientBounds.Width * 0.5f), (Window.ClientBounds.Height * 0.722f)), Window.ClientBounds.Width * 0.75f,Window.ClientBounds.Width * 0.25f);
         }
 
         // Método que se ejecuta continuamente en cada fotograma (frame) para actualizar la lógica

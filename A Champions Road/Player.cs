@@ -17,11 +17,11 @@ public Texture2D textura;
 public Texture2D texturaAlternativa;
 public Texture2D texturaAlternativa2;
 public Texture2D texturaNormal;
-public int limiteIzquierda, limiteDerecha;
+public float limiteIzquierda, limiteDerecha;
 public float Speed = 10f;
 
 
-public Player(Texture2D texture, Texture2D altTexture, Texture2D altTexture2, Texture2D normalTexture, Vector2 initialPosition)
+public Player(Texture2D texture, Texture2D altTexture, Texture2D altTexture2, Texture2D normalTexture, Vector2 initialPosition, float limiteD, float limiteI)
     {
         
         this.textura = texture;
@@ -29,8 +29,8 @@ public Player(Texture2D texture, Texture2D altTexture, Texture2D altTexture2, Te
         this.texturaAlternativa2 = altTexture2;
         this.texturaNormal = normalTexture;
         Position = initialPosition;
-        limiteDerecha = 600;
-        limiteIzquierda = 400;
+        limiteDerecha = limiteD;
+        limiteIzquierda = limiteI;
     }  
 public enum PlayerState
     {
@@ -67,12 +67,12 @@ if(currentState == PlayerState.Idle)
             {
                 currentState = PlayerState.Idle;
                 textura = texturaNormal;
-                if(Position.X + Speed < limiteDerecha)
+                if(Position.X + Speed < limiteDerecha - textura.Width)
                     {
                         Position.X += Speed;
                     }
                     else {
-        Position.X = limiteDerecha; 
+        Position.X = limiteDerecha- textura.Width; 
     }
 
             }
