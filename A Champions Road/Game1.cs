@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media; // No olvides importar este espacio de nombres
+
 
 namespace A_Champion_s_Road
 {
@@ -21,7 +23,7 @@ namespace A_Champion_s_Road
         private Texture2D _playerNormalTexture;
         private Texture2D _cargandoGolpeIzquierda;
         private Texture2D _cargandoGolpeDerecha;
-
+private Song backgroundMusic;
 private Texture2D _ring;
         public Game1()
         {
@@ -52,7 +54,9 @@ private Texture2D _ring;
         // Método encargado de cargar todos los recursos del juego (texturas, sonidos, fuentes)
         protected override void LoadContent()
         {
-            
+            backgroundMusic = Content.Load<Song>("Ten_Counts_To_Glory"); 
+    MediaPlayer.Play(backgroundMusic);
+    MediaPlayer.IsRepeating = true; 
             // Inicializa el SpriteBatch pasándole el dispositivo gráfico actual
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 _ring = Content.Load<Texture2D>("ring3");
