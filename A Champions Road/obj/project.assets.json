@@ -310,24 +310,26 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\alumno.ET26\\.nuget\\packages\\": {}
+    "C:\\Users\\Julio\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\alumno.ET26\\Desktop\\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\\A Champions Road\\A Champions Road.csproj",
+      "projectUniqueName": "C:\\Users\\Julio\\Desktop\\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\\A Champions Road\\A Champions Road.csproj",
       "projectName": "A Champions Road",
-      "projectPath": "C:\\Users\\alumno.ET26\\Desktop\\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\\A Champions Road\\A Champions Road.csproj",
-      "packagesPath": "C:\\Users\\alumno.ET26\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\alumno.ET26\\Desktop\\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\\A Champions Road\\obj\\",
+      "projectPath": "C:\\Users\\Julio\\Desktop\\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\\A Champions Road\\A Champions Road.csproj",
+      "packagesPath": "C:\\Users\\Julio\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Julio\\Desktop\\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\\A Champions Road\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\alumno.ET26\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Julio\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -345,7 +347,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "10.0.200"
     },
     "frameworks": {
       "net8.0": {
@@ -376,7 +379,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.421/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

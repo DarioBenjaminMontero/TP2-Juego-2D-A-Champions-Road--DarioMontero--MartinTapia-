@@ -19,6 +19,8 @@ namespace A_Champion_s_Road
         private Texture2D _playerAltTexture;
         private Texture2D _playerAltTexture2;
         private Texture2D _playerNormalTexture;
+        private Texture2D _cargandoGolpeIzquierda;
+        private Texture2D _cargandoGolpeDerecha;
 
 private Texture2D _ring;
         public Game1()
@@ -50,16 +52,22 @@ private Texture2D _ring;
         // Método encargado de cargar todos los recursos del juego (texturas, sonidos, fuentes)
         protected override void LoadContent()
         {
+            
             // Inicializa el SpriteBatch pasándole el dispositivo gráfico actual
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 _ring = Content.Load<Texture2D>("ring3");
+
             // Carga la textura del protagonista desde la pipeline de contenido de MonoGame
             _playerTexture = Content.Load<Texture2D>("backSprite-danteVega2");
+            float playerX = Window.ClientBounds.Width * 0.5f;
+            float playerY = Window.ClientBounds.Height - _playerTexture.Height;
             _playerAltTexture = Content.Load<Texture2D>("backSprite-punch1-danteVega");
             _playerAltTexture2 = Content.Load<Texture2D>("backSprite-punch2-danteVega");
             _playerNormalTexture = Content.Load<Texture2D>("backSprite-danteVega2");
+            _cargandoGolpeDerecha = Content.Load<Texture2D>("backSprite-punch2-danteVega3");
+            _cargandoGolpeIzquierda = Content.Load<Texture2D>("backSprite-punch1-danteVega3");
             // Instancia el objeto Player pasándole su textura y su posición inicial (X: 400, Y: 300)
-            _player = new Player(_playerTexture, _playerAltTexture, _playerAltTexture2, _playerNormalTexture, new Vector2((Window.ClientBounds.Width * 0.5f), (Window.ClientBounds.Height * 0.722f)), Window.ClientBounds.Width * 0.75f,Window.ClientBounds.Width * 0.25f);
+            _player = new Player(_playerTexture, _playerAltTexture, _playerAltTexture2, _playerNormalTexture,_cargandoGolpeDerecha, _cargandoGolpeIzquierda, new Vector2(playerX, playerY), Window.ClientBounds.Width * 0.75f,Window.ClientBounds.Width * 0.25f);
         }
 
         // Método que se ejecuta continuamente en cada fotograma (frame) para actualizar la lógica

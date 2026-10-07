@@ -79,3 +79,5 @@ C:\Users\Julio\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-
 C:\Users\Julio\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\obj\Debug\net8.0\A Champions Road.genruntimeconfig.cache
 C:\Users\Julio\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\obj\Debug\net8.0\ref\A Champions Road.dll
 C:\Users\alumno.ET26\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Content\ring3.xnb
+C:\Users\Julio\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Content\backSprite-punch1-danteVega3.xnb
+C:\Users\Julio\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Content\backSprite-punch2-danteVega3.xnb
