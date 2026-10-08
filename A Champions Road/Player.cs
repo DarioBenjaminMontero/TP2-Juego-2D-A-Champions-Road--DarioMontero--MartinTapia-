@@ -124,8 +124,6 @@ if (kState.IsKeyDown(Keys.O))
             }
             else if (currentState == PlayerState.PunchingLeft)
     {
-        // Aquí puedes agregar lógica similar si el golpe izquierdo también lleva animación por frames,
-        // o si es temporal, controlarlo con su propio tiempo. Por ahora lo dejamos simple:
         tiempoTranscurrido += (float)gameTime.ElapsedGameTime.TotalSeconds;
                 if (frameActual == 0)
                 {
