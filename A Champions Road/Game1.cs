@@ -3,20 +3,22 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media; 
 using MonoGameLibrary;
+using MonoGameLibrary.Graphics;
 
 namespace A_Champion_s_Road
 {
 
     public class Game1 : Core
     {
-
-        private Player _player;
+        private Player _player; 
         private Texture2D _playerTexture;
-        private Song backgroundMusic;
+        private TextureRegion _idle;
+        private TextureRegion _charge;
+        private TextureRegion _punching;
+
+        private Song backgroundMusic; 
         private Texture2D _ring;
 
-
-        
         public Game1() : base("A Champions Road", 1280, 720, false)
         {
             Content.RootDirectory = "Content";
@@ -46,14 +48,34 @@ namespace A_Champion_s_Road
             // Fondo del ring
             _ring = Content.Load<Texture2D>("ring3");
 
-            // Texture atlas Dante Vega
+            // png utilizado para el Texture Atlas
             _playerTexture = Content.Load<Texture2D>("punch-danteVega");
+
+            // declaracion formal del Texture Atlas
+            TextureAtlas atlasPunch = new TextureAtlas(_playerTexture);
+
+            // declarar regiones 
+            atlasPunch.AddRegion("quieto", 0, 0, 256, 335);
+            atlasPunch.AddRegion("intermedio", 0, 0, 20, 20); // FALTA AJUSTAR LAS REGIONES, POR ESO AL EJECUTAR SE VE RE MAL
+            atlasPunch.AddRegion("golpe", 0, 0, 20, 20);
+
+            _idle = atlasPunch.GetRegion("quieto");
+            _charge = atlasPunch.GetRegion("intermedio");
+            _punching = atlasPunch.GetRegion("golpe");
             
             // Posición sprite Dante-Vega
             float playerX = Window.ClientBounds.Width * 0.5f;
-            float playerY = Window.ClientBounds.Height - _playerTexture.Height;
+            float playerY = Window.ClientBounds.Height - _idle.Height; // _playerTexture.Height
 
-            _player = new Player(_playerTexture, new Vector2(playerX, playerY), Window.ClientBounds.Width * 0.75f,Window.ClientBounds.Width * 0.25f);
+            // _player = new Player(_playerTexture, new Vector2(playerX, playerY), Window.ClientBounds.Width * 0.75f,Window.ClientBounds.Width * 0.25f);
+            _player = new Player(
+                _idle, 
+                _charge, 
+                _punching, 
+                new Vector2(playerX, playerY), 
+                Window.ClientBounds.Width * 0.75f, 
+                Window.ClientBounds.Width * 0.25f
+            );
         }
 
         protected override void Update(GameTime gameTime)
@@ -67,13 +89,13 @@ namespace A_Champion_s_Road
         }
         protected override void Draw(GameTime gameTime)
         {
-            Rectangle texturaActual = new Rectangle(0, 0, 458, 58);
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            SpriteBatch.Begin();
+            SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
-            Rectangle fullscreenBounds = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
-            SpriteBatch.Draw(_ring, fullscreenBounds, Color.White);
-            _player.Draw(SpriteBatch);
+                Rectangle fullscreenBounds = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+
+            SpriteBatch.Draw(_ring, fullscreenBounds, Color.White); //ring
+            _player.Draw(SpriteBatch); // jugador
 
             SpriteBatch.End();
 

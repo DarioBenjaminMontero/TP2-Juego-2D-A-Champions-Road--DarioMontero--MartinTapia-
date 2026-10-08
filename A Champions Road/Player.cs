@@ -1,10 +1,9 @@
-
-
-
 using System.Runtime.Serialization.Formatters;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGameLibrary.Graphics;
+
 
 namespace A_Champion_s_Road
 {
@@ -13,12 +12,13 @@ namespace A_Champion_s_Road
     {
 
         public Vector2 Position;
-        public Texture2D textura;
-        // public Texture2D texturaAlternativa;
-        // public Texture2D texturaAlternativa2;
-        // public Texture2D texturaNormal;
-        // public Texture2D _cargandoGolpeDerecha;
-        // public Texture2D _cargandoGolpeIzquierda;
+
+        // public Texture2D texture;
+        public TextureRegion currentRegion; // variable que va a cambiar dependiendo q pase
+        public TextureRegion idleRegion;
+        public TextureRegion chargeRegion;
+        public TextureRegion punchingRegion;
+
         public float limiteIzquierda, limiteDerecha;
         public float Speed = 10f;
         public double tiempoTranscurrido = 0;
@@ -26,14 +26,14 @@ namespace A_Champion_s_Road
         public double limiteGolpe = 0.999999999f;
         public int frameActual = 0;
         public int limiteFrames = 2;
-        public Player(Texture2D texture, Vector2 initialPosition, float limiteD, float limiteI)
+        public Player(TextureRegion idle, TextureRegion charge, TextureRegion punching, Vector2 initialPosition, float limiteD, float limiteI)
         {
-            this.textura = texture;
-            // this.texturaAlternativa = altTexture;
-            // this.texturaAlternativa2 = altTexture2;
-            // this.texturaNormal = normalTexture;
-            // this._cargandoGolpeDerecha = _cargandoGolpeDerecha;
-            // this._cargandoGolpeIzquierda = _cargandoGolpeIzquierda;
+            idleRegion = idle;
+            chargeRegion = charge;
+            punchingRegion = punching;
+
+            currentRegion = idleRegion; // por default va a quedar en idle
+
             Position = initialPosition;
             limiteDerecha = limiteD;
             limiteIzquierda = limiteI;
@@ -55,7 +55,7 @@ namespace A_Champion_s_Road
                 if (kState.IsKeyDown(Keys.A))
                 {
                     currentState = PlayerState.Idle;
-                    // textura = texturaNormal;
+                    currentRegion = idleRegion;
     
                     if (Position.X - Speed > limiteIzquierda)
                     {
@@ -70,13 +70,13 @@ namespace A_Champion_s_Road
                 {
                     currentState = PlayerState.Idle;
                     // textura = texturaNormal;
-                    if (Position.X + Speed < limiteDerecha - textura.Width)
+                    if (Position.X + Speed < limiteDerecha - currentRegion.Width) // textura.Width
                     {
                         Position.X += Speed;
                     }
                     else
                     {
-                        Position.X = limiteDerecha - textura.Width;
+                        Position.X = limiteDerecha - currentRegion.Width; // textura.Width
                     }
                 }
 if (kState.IsKeyDown(Keys.O))
@@ -98,14 +98,17 @@ if (kState.IsKeyDown(Keys.O))
                 if (frameActual == 0)
                 {
                     // textura = texturaNormal;
+                    currentRegion = idleRegion;
                 }
                 else if (frameActual == 1)
                 {
                     // textura = _cargandoGolpeDerecha;
+                    currentRegion = chargeRegion;
                 }
                 else if (frameActual == 2)
                 {
                     // textura = texturaAlternativa2;
+                    currentRegion = punchingRegion;
                 }
                 if (tiempoTranscurrido >= limite)
                 {
@@ -128,14 +131,17 @@ if (kState.IsKeyDown(Keys.O))
                 if (frameActual == 0)
                 {
                     // textura = texturaNormal;
+                    currentRegion = idleRegion;
                 }
                 else if (frameActual == 1)
                 {
                     // textura = _cargandoGolpeIzquierda;
+                    currentRegion = chargeRegion;
                 }
                 else if (frameActual == 2)
                 {
                     // textura = texturaAlternativa;
+                    currentRegion = punchingRegion;
                 }
                 if (tiempoTranscurrido >= limite)
                 {
@@ -155,7 +161,20 @@ if (kState.IsKeyDown(Keys.O))
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(textura, Position, Color.White);
+            // spriteBatch.Draw(textura, Position, Color.White);
+
+            SpriteEffects effect = (currentState == PlayerState.PunchingLeft) ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+
+            currentRegion.Draw(
+                spriteBatch, 
+                Position, 
+                Color.White, 
+                0.0f, 
+                Vector2.Zero, 
+                1.0f, 
+                effect, 
+                0.0f
+            );
         }
     }
 }
