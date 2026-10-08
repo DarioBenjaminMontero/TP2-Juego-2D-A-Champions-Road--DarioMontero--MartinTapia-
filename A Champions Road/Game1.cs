@@ -26,7 +26,7 @@ namespace A_Champion_s_Road
             Graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
             Graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
             Graphics.HardwareModeSwitch = false;
-            Graphics.IsFullScreen = true;
+            Graphics.IsFullScreen = true; // true
             Graphics.ApplyChanges();
         }
 
@@ -55,9 +55,9 @@ namespace A_Champion_s_Road
             TextureAtlas atlasPunch = new TextureAtlas(_playerTexture);
 
             // declarar regiones 
-            atlasPunch.AddRegion("quieto", 0, 0, 256, 335);
-            atlasPunch.AddRegion("intermedio", 0, 0, 20, 20); // FALTA AJUSTAR LAS REGIONES, POR ESO AL EJECUTAR SE VE RE MAL
-            atlasPunch.AddRegion("golpe", 0, 0, 20, 20);
+            atlasPunch.AddRegion("quieto", 49, 89, 201, 256); // primeros dos parametros: X, Y donde comienza el sprite en la esquina SUP. IZQ
+            atlasPunch.AddRegion("intermedio", 321, 91, 269, 254); // ultimos dos parametros, la diferencia entre las X y las Y (X/Y esquina INF. DER - X/Y esquina SUP. IZQ)
+            atlasPunch.AddRegion("golpe", 52, 354, 228, 338);
 
             _idle = atlasPunch.GetRegion("quieto");
             _charge = atlasPunch.GetRegion("intermedio");

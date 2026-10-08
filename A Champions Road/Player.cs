@@ -120,7 +120,7 @@ if (kState.IsKeyDown(Keys.O))
                     }
                     else
                     {  
-             frameActual = frameActual + 1;
+                frameActual = frameActual + 1;
                     }
                     tiempoTranscurrido = tiempoTranscurrido -limite;
                 }
@@ -153,7 +153,7 @@ if (kState.IsKeyDown(Keys.O))
                     }
                     else
                     {  
-             frameActual = frameActual + 1;
+                frameActual = frameActual + 1;
                     }
                     tiempoTranscurrido = tiempoTranscurrido - limite;
                 }
