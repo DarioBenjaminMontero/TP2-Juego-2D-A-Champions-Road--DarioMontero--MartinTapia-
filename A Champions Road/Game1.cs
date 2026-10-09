@@ -55,7 +55,7 @@ namespace A_Champion_s_Road
             TextureAtlas atlasPunch = new TextureAtlas(_playerTexture);
 
             // declarar regiones 
-            atlasPunch.AddRegion("quieto", 49, 89, 201, 256); // primeros dos parametros: X, Y donde comienza el sprite en la esquina SUP. IZQ
+            atlasPunch.AddRegion("quieto", 49, 89, 201, 256);       // primeros dos parametros: X, Y donde comienza el sprite en la esquina SUP. IZQ
             atlasPunch.AddRegion("intermedio", 321, 91, 269, 254); // ultimos dos parametros, la diferencia entre las X y las Y (X/Y esquina INF. DER - X/Y esquina SUP. IZQ)
             atlasPunch.AddRegion("golpe", 52, 354, 228, 338);
 
@@ -77,7 +77,7 @@ namespace A_Champion_s_Road
                 Window.ClientBounds.Width * 0.25f
             );
 
-            
+
         }
 
         protected override void Update(GameTime gameTime)
