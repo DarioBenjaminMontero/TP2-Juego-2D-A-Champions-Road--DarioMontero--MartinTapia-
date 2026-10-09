@@ -14,10 +14,10 @@ namespace A_Champion_s_Road
         public Vector2 Position;
 
         // public Texture2D texture;
-        public TextureRegion currentRegion; // variable que va a cambiar dependiendo q pase
-        public TextureRegion idleRegion;
-        public TextureRegion chargeRegion;
-        public TextureRegion punchingRegion;
+        public Sprite currentRegion; // variable que va a cambiar dependiendo q pase
+        public Sprite idleRegion;
+        public Sprite chargeRegion;
+        public Sprite punchingRegion;
 
         public float limiteIzquierda, limiteDerecha;
         public float Speed = 10f;
@@ -26,7 +26,7 @@ namespace A_Champion_s_Road
         public double limiteGolpe = 0.999999999f;
         public int frameActual = 0;
         public int limiteFrames = 2;
-        public Player(TextureRegion idle, TextureRegion charge, TextureRegion punching, Vector2 initialPosition, float limiteD, float limiteI)
+        public Player(Sprite idle, Sprite charge, Sprite punching, Vector2 initialPosition, float limiteD, float limiteI)
         {
             idleRegion = idle;
             chargeRegion = charge;
@@ -165,16 +165,7 @@ if (kState.IsKeyDown(Keys.O))
 
             SpriteEffects effect = (currentState == PlayerState.PunchingLeft) ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 
-            currentRegion.Draw(
-                spriteBatch, 
-                Position, 
-                Color.White, 
-                0.0f, 
-                Vector2.Zero, 
-                1.0f, 
-                effect, 
-                0.0f
-            );
+            currentRegion.Draw(spriteBatch, Position);
         }
     }
 }

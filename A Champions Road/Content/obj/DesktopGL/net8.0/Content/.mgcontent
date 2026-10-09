@@ -4,14 +4,14 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/PC Humilde/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/backSprite-danteVega2.png</File>
-    <File>C:/Users/PC Humilde/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/backSprite-punch1-danteVega.png</File>
-    <File>C:/Users/PC Humilde/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/backSprite-punch2-danteVega.png</File>
-    <File>C:/Users/PC Humilde/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/ring3.png</File>
-    <File>C:/Users/PC Humilde/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/backSprite-punch1-danteVega3.png</File>
-    <File>C:/Users/PC Humilde/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/backSprite-punch2-danteVega3.png</File>
-    <File>C:/Users/PC Humilde/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/Ten_Counts_to_Glory.mp3</File>
-    <File>C:/Users/PC Humilde/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/punch-danteVega.png</File>
+    <File>C:/Users/alumno.ET26/Downloads/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/backSprite-danteVega2.png</File>
+    <File>C:/Users/alumno.ET26/Downloads/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/backSprite-punch1-danteVega.png</File>
+    <File>C:/Users/alumno.ET26/Downloads/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/backSprite-punch2-danteVega.png</File>
+    <File>C:/Users/alumno.ET26/Downloads/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/ring3.png</File>
+    <File>C:/Users/alumno.ET26/Downloads/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/backSprite-punch1-danteVega3.png</File>
+    <File>C:/Users/alumno.ET26/Downloads/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/backSprite-punch2-danteVega3.png</File>
+    <File>C:/Users/alumno.ET26/Downloads/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/Ten_Counts_to_Glory.mp3</File>
+    <File>C:/Users/alumno.ET26/Downloads/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/punch-danteVega.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />

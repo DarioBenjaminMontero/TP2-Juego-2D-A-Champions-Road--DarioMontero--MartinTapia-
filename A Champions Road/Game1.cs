@@ -12,9 +12,9 @@ namespace A_Champion_s_Road
     {
         private Player _player; 
         private Texture2D _playerTexture;
-        private TextureRegion _idle;
-        private TextureRegion _charge;
-        private TextureRegion _punching;
+        private Sprite _idle;
+        private Sprite _charge;
+        private Sprite _punching;
 
         private Song backgroundMusic; 
         private Texture2D _ring;
@@ -59,9 +59,9 @@ namespace A_Champion_s_Road
             atlasPunch.AddRegion("intermedio", 321, 91, 269, 254); // ultimos dos parametros, la diferencia entre las X y las Y (X/Y esquina INF. DER - X/Y esquina SUP. IZQ)
             atlasPunch.AddRegion("golpe", 52, 354, 228, 338);
 
-            _idle = atlasPunch.GetRegion("quieto");
-            _charge = atlasPunch.GetRegion("intermedio");
-            _punching = atlasPunch.GetRegion("golpe");
+            _idle = atlasPunch.CreateSprite("quieto");
+            _charge = atlasPunch.CreateSprite("intermedio");
+            _punching = atlasPunch.CreateSprite("golpe");
             
             // Posición sprite Dante-Vega
             float playerX = Window.ClientBounds.Width * 0.5f;
@@ -76,6 +76,8 @@ namespace A_Champion_s_Road
                 Window.ClientBounds.Width * 0.75f, 
                 Window.ClientBounds.Width * 0.25f
             );
+
+            
         }
 
         protected override void Update(GameTime gameTime)
