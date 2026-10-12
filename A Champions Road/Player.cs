@@ -38,25 +38,19 @@ namespace A_Champion_s_Road
             limiteDerecha = limiteD;
             limiteIzquierda = limiteI;
         }
-        public enum PlayerState
-        {
-            Idle,
-            PunchingLeft,
-            PunchingRight,
-            Blocking,
-            Hurt
-        }
+        public enum PlayerState { Idle, PunchingLeft, PunchingRight, Blocking, Hurt }
         private PlayerState currentState = PlayerState.Idle;
         public void Update(GameTime gameTime)
         {
             KeyboardState kState = Keyboard.GetState();
             if (currentState == PlayerState.Idle)
             {
+                // Si apretas [A] el personaje se va hacia la izquierda
                 if (kState.IsKeyDown(Keys.A))
                 {
                     currentState = PlayerState.Idle;
                     currentRegion = idleRegion;
-    
+
                     if (Position.X - Speed > limiteIzquierda)
                     {
                         Position.X -= Speed;
@@ -66,6 +60,7 @@ namespace A_Champion_s_Road
                         Position.X = limiteIzquierda;
                     }
                 }
+                // Si apretas [D] el peronaje se va hacia la derecha
                 else if (kState.IsKeyDown(Keys.D))
                 {
                     currentState = PlayerState.Idle;
@@ -79,18 +74,20 @@ namespace A_Champion_s_Road
                         Position.X = limiteDerecha - currentRegion.Width; // textura.Width
                     }
                 }
-if (kState.IsKeyDown(Keys.O))
-        {
-            currentState = PlayerState.PunchingLeft;
-            frameActual = 0;
-            tiempoTranscurrido = 0;
-        }
-        else if (kState.IsKeyDown(Keys.P))
-        {
-            currentState = PlayerState.PunchingRight;
-            frameActual = 0;
-            tiempoTranscurrido = 0;
-        }
+                // Si apretas [O] el personaje va a hacer un golpe con el brazo izquierdo
+                if (kState.IsKeyDown(Keys.O))
+                {
+                    currentState = PlayerState.PunchingLeft;
+                    frameActual = 0;
+                    tiempoTranscurrido = 0;
+                }
+                // Si apretas [P] el personaje va a hacer un golpe con el brazo derecho
+                else if (kState.IsKeyDown(Keys.P))
+                {
+                    currentState = PlayerState.PunchingRight;
+                    frameActual = 0;
+                    tiempoTranscurrido = 0;
+                }
             }
             else if (currentState == PlayerState.PunchingRight)
             {
@@ -113,21 +110,22 @@ if (kState.IsKeyDown(Keys.O))
                 if (tiempoTranscurrido >= limite)
                 {
                     if (frameActual == 2)
-                {
+                    {
                         frameActual = 0;
                         currentState = PlayerState.Idle;
+                        currentRegion = idleRegion;
                         // textura = texturaNormal;
                     }
                     else
-                    {  
-                frameActual = frameActual + 1;
+                    {
+                        frameActual = frameActual + 1;
                     }
-                    tiempoTranscurrido = tiempoTranscurrido -limite;
+                    tiempoTranscurrido = tiempoTranscurrido - limite;
                 }
             }
             else if (currentState == PlayerState.PunchingLeft)
-    {
-        tiempoTranscurrido += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            {
+                tiempoTranscurrido += (float)gameTime.ElapsedGameTime.TotalSeconds;
                 if (frameActual == 0)
                 {
                     // textura = texturaNormal;
@@ -146,24 +144,31 @@ if (kState.IsKeyDown(Keys.O))
                 if (tiempoTranscurrido >= limite)
                 {
                     if (frameActual == 2)
-                {
+                    {
                         frameActual = 0;
                         currentState = PlayerState.Idle;
+                        currentRegion = idleRegion;
                         // textura = texturaNormal;
                     }
                     else
-                    {  
-                frameActual = frameActual + 1;
+                    {
+                        frameActual = frameActual + 1;
                     }
                     tiempoTranscurrido = tiempoTranscurrido - limite;
                 }
-    }
+            }
         }
         public void Draw(SpriteBatch spriteBatch)
         {
             // spriteBatch.Draw(textura, Position, Color.White);
 
-            SpriteEffects effect = (currentState == PlayerState.PunchingLeft) ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+        if(currentState == PlayerState.PunchingRight)
+        {
+            currentRegion.Effects = SpriteEffects.FlipHorizontally;        
+        } else
+            {
+                currentRegion.Effects = SpriteEffects.None;
+            }
 
             currentRegion.Draw(spriteBatch, Position);
         }

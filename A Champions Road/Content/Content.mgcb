@@ -12,12 +12,37 @@
 
 
 #---------------------------------- Content ---------------------------------#
-/build:backSprite-danteVega2.png
-/build:backSprite-punch1-danteVega.png
-/build:backSprite-punch2-danteVega.png
-/build:ring3.png
-/build:backSprite-punch1-danteVega3.png
-/build:backSprite-punch2-danteVega3.png
-/build:Ten_Counts_to_Glory.mp3
+
+#begin punch-danteVega.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:punch-danteVega.png
-/build:atlas-definition.xml
+
+#begin ring3.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:ring3.png
+
+#begin Ten_Counts_to_Glory.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.5.1
+/build:Ten_Counts_to_Glory.mp3
+

@@ -26,7 +26,7 @@ namespace A_Champion_s_Road
             Graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
             Graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
             Graphics.HardwareModeSwitch = false;
-            Graphics.IsFullScreen = true; // true
+            Graphics.IsFullScreen = true; 
             Graphics.ApplyChanges();
         }
 
@@ -57,12 +57,12 @@ namespace A_Champion_s_Road
             // declarar regiones 
             atlasPunch.AddRegion("quieto", 49, 89, 201, 256);       // primeros dos parametros: X, Y donde comienza el sprite en la esquina SUP. IZQ
             atlasPunch.AddRegion("intermedio", 321, 91, 269, 254); // ultimos dos parametros, la diferencia entre las X y las Y (X/Y esquina INF. DER - X/Y esquina SUP. IZQ)
-            atlasPunch.AddRegion("golpe", 52, 354, 228, 338);
+            atlasPunch.AddRegion("golpe", 52, 354, 230, 338);
 
             _idle = atlasPunch.CreateSprite("quieto");
             _charge = atlasPunch.CreateSprite("intermedio");
             _punching = atlasPunch.CreateSprite("golpe");
-            
+
             // Posición sprite Dante-Vega
             float playerX = Window.ClientBounds.Width * 0.5f;
             float playerY = Window.ClientBounds.Height - _idle.Height; // _playerTexture.Height

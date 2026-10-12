@@ -134,11 +134,6 @@ C:\Users\alumno.ET26\Downloads\TP2-Juego-2D-A-Champions-Road--DarioMontero--Mart
 C:\Users\alumno.ET26\Downloads\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\obj\Debug\net8.0\ref\A Champions Road.dll
 C:\Users\alumno.ET26\Downloads\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\MonoGameLibrary.dll
 C:\Users\alumno.ET26\Downloads\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\MonoGameLibrary.pdb
-C:\Users\PC Humilde\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Content\backSprite-danteVega2.xnb
-C:\Users\PC Humilde\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Content\backSprite-punch1-danteVega.xnb
-C:\Users\PC Humilde\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Content\backSprite-punch1-danteVega3.xnb
-C:\Users\PC Humilde\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Content\backSprite-punch2-danteVega.xnb
-C:\Users\PC Humilde\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Content\backSprite-punch2-danteVega3.xnb
 C:\Users\PC Humilde\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Content\punch-danteVega.xnb
 C:\Users\PC Humilde\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Content\ring3.xnb
 C:\Users\PC Humilde\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Content\Ten_Counts_to_Glory.ogg

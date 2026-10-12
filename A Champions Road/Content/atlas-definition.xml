@@ -1,11 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <TextureAtlas>
+
     <Texture>punch-danteVega</Texture>
     <Regions>
         <Region name="quieto" x="49" y="89" width="201" height="256" />
         <Region name="intermedio" x="321" y="91" width="269" height="254" />
-        <Region name="golpe" x="52" y="354" width="228" height="338" />
+        <Region name="golpe" x="52" y="354" width="230" height="338" />
     </Regions>
+
     <Animations>
         <Animation name="punchingAnimation" delay="200">
             <Frame region="quieto" />
@@ -13,4 +15,5 @@
             <Frame region="golpe" />
         </Animation>
     </Animations>
+
 </TextureAtlas>
