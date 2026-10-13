@@ -15,7 +15,7 @@ namespace A_Champion_s_Road
         private Sprite _idle;
         private Sprite _charge;
         private Sprite _punching;
-
+        private Sprite _dodge;
         private Song backgroundMusic; 
         private Texture2D _ring;
 
@@ -55,13 +55,15 @@ namespace A_Champion_s_Road
             TextureAtlas atlasPunch = new TextureAtlas(_playerTexture);
 
             // declarar regiones 
-            atlasPunch.AddRegion("quieto", 49, 89, 201, 256);       // primeros dos parametros: X, Y donde comienza el sprite en la esquina SUP. IZQ
-            atlasPunch.AddRegion("intermedio", 321, 91, 269, 254); // ultimos dos parametros, la diferencia entre las X y las Y (X/Y esquina INF. DER - X/Y esquina SUP. IZQ)
-            atlasPunch.AddRegion("golpe", 52, 354, 230, 338);
+            atlasPunch.AddRegion("quieto", 49, 75, 201, 256);       // primeros dos parametros: X, Y donde comienza el sprite en la esquina SUP. IZQ
+            atlasPunch.AddRegion("intermedio", 309, 77, 270, 254); // ultimos dos parametros, la diferencia entre las X y las Y (X/Y esquina INF. DER - X/Y esquina SUP. IZQ)
+            atlasPunch.AddRegion("golpe", 49, 332, 232, 432);
+            atlasPunch.AddRegion("esquivar", 347, 410, 232, 254);
 
             _idle = atlasPunch.CreateSprite("quieto");
             _charge = atlasPunch.CreateSprite("intermedio");
             _punching = atlasPunch.CreateSprite("golpe");
+            _dodge = atlasPunch.CreateSprite("esquivar");
 
             // Posición sprite Dante-Vega
             float playerX = Window.ClientBounds.Width * 0.5f;
@@ -72,6 +74,7 @@ namespace A_Champion_s_Road
                 _idle, 
                 _charge, 
                 _punching, 
+                _dodge,
                 new Vector2(playerX, playerY), 
                 Window.ClientBounds.Width * 0.75f, 
                 Window.ClientBounds.Width * 0.25f

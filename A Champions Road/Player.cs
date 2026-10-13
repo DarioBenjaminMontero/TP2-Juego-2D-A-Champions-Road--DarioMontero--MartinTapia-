@@ -18,7 +18,7 @@ namespace A_Champion_s_Road
         public Sprite idleRegion;
         public Sprite chargeRegion;
         public Sprite punchingRegion;
-
+        public Sprite dodgingRegion;
         public float limiteIzquierda, limiteDerecha;
         public float Speed = 10f;
         public double tiempoTranscurrido = 0;
@@ -26,11 +26,12 @@ namespace A_Champion_s_Road
         public double limiteGolpe = 0.999999999f;
         public int frameActual = 0;
         public int limiteFrames = 2;
-        public Player(Sprite idle, Sprite charge, Sprite punching, Vector2 initialPosition, float limiteD, float limiteI)
+        public Player(Sprite idle, Sprite charge, Sprite punching, Sprite dodging, Vector2 initialPosition, float limiteD, float limiteI)
         {
             idleRegion = idle;
             chargeRegion = charge;
             punchingRegion = punching;
+            dodgingRegion = dodging;
 
             currentRegion = idleRegion; // por default va a quedar en idle
 
@@ -38,42 +39,29 @@ namespace A_Champion_s_Road
             limiteDerecha = limiteD;
             limiteIzquierda = limiteI;
         }
-        public enum PlayerState { Idle, PunchingLeft, PunchingRight, Blocking, Hurt }
+        public enum PlayerState { Idle, PunchingLeft, PunchingRight, Blocking, Hurt, DodgingLeft, DodgingRight }
         private PlayerState currentState = PlayerState.Idle;
         public void Update(GameTime gameTime)
         {
             KeyboardState kState = Keyboard.GetState();
             if (currentState == PlayerState.Idle)
             {
-                // Si apretas [A] el personaje se va hacia la izquierda
+                // Si apretas [A] el personaje esquiva hacia la izquierda
                 if (kState.IsKeyDown(Keys.A))
                 {
-                    currentState = PlayerState.Idle;
-                    currentRegion = idleRegion;
-
-                    if (Position.X - Speed > limiteIzquierda)
-                    {
-                        Position.X -= Speed;
-                    }
-                    else
-                    {
-                        Position.X = limiteIzquierda;
-                    }
+                    currentState = PlayerState.DodgingLeft;
+                    frameActual = 0;
+                    tiempoTranscurrido = 0;
                 }
-                // Si apretas [D] el peronaje se va hacia la derecha
+
+                // Si apretas [D] el peronaje esquiva hacia la derecha
                 else if (kState.IsKeyDown(Keys.D))
                 {
-                    currentState = PlayerState.Idle;
-                    // textura = texturaNormal;
-                    if (Position.X + Speed < limiteDerecha - currentRegion.Width) // textura.Width
-                    {
-                        Position.X += Speed;
-                    }
-                    else
-                    {
-                        Position.X = limiteDerecha - currentRegion.Width; // textura.Width
-                    }
+                    currentState = PlayerState.DodgingRight;
+                    frameActual = 0;
+                    tiempoTranscurrido = 0;
                 }
+
                 // Si apretas [O] el personaje va a hacer un golpe con el brazo izquierdo
                 if (kState.IsKeyDown(Keys.O))
                 {
@@ -81,6 +69,7 @@ namespace A_Champion_s_Road
                     frameActual = 0;
                     tiempoTranscurrido = 0;
                 }
+
                 // Si apretas [P] el personaje va a hacer un golpe con el brazo derecho
                 else if (kState.IsKeyDown(Keys.P))
                 {
@@ -89,7 +78,9 @@ namespace A_Champion_s_Road
                     tiempoTranscurrido = 0;
                 }
             }
-            else if (currentState == PlayerState.PunchingRight)
+
+            // ANIMACION DEL GOLPE
+            else if (currentState == PlayerState.PunchingRight || currentState == PlayerState.PunchingLeft)
             {
                 tiempoTranscurrido += (float)gameTime.ElapsedGameTime.TotalSeconds;
                 if (frameActual == 0)
@@ -123,32 +114,26 @@ namespace A_Champion_s_Road
                     tiempoTranscurrido = tiempoTranscurrido - limite;
                 }
             }
-            else if (currentState == PlayerState.PunchingLeft)
+
+            // ANIMACION DEL ESQUIVE
+            if(currentState == PlayerState.DodgingRight || currentState == PlayerState.DodgingLeft)
             {
                 tiempoTranscurrido += (float)gameTime.ElapsedGameTime.TotalSeconds;
-                if (frameActual == 0)
+                if(frameActual == 0)
                 {
-                    // textura = texturaNormal;
                     currentRegion = idleRegion;
                 }
-                else if (frameActual == 1)
+                else if(frameActual == 1)
                 {
-                    // textura = _cargandoGolpeIzquierda;
-                    currentRegion = chargeRegion;
+                    currentRegion = dodgingRegion;
                 }
-                else if (frameActual == 2)
+                if(tiempoTranscurrido >= limite)
                 {
-                    // textura = texturaAlternativa;
-                    currentRegion = punchingRegion;
-                }
-                if (tiempoTranscurrido >= limite)
-                {
-                    if (frameActual == 2)
+                    if(frameActual == 1)
                     {
                         frameActual = 0;
                         currentState = PlayerState.Idle;
                         currentRegion = idleRegion;
-                        // textura = texturaNormal;
                     }
                     else
                     {
@@ -157,12 +142,13 @@ namespace A_Champion_s_Road
                     tiempoTranscurrido = tiempoTranscurrido - limite;
                 }
             }
+
         }
         public void Draw(SpriteBatch spriteBatch)
         {
             // spriteBatch.Draw(textura, Position, Color.White);
 
-        if(currentState == PlayerState.PunchingRight)
+        if(currentState == PlayerState.PunchingRight || currentState == PlayerState.DodgingRight)
         {
             currentRegion.Effects = SpriteEffects.FlipHorizontally;        
         } else
