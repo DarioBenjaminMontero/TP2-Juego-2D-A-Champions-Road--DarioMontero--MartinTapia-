@@ -27,6 +27,8 @@
 /processorParam:Version=3.8.5.1
 /build:punch-danteVega.png
 /build:animacionAgachado.png
+/build:atlasConEsquive.png
+
 
 #begin ring3.png
 /importer:TextureImporter

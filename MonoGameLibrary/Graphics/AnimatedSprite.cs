@@ -8,55 +8,71 @@ public class AnimatedSprite : Sprite
     private int _currentFrame;
     private TimeSpan _elapsed;
     private Animation _animation;
+    private bool _isFinished;
 
-    /// <summary>
-    /// Gets or Sets the animation for this animated sprite.
-    /// </summary>
+    public bool IsLooping { get; set; } = true;
+
     public Animation Animation
     {
         get => _animation;
         set
         {
             _animation = value;
-            Region = _animation.Frames[0];
+            Reset();
         }
     }
 
-    /// <summary>
-    /// Creates a new animated sprite.
-    /// </summary>
     public AnimatedSprite() { }
 
-    /// <summary>
-    /// Creates a new animated sprite with the specified frames and delay.
-    /// </summary>
-    /// <param name="animation">The animation for this animated sprite.</param>
-    public AnimatedSprite(Animation animation)
+    public AnimatedSprite(Animation animation, bool isLooping = true)
     {
+        IsLooping = isLooping;
         Animation = animation;
     }
 
-    /// <summary>
-    /// Updates this animated sprite.
-    /// </summary>
-    /// <param name="gameTime">A snapshot of the game timing values provided by the framework.</param>
+    public void Reset()
+    {
+        _currentFrame = 0;
+        _elapsed = TimeSpan.Zero;
+        _isFinished = false;
+
+        if (_animation != null && _animation.Frames.Count > 0)
+        {
+            Region = _animation.Frames[0];
+        }
+    } 
+
+    public bool IsFinished => !IsLooping && _isFinished;
+
     public void Update(GameTime gameTime)
     {
+        if (_animation == null || (_isFinished && !IsLooping)) return;
+
         _elapsed += gameTime.ElapsedGameTime;
 
-        if (_elapsed >= _animation.Delay)
+        while (_elapsed >= _animation.Delay)
         {
             _elapsed -= _animation.Delay;
-            _currentFrame++;
 
-            if (_currentFrame >= _animation.Frames.Count)
+            if (IsLooping)
             {
-                _currentFrame = 0;
+                _currentFrame = (_currentFrame + 1) % _animation.Frames.Count;
+                Region = _animation.Frames[_currentFrame];
             }
-
-            Region = _animation.Frames[_currentFrame];
+            else
+            {
+                if (_currentFrame < _animation.Frames.Count - 1)
+                {
+                    _currentFrame++;
+                    Region = _animation.Frames[_currentFrame];
+                }
+                else
+                {
+                    // Si ya estábamos en el último frame y pasó su delay, marcamos como terminado
+                    _isFinished = true;
+                    break;
+                }
+            }
         }
     }
-
 }
-

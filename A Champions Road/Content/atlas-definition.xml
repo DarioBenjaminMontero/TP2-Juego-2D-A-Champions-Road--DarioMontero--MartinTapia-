@@ -1,18 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TextureAtlas>
 
-    <Texture>punch-danteVega</Texture>
+    <Texture>atlasConEsquive</Texture>
     <Regions>
-        <Region name="quieto" x="49" y="89" width="201" height="256" />
-        <Region name="intermedio" x="321" y="91" width="269" height="254" />
-        <Region name="golpe" x="52" y="354" width="230" height="338" />
+        <Region name="quieto" x="21" y="32" width="85" height="109" />
+        <Region name="cargandoGolpe" x="154" y="33" width="114" height="141" />
+        <Region name="golpe" x="322" y="0" width="97" height="338" />
+        <Region name="Esquivando" x="199" y="175" width="98" height="108" />
+        <Region name="EsquivandoIntermedio" x="320" y="182" width="113" height="101" />
+        <Region name="EsquiveCompleto" x="16" y="343" width="116" height="82" />
     </Regions>
 
     <Animations>
+        <Animation name="idleAnimation" delay="100">
+            <Frame region="quieto" />
+        </Animation>
+
         <Animation name="punchingAnimation" delay="200">
             <Frame region="quieto" />
-            <Frame region="intermedio" />
+            <Frame region="cargandoGolpe" />
             <Frame region="golpe" />
+        </Animation>
+
+        <Animation name="dodgingAnimation" delay="200">
+            <Frame region="quieto" />
+            <Frame region="Esquivando" />
+            <Frame region="EsquivandoIntermedio" />
+            <Frame region="EsquiveCompleto" />
         </Animation>
     </Animations>
 
