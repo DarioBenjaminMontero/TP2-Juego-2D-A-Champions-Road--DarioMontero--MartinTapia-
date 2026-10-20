@@ -11,6 +11,14 @@
         <Region name="EsquiveCompleto" x="16" y="343" width="116" height="82" />
     </Regions>
 
+    <Texture>enemy1</Texture>
+    <Regions>
+        <Region name="enemy-quieto1" x="33" y="7" width="221" height="461" />
+        <Region name="enemy-quieto2" x="333" y="7" width="233" height="461" />
+        <Region name="enemy-quieto3" x="33" y="476" width="247" height="460" />
+    </Regions>
+
+
     <Animations>
         <Animation name="idleAnimation" delay="100">
             <Frame region="quieto" />
@@ -27,6 +35,13 @@
             <Frame region="Esquivando" />
             <Frame region="EsquivandoIntermedio" />
             <Frame region="EsquiveCompleto" />
+        </Animation>
+
+        <Animation name ="enemyIdle" delay="125">
+            <Frame region="enemy-quieto1" />
+            <Frame region="enemy-quieto2" />
+            <Frame region="enemy-quieto3" />
+            <Frame region="enemy-quieto2" />
         </Animation>
     </Animations>
 

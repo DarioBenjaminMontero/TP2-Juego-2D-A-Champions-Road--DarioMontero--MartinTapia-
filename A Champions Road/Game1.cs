@@ -9,7 +9,8 @@ namespace A_Champion_s_Road
 {
     public class Game1 : Core
     {
-        private Player _player; 
+        private Player _player;
+        private Enemy _enemy; // <--- 1. Declarar el enemigo
         private Song backgroundMusic; 
         private Texture2D _ring;
 
@@ -39,6 +40,7 @@ namespace A_Champion_s_Road
 
             TextureAtlas atlas = TextureAtlas.FromFile(Content, "atlas-definition.xml");
 
+            // Animaciones del Player
             Animation idleAnim = atlas.GetAnimation("idleAnimation");
             Animation punchAnim = atlas.GetAnimation("punchingAnimation");
             Animation dodgeAnim = atlas.GetAnimation("dodgingAnimation");
@@ -54,6 +56,12 @@ namespace A_Champion_s_Road
                 Window.ClientBounds.Width * 0.75f, 
                 Window.ClientBounds.Width * 0.25f
             );
+
+            Animation enemyIdleAnim = atlas.GetAnimation("enemyIdle");
+
+            float enemyX = Window.ClientBounds.Width * 0.5f;
+            float enemyY = Window.ClientBounds.Height * 0.8f; // POR AHORA EL ENEMIGO ES UNA ANIMACION EN BUCLE NOMAS 
+            _enemy = new Enemy(enemyIdleAnim, new Vector2(enemyX, enemyY));
         }
 
         protected override void Update(GameTime gameTime)
@@ -62,6 +70,7 @@ namespace A_Champion_s_Road
                 Exit();
                 
             _player.Update(gameTime);
+            _enemy.Update(gameTime); 
             base.Update(gameTime);
         }
 
@@ -73,6 +82,7 @@ namespace A_Champion_s_Road
             Rectangle fullscreenBounds = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
             SpriteBatch.Draw(_ring, fullscreenBounds, Color.White);
             
+            _enemy.Draw(SpriteBatch); 
             _player.Draw(SpriteBatch);
 
             SpriteBatch.End();

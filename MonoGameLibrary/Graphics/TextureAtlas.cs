@@ -49,7 +49,12 @@ public class TextureAtlas
     /// <param name="height">The height, in pixels, of the region.</param>
     public void AddRegion(string name, int x, int y, int width, int height)
     {
-        TextureRegion region = new TextureRegion(Texture, x, y, width, height);
+        AddRegion(Texture, name, x, y, width, height);
+    }
+
+    private void AddRegion(Texture2D texture, string name, int x, int y, int width, int height)
+    {
+        TextureRegion region = new TextureRegion(texture, x, y, width, height);
         _regions.Add(name, region);
     }
 
@@ -100,24 +105,33 @@ public class TextureAtlas
                 XDocument doc = XDocument.Load(reader);
                 XElement root = doc.Root;
 
-                string texturePath = root.Element("Texture").Value;
-                atlas.Texture = content.Load<Texture2D>(texturePath);
-
-                var regions = root.Element("Regions")?.Elements("Region");
-
-                if (regions != null)
+                Texture2D currentTexture = null;
+                foreach (XElement element in root.Elements())
                 {
-                    foreach (var region in regions)
+                    if (element.Name == "Texture")
                     {
-                        string name = region.Attribute("name")?.Value;
-                        int x = int.Parse(region.Attribute("x")?.Value ?? "0");
-                        int y = int.Parse(region.Attribute("y")?.Value ?? "0");
-                        int width = int.Parse(region.Attribute("width")?.Value ?? "0");
-                        int height = int.Parse(region.Attribute("height")?.Value ?? "0");
-
-                        if (!string.IsNullOrEmpty(name))
+                        currentTexture = content.Load<Texture2D>(element.Value);
+                        atlas.Texture ??= currentTexture;
+                    }
+                    else if (element.Name == "Regions")
+                    {
+                        if (currentTexture == null)
                         {
-                            atlas.AddRegion(name, x, y, width, height);
+                            throw new InvalidDataException("A <Regions> element must follow a <Texture> element.");
+                        }
+
+                        foreach (var region in element.Elements("Region"))
+                        {
+                            string name = region.Attribute("name")?.Value;
+                            int x = int.Parse(region.Attribute("x")?.Value ?? "0");
+                            int y = int.Parse(region.Attribute("y")?.Value ?? "0");
+                            int width = int.Parse(region.Attribute("width")?.Value ?? "0");
+                            int height = int.Parse(region.Attribute("height")?.Value ?? "0");
+
+                            if (!string.IsNullOrEmpty(name))
+                            {
+                                atlas.AddRegion(currentTexture, name, x, y, width, height);
+                            }
                         }
                     }
                 }

@@ -28,6 +28,7 @@
 /build:punch-danteVega.png
 /build:animacionAgachado.png
 /build:atlasConEsquive.png
+/build:enemy1.png
 
 
 #begin ring3.png
@@ -49,4 +50,3 @@
 /processorParam:Quality=Best
 /processorParam:Version=3.8.5.1
 /build:Ten_Counts_to_Glory.mp3
-
