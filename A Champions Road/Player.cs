@@ -40,7 +40,7 @@ namespace A_Champion_s_Road
         public void Update(GameTime gameTime)
         {
             KeyboardState kState = Keyboard.GetState();
-
+KeyboardState prevKState = Keyboard.GetState();
             switch (currentState)
             {
                 case PlayerState.Idle:
@@ -52,6 +52,10 @@ namespace A_Champion_s_Road
                         currentState = PlayerState.Punching;
                         _punchSprite.Reset();
                         _currentSprite = _punchSprite;
+                        if (kState.IsKeyDown(Keys.P))
+                            _currentSprite.Effects = SpriteEffects.FlipHorizontally;
+                        else if (kState.IsKeyDown(Keys.O))
+                            _currentSprite.Effects = SpriteEffects.None;
                     }
                     else if (kState.IsKeyDown(Keys.A) || kState.IsKeyDown(Keys.D))
                     {
@@ -59,6 +63,20 @@ namespace A_Champion_s_Road
                         _dodgeSprite.Reset();
                         _currentSprite = _dodgeSprite;
                         Position.X = kState.IsKeyDown(Keys.A) ? originalPosition.X - 45 : originalPosition.X + 45;
+                        if (kState.IsKeyDown(Keys.D))
+                        {
+                            _currentSprite.Effects = SpriteEffects.FlipHorizontally;
+                            Position.X = originalPosition.X + 45;
+                        }
+                        else if (kState.IsKeyDown(Keys.A))
+                        {
+                            _currentSprite.Effects = SpriteEffects.None;
+                            Position.X = originalPosition.X - 45;
+                        }
+                    }
+                    else
+                    {
+                        _currentSprite.Effects = SpriteEffects.None;
                     }
                     break;
 
@@ -88,14 +106,7 @@ namespace A_Champion_s_Road
                 _currentSprite.Origin = new Vector2(_currentSprite.Region.Width / 2f, _currentSprite.Region.Height);
             }
 
-            if (kState.IsKeyDown(Keys.P) || kState.IsKeyDown(Keys.D))
-            {
-                _currentSprite.Effects = SpriteEffects.FlipHorizontally;
-            }
-            else if (kState.IsKeyDown(Keys.O) || kState.IsKeyDown(Keys.A))
-            {
-                _currentSprite.Effects = SpriteEffects.None;
-            }
+            
         }
 
         public void Draw(SpriteBatch spriteBatch)

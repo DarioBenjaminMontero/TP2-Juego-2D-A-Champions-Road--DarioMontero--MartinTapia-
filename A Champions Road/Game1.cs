@@ -45,7 +45,7 @@ namespace A_Champion_s_Road
             Animation punchAnim = atlas.GetAnimation("punchingAnimation");
             Animation dodgeAnim = atlas.GetAnimation("dodgingAnimation");
 
-            float playerX = Window.ClientBounds.Width * 0.45f;
+            float playerX = Window.ClientBounds.Width * 0.5f;
             float playerY = Window.ClientBounds.Height;
 
             _player = new Player(
@@ -60,7 +60,7 @@ namespace A_Champion_s_Road
             Animation enemyIdleAnim = atlas.GetAnimation("enemyIdle");
 
             float enemyX = Window.ClientBounds.Width * 0.5f;
-            float enemyY = Window.ClientBounds.Height * 0.8f; // POR AHORA EL ENEMIGO ES UNA ANIMACION EN BUCLE NOMAS 
+            float enemyY = Window.ClientBounds.Height * 0.95f; // POR AHORA EL ENEMIGO ES UNA ANIMACION EN BUCLE NOMAS 
             _enemy = new Enemy(enemyIdleAnim, new Vector2(enemyX, enemyY));
         }
 

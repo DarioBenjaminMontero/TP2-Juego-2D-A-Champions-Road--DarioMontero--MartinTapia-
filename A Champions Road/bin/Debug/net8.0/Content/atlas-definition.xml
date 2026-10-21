@@ -4,8 +4,8 @@
     <Texture>atlasConEsquive</Texture>
     <Regions>
         <Region name="quieto" x="21" y="32" width="85" height="109" />
-        <Region name="cargandoGolpe" x="154" y="33" width="114" height="141" />
-        <Region name="golpe" x="322" y="0" width="97" height="338" />
+        <Region name="cargandoGolpe" x="154" y="0" width="114" height="141" />
+        <Region name="golpe" x="322" y="0" width="97" height="141" />
         <Region name="Esquivando" x="199" y="175" width="98" height="108" />
         <Region name="EsquivandoIntermedio" x="320" y="182" width="113" height="101" />
         <Region name="EsquiveCompleto" x="16" y="343" width="116" height="82" />
@@ -24,20 +24,23 @@
             <Frame region="quieto" />
         </Animation>
 
-        <Animation name="punchingAnimation" delay="200">
+        <Animation name="punchingAnimation" delay="100">
             <Frame region="quieto" />
             <Frame region="cargandoGolpe" />
             <Frame region="golpe" />
+
         </Animation>
 
-        <Animation name="dodgingAnimation" delay="200">
+        <Animation name="dodgingAnimation" delay="75">
             <Frame region="quieto" />
             <Frame region="Esquivando" />
             <Frame region="EsquivandoIntermedio" />
             <Frame region="EsquiveCompleto" />
+                        <Frame region="EsquivandoIntermedio" />
+                                    <Frame region="Esquivando" />
         </Animation>
 
-        <Animation name ="enemyIdle" delay="125">
+        <Animation name ="enemyIdle" delay="200">
             <Frame region="enemy-quieto1" />
             <Frame region="enemy-quieto2" />
             <Frame region="enemy-quieto3" />
