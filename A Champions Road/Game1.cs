@@ -10,7 +10,7 @@ namespace A_Champion_s_Road
     public class Game1 : Core
     {
         private Player _player;
-        private Enemy _enemy; // <--- 1. Declarar el enemigo
+        private Enemy _enemy; 
         private Song backgroundMusic;
         private Texture2D _ring;
 
@@ -104,16 +104,13 @@ case (Player.PlayerState.Idle, Enemy.EnemyState.Punching, true):
             }
             break;
 
-        // CASTIGO GOLPE TARDÍO: Intentás pegarle en el Frame 2 (ya no es counterable) -> Te frena el golpe y te daña
+
         case (Player.PlayerState.Punching, Enemy.EnemyState.Punching, false):
             _player.CurrentState = Player.PlayerState.Hurting;
             break;
 
-        // ==========================================
-        // COMBATE PASIVO (Te quedaste quieto esperando)
-        // ==========================================
         default:
-            // DAÑO PASIVO: Si estás en Idle y el enemigo llega al frame del impacto (Frame 2), te golpea físicamente
+
             if (_enemy.CurrentEnemyState == Enemy.EnemyState.Punching && frameActualEnemigo == 2 && _player.CurrentState == Player.PlayerState.Idle)
             {
                 _player.CurrentState = Player.PlayerState.Hurting;

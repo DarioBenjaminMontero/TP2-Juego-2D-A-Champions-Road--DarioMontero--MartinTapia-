@@ -111,6 +111,15 @@ _cronometroEstado += dt;
                     }
 
                     break;
+                    case PlayerState.Hurting: 
+                    
+_cronometroEstado += dt;
+                    if (_cronometroEstado >= _tiempoVulnerableMax)
+                    {
+                        CurrentState = PlayerState.Idle;
+                    }
+
+                    break;
             }
 
             if (_currentSprite.Region != null)

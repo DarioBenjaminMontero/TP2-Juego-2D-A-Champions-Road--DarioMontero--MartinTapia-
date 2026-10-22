@@ -69,7 +69,7 @@ public int CurrentFrame => _currentFrame;
                 }
                 else
                 {
-                    // Si ya estábamos en el último frame y pasó su delay, marcamos como terminado
+                    // si ya estábamos en el ultimo frame y paso su delay, marcamos como terminado
                     _isFinished = true;
                     break;
                 }
