@@ -14,11 +14,13 @@ namespace A_Champion_s_Road
         private AnimatedSprite _dodgeSprite;
         private AnimatedSprite _idleAnim;
         private AnimatedSprite _currentSprite;
+        private float _tiempoVulnerableMax = 1.0f;
+        private float _cronometroEstado = 0f;
 
         public float limiteIzquierda, limiteDerecha;
 
-        public enum PlayerState { Idle, Punching, Dodging }
-        private PlayerState currentState = PlayerState.Idle;
+        public enum PlayerState { Idle, Punching, Dodging, Vulnerable, Hurting }
+        public PlayerState CurrentState {get; set;} = PlayerState.Idle;
 
         public Player(Animation idleAnim, Animation punchAnim, Animation dodgeAnim, Vector2 initialPosition, float limiteD, float limiteI)
         {
@@ -39,17 +41,18 @@ namespace A_Champion_s_Road
 
         public void Update(GameTime gameTime)
         {
+float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
             KeyboardState kState = Keyboard.GetState();
-KeyboardState prevKState = Keyboard.GetState();
-            switch (currentState)
+            switch (CurrentState)
             {
                 case PlayerState.Idle:
                     Position = originalPosition;
                     _currentSprite = _idleAnim;
+                    _cronometroEstado = 0f;
 
                     if (kState.IsKeyDown(Keys.O) || kState.IsKeyDown(Keys.P))
                     {
-                        currentState = PlayerState.Punching;
+                        CurrentState = PlayerState.Punching;
                         _punchSprite.Reset();
                         _currentSprite = _punchSprite;
                         if (kState.IsKeyDown(Keys.P))
@@ -59,7 +62,7 @@ KeyboardState prevKState = Keyboard.GetState();
                     }
                     else if (kState.IsKeyDown(Keys.A) || kState.IsKeyDown(Keys.D))
                     {
-                        currentState = PlayerState.Dodging;
+                        CurrentState = PlayerState.Dodging;
                         _dodgeSprite.Reset();
                         _currentSprite = _dodgeSprite;
                         Position.X = kState.IsKeyDown(Keys.A) ? originalPosition.X - 45 : originalPosition.X + 45;
@@ -86,7 +89,7 @@ KeyboardState prevKState = Keyboard.GetState();
                     if (_punchSprite.IsFinished)
                     {
                         _punchSprite.Reset();
-                        currentState = PlayerState.Idle;
+                        CurrentState = PlayerState.Idle;
                     }
                     break;
 
@@ -96,8 +99,17 @@ KeyboardState prevKState = Keyboard.GetState();
                     if (_dodgeSprite.IsFinished)
                     {
                         _dodgeSprite.Reset();
-                        currentState = PlayerState.Idle;
+                        CurrentState = PlayerState.Idle;
                     }
+                    break;
+                    case PlayerState.Vulnerable: 
+                    
+_cronometroEstado += dt;
+                    if (_cronometroEstado >= _tiempoVulnerableMax)
+                    {
+                        CurrentState = PlayerState.Idle;
+                    }
+
                     break;
             }
 

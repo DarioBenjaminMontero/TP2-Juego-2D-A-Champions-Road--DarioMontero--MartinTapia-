@@ -180,3 +180,4 @@ C:\Users\Julio\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-
 C:\Users\Julio\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Content\punch-danteVega.xnb
 C:\Users\Julio\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\MonoGameLibrary.dll
 C:\Users\Julio\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\MonoGameLibrary.pdb
+C:\Users\Julio\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Content\enemy2.xnb

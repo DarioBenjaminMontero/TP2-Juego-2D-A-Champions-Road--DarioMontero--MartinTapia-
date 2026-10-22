@@ -20,8 +20,9 @@ public class AnimatedSprite : Sprite
             _animation = value;
             Reset();
         }
-    }
 
+    }
+public int CurrentFrame => _currentFrame;
     public AnimatedSprite() { }
 
     public AnimatedSprite(Animation animation, bool isLooping = true)

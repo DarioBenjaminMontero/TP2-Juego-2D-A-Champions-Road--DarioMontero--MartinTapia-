@@ -11,11 +11,14 @@
         <Region name="EsquiveCompleto" x="16" y="343" width="116" height="82" />
     </Regions>
 
-    <Texture>enemy1</Texture>
+    <Texture>enemy2</Texture>
     <Regions>
-        <Region name="enemy-quieto1" x="33" y="7" width="221" height="461" />
-        <Region name="enemy-quieto2" x="333" y="7" width="233" height="461" />
-        <Region name="enemy-quieto3" x="33" y="476" width="247" height="460" />
+        <Region name="enemy-quieto1" x="14" y="3" width="94" height="196" />
+        <Region name="enemy-quieto2" x="142" y="3" width="99" height="196" />
+        <Region name="enemy-quieto3" x="270" y="3" width="106" height="196" />
+        <Region name="enemy-preparacion" x="19" y="203" width="76" height="196" />
+        <Region name="enemy-preparacion2" x="19" y="203" width="76" height="196" />
+        <Region name="enemy-golpe" x="142" y="203" width="94" height="196" />
     </Regions>
 
 
@@ -44,6 +47,14 @@
             <Frame region="enemy-quieto1" />
             <Frame region="enemy-quieto2" />
             <Frame region="enemy-quieto3" />
+            <Frame region="enemy-quieto2" />
+        </Animation>
+
+        <Animation name ="enemyPunch" delay="500">
+            <Frame region="enemy-preparacion" />
+            <Frame region="enemy-preparacion2"  delay="500"/>
+            <Frame region="enemy-golpe" />
+            <Frame region="enemy-quieto1" />
             <Frame region="enemy-quieto2" />
         </Animation>
     </Animations>
