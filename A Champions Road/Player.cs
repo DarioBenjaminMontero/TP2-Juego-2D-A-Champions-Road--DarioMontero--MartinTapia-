@@ -1,8 +1,8 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using MonoGameLibrary.Graphics;
-
+using MonoGameLibrary.Input; // Asegúrate de tener este using si tu KeyboardInfo está en ese namespace
+using Microsoft.Xna.Framework.Input;
 namespace A_Champion_s_Road
 {
     public class Player
@@ -20,7 +20,10 @@ namespace A_Champion_s_Road
         public float limiteIzquierda, limiteDerecha;
 
         public enum PlayerState { Idle, Punching, Dodging, Vulnerable, Hurting }
-        public PlayerState CurrentState {get; set;} = PlayerState.Idle;
+        public enum Direction { None, Left, Right }
+        public PlayerState CurrentState { get; set; } = PlayerState.Idle;
+        public Direction CurrentDirectionPunch { get; set; } = Direction.None;
+        public Direction CurrentDirectionDodge { get; set; } = Direction.None;
 
         public Player(Animation idleAnim, Animation punchAnim, Animation dodgeAnim, Vector2 initialPosition, float limiteD, float limiteI)
         {
@@ -39,10 +42,11 @@ namespace A_Champion_s_Road
             _dodgeSprite.Scale = new Vector2(2.8f, 2.8f);
         }
 
-        public void Update(GameTime gameTime)
+        // Recibimos KeyboardInfo en lugar de consultar Keyboard.GetState() cada vez
+        public void Update(GameTime gameTime, KeyboardInfo keyboard)
         {
-float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            KeyboardState kState = Keyboard.GetState();
+            float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
             switch (CurrentState)
             {
                 case PlayerState.Idle:
@@ -50,35 +54,49 @@ float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
                     _currentSprite = _idleAnim;
                     _cronometroEstado = 0f;
 
-                    if (kState.IsKeyDown(Keys.O) || kState.IsKeyDown(Keys.P))
+                    // Usamos WasKeyJustPressed para mayor precisión en juegos de combate
+                    if (keyboard.WasKeyJustPressed(Keys.O) || keyboard.WasKeyJustPressed(Keys.P))
                     {
                         CurrentState = PlayerState.Punching;
+                        CurrentDirectionDodge = Direction.None;
                         _punchSprite.Reset();
                         _currentSprite = _punchSprite;
-                        if (kState.IsKeyDown(Keys.P))
+
+                        if (keyboard.WasKeyJustPressed(Keys.P))
+                        {
+                            CurrentDirectionPunch = Direction.Right;
                             _currentSprite.Effects = SpriteEffects.FlipHorizontally;
-                        else if (kState.IsKeyDown(Keys.O))
+                        }
+                        else if (keyboard.WasKeyJustPressed(Keys.O))
+                        {
+                            CurrentDirectionPunch = Direction.Left;
                             _currentSprite.Effects = SpriteEffects.None;
+                        }
                     }
-                    else if (kState.IsKeyDown(Keys.A) || kState.IsKeyDown(Keys.D))
+                    else if (keyboard.WasKeyJustPressed(Keys.A) || keyboard.WasKeyJustPressed(Keys.D))
                     {
                         CurrentState = PlayerState.Dodging;
+                        CurrentDirectionPunch = Direction.None;
                         _dodgeSprite.Reset();
                         _currentSprite = _dodgeSprite;
-                        Position.X = kState.IsKeyDown(Keys.A) ? originalPosition.X - 45 : originalPosition.X + 45;
-                        if (kState.IsKeyDown(Keys.D))
+
+                        if (keyboard.WasKeyJustPressed(Keys.D))
                         {
                             _currentSprite.Effects = SpriteEffects.FlipHorizontally;
                             Position.X = originalPosition.X + 45;
+                            CurrentDirectionDodge = Direction.Right;
                         }
-                        else if (kState.IsKeyDown(Keys.A))
+                        else if (keyboard.WasKeyJustPressed(Keys.A))
                         {
                             _currentSprite.Effects = SpriteEffects.None;
                             Position.X = originalPosition.X - 45;
+                            CurrentDirectionDodge = Direction.Left;
                         }
                     }
                     else
                     {
+                        CurrentDirectionPunch = Direction.None;
+                        CurrentDirectionDodge = Direction.None;
                         _currentSprite.Effects = SpriteEffects.None;
                     }
                     break;
@@ -102,23 +120,21 @@ float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
                         CurrentState = PlayerState.Idle;
                     }
                     break;
-                    case PlayerState.Vulnerable: 
-                    
-_cronometroEstado += dt;
+
+                case PlayerState.Vulnerable:
+                    _cronometroEstado += dt;
                     if (_cronometroEstado >= _tiempoVulnerableMax)
                     {
                         CurrentState = PlayerState.Idle;
                     }
-
                     break;
-                    case PlayerState.Hurting: 
-                    
-_cronometroEstado += dt;
+
+                case PlayerState.Hurting:
+                    _cronometroEstado += dt;
                     if (_cronometroEstado >= _tiempoVulnerableMax)
                     {
                         CurrentState = PlayerState.Idle;
                     }
-
                     break;
             }
 
@@ -126,8 +142,6 @@ _cronometroEstado += dt;
             {
                 _currentSprite.Origin = new Vector2(_currentSprite.Region.Width / 2f, _currentSprite.Region.Height);
             }
-
-            
         }
 
         public void Draw(SpriteBatch spriteBatch)

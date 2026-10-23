@@ -164,7 +164,6 @@ C:\Users\PC Humilde\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinT
 C:\Users\PC Humilde\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\obj\Debug\net8.0\ref\A Champions Road.dll
 C:\Users\alumno.ET26\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Content\animacionAgachado.xnb
 C:\Users\alumno.ET26\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Content\punch-danteVega.xnb
-C:\Users\alumno.ET26\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\A Champions Road.exe
 C:\Users\alumno.ET26\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\MonoGameLibrary.dll
 C:\Users\alumno.ET26\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\MonoGameLibrary.pdb
 C:\Users\alumno.ET26\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Content\atlasConEsquive.xnb
@@ -181,3 +180,5 @@ C:\Users\Julio\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-
 C:\Users\Julio\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\MonoGameLibrary.dll
 C:\Users\Julio\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\MonoGameLibrary.pdb
 C:\Users\Julio\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Content\enemy2.xnb
+C:\Users\alumno.ET26\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Content\enemy1.xnb
+C:\Users\alumno.ET26\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Content\enemy2.xnb

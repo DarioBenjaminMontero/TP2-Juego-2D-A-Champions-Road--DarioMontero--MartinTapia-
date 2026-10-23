@@ -4,6 +4,8 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using MonoGameLibrary;
 using MonoGameLibrary.Graphics;
+using MonoGameLibrary.Input;
+using System;
 
 namespace A_Champion_s_Road
 {
@@ -13,6 +15,10 @@ namespace A_Champion_s_Road
         private Enemy _enemy; 
         private Song backgroundMusic;
         private Texture2D _ring;
+        private CombatSystem _combat;
+        
+        // Declaramos el InputManager
+        private InputManager _inputManager;
 
         public Game1() : base("A Champions Road", 1280, 720, false)
         {
@@ -23,6 +29,9 @@ namespace A_Champion_s_Road
             Graphics.HardwareModeSwitch = false;
             Graphics.IsFullScreen = true;
             Graphics.ApplyChanges();
+
+            // Inicializamos el InputManager en el constructor
+            _inputManager = new InputManager();
         }
 
         protected override void Initialize()
@@ -60,8 +69,9 @@ namespace A_Champion_s_Road
             Animation enemyIdleAnim = atlas.GetAnimation("enemyIdle");
             Animation enemyPunchAnim = atlas.GetAnimation("enemyPunch");
             float enemyX = Window.ClientBounds.Width * 0.5f;
-            float enemyY = Window.ClientBounds.Height * 0.95f; // POR AHORA EL ENEMIGO ES UNA ANIMACION EN BUCLE NOMAS 
+            float enemyY = Window.ClientBounds.Height * 0.95f; 
             _enemy = new Enemy(enemyIdleAnim, enemyPunchAnim, new Vector2(enemyX, enemyY));
+            _combat = new CombatSystem(_enemy, _player);
         }
 
         protected override void Update(GameTime gameTime)
@@ -69,60 +79,16 @@ namespace A_Champion_s_Road
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            _player.Update(gameTime);
+            // 1. Actualizamos el administrador de entradas primero
+            _inputManager.Update(gameTime);
+
+            // 2. Le pasamos el KeyboardInfo al Update del jugador
+            _player.Update(gameTime, _inputManager.Keyboard);
+
             _enemy.Update(gameTime);
-            CheckCombatInteractions();
+            _combat.Update(gameTime);
             base.Update(gameTime);
         }
-
-        public void CheckCombatInteractions()
-{
-    int frameActualEnemigo = _enemy.CurrentPunchFrame;
-
-    switch ((_player.CurrentState, _enemy.CurrentEnemyState, _enemy.IsCounterable))
-    {
-  
-case (Player.PlayerState.Idle, Enemy.EnemyState.Punching, true):
-            // Se deja vacío a propósito para que el juego continúe normalmente
-            
-            break;
-        case (Player.PlayerState.Punching, Enemy.EnemyState.Punching, true):
-            _enemy.CurrentEnemyState = Enemy.EnemyState.Hurting;
-            _enemy.IsCounterable = false;
-            break;
-
-   
-        case (Player.PlayerState.Dodging, Enemy.EnemyState.Punching, true):
-            _player.CurrentState = Player.PlayerState.Hurting;
-            break;
-
-
-        case (Player.PlayerState.Dodging, Enemy.EnemyState.Punching, false):
-            if (frameActualEnemigo == 2 || frameActualEnemigo == 1)
-            {
-                _enemy.CurrentEnemyState = Enemy.EnemyState.Vulnerable;
-            }
-            break;
-
-
-        case (Player.PlayerState.Punching, Enemy.EnemyState.Punching, false):
-            _player.CurrentState = Player.PlayerState.Hurting;
-            break;
-
-        default:
-
-            if (_enemy.CurrentEnemyState == Enemy.EnemyState.Punching && frameActualEnemigo == 2 && _player.CurrentState == Player.PlayerState.Idle)
-            {
-                _player.CurrentState = Player.PlayerState.Hurting;
-            }
-
-            if (_player.CurrentState == Player.PlayerState.Vulnerable)
-            {
-                _enemy.CurrentEnemyState = Enemy.EnemyState.Punching;
-            }
-            break;
-    }
-}
 
         protected override void Draw(GameTime gameTime)
         {

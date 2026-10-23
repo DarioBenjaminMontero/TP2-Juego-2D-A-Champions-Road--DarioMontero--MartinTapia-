@@ -4,13 +4,13 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/Julio/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/punch-danteVega.png</File>
-    <File>C:/Users/Julio/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/animacionAgachado.png</File>
-    <File>C:/Users/Julio/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/atlasConEsquive.png</File>
-    <File>C:/Users/Julio/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/enemy1.png</File>
-    <File>C:/Users/Julio/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/enemy2.png</File>
-    <File>C:/Users/Julio/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/ring3.png</File>
-    <File>C:/Users/Julio/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/Ten_Counts_to_Glory.mp3</File>
+    <File>C:/Users/alumno.ET26/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/punch-danteVega.png</File>
+    <File>C:/Users/alumno.ET26/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/animacionAgachado.png</File>
+    <File>C:/Users/alumno.ET26/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/atlasConEsquive.png</File>
+    <File>C:/Users/alumno.ET26/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/enemy1.png</File>
+    <File>C:/Users/alumno.ET26/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/enemy2.png</File>
+    <File>C:/Users/alumno.ET26/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/ring3.png</File>
+    <File>C:/Users/alumno.ET26/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/Ten_Counts_to_Glory.mp3</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />

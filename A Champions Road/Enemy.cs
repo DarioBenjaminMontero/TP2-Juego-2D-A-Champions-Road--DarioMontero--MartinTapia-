@@ -12,7 +12,9 @@ namespace A_Champion_s_Road
         private AnimatedSprite _currentSprite;
         float _tiempoParaDecidir = 1.0f;
         float _cronometroIA = 0.0f;
-        float _cronometroVulnerable = 0.0f;
+        private float _tiempoVulnerableMax = 1.0f;
+        private float _cronometroEstado = 0f;
+        
 
         public enum EnemyState { Idle, Punching, Vulnerable, Hurting }
         public EnemyState CurrentEnemyState { get; set; } = EnemyState.Idle;
@@ -83,13 +85,21 @@ public int CurrentPunchFrame => _punchAnim.CurrentFrame;
                     break;
                 case EnemyState.Vulnerable:
 
-                    _cronometroVulnerable += dt;
-                    if (_cronometroVulnerable >= 1.0f)
+                    _cronometroEstado += dt;
+                    if (_cronometroEstado >= _tiempoVulnerableMax)
                     {
-                        _cronometroVulnerable = 0f;
                         CurrentEnemyState = EnemyState.Idle;
                     }
 
+                    break;
+                     case EnemyState.Hurting:
+
+_cronometroEstado += dt;
+                    if (_cronometroEstado >= _tiempoVulnerableMax)
+                    {
+                        CurrentEnemyState = EnemyState.Idle;
+                    }
+                    
                     break;
             }
 
