@@ -39,9 +39,9 @@ public int CurrentPunchFrame => _punchSprite.CurrentFrame;
             _dodgeSprite = new AnimatedSprite(dodgeAnim, false);
 
             _currentSprite = _idleAnim;
-            _currentSprite.Scale = new Vector2(2.8f, 2.8f);
-            _punchSprite.Scale = new Vector2(2.8f, 2.8f);
-            _dodgeSprite.Scale = new Vector2(2.8f, 2.8f);
+            _currentSprite.Scale = new Vector2(1.5f, 1.5f);
+            _punchSprite.Scale = new Vector2(1.5f, 1.5f);
+            _dodgeSprite.Scale = new Vector2(1.5f, 1.5f);
         }
 
         // Recibimos KeyboardInfo en lugar de consultar Keyboard.GetState() cada vez

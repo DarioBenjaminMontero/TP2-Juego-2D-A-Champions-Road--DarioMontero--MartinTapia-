@@ -23,9 +23,9 @@ public class EnemyAI
         if (_cronometroIA >= _tiempoParaDecidir)
         {
             _cronometroIA = 0f;
-            int numeroAleatorio = _aleatorio.Next(1, 5);
+            int numeroAleatorio = _aleatorio.Next(1, 3);
             
-            if (numeroAleatorio == 3)
+            if (numeroAleatorio == 2)
             {
                 enemy.StartPunch(); // Método dentro de Enemy para iniciar el ataque
             }

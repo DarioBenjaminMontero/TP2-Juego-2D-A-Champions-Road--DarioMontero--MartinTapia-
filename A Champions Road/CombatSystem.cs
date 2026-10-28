@@ -45,7 +45,7 @@ public class CombatSystem
 
                 if (_player.IsDodgeFinished)
                 {
-_player.CurrentState = Player.PlayerState.Vulnerable;                    
+                    _player.CurrentState = Player.PlayerState.Vulnerable;
                 }
                 break;
 
@@ -66,12 +66,12 @@ _player.CurrentState = Player.PlayerState.Vulnerable;
                 {
                     _player.CurrentState = Player.PlayerState.Hurting;
                 }
-                if (_player.CurrentState == Player.PlayerState.Vulnerable && 
-    _enemy.CurrentEnemyState == Enemy.EnemyState.Punching && 
+                if (_player.CurrentState == Player.PlayerState.Vulnerable &&
+    _enemy.CurrentEnemyState == Enemy.EnemyState.Punching &&
     frameActualEnemigo == 2)
-{
-    _player.CurrentState = Player.PlayerState.Hurting;
-}
+                {
+                    _player.CurrentState = Player.PlayerState.Hurting;
+                }
 
                 if (_player.CurrentState == Player.PlayerState.Vulnerable)
                 {

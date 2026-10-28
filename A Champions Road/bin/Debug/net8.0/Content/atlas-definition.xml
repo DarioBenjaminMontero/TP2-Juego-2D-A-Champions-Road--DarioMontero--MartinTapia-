@@ -1,14 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TextureAtlas>
 
-    <Texture>atlasConEsquive</Texture>
+    <Texture>danteVegaAtlas</Texture>
     <Regions>
-        <Region name="quieto" x="21" y="32" width="85" height="109" />
-        <Region name="cargandoGolpe" x="154" y="0" width="114" height="141" />
-        <Region name="golpe" x="322" y="0" width="97" height="141" />
-        <Region name="Esquivando" x="199" y="175" width="98" height="108" />
-        <Region name="EsquivandoIntermedio" x="320" y="182" width="113" height="101" />
-        <Region name="EsquiveCompleto" x="16" y="343" width="116" height="82" />
+        <Region name="quieto" x="42" y="64" width="171" height="219" />
+        <Region name="cargandoGolpe" x="308" y="66" width="229" height="217" />
+        <Region name="golpe" x="644" y="0" width="195" height="283" />
+        <Region name="Esquivando" x="98" y="350" width="199" height="217" />
+        <Region name="EsquivandoIntermedio" x="340" y="364" width="227" height="203" />
+        <Region name="EsquiveCompleto" x="632" y="402" width="233" height="165" />
+        <Region name="herido" x="4" y="634" width="233" height="217" /> 
     </Regions>
 
     <Texture>enemy2</Texture>
@@ -50,9 +51,9 @@
             <Frame region="enemy-quieto2" />
         </Animation>
 
-        <Animation name ="enemyPunch" delay="500">
+        <Animation name ="enemyPunch" delay="300">
             <Frame region="enemy-preparacion" />
-            <Frame region="enemy-preparacion2"  delay="500"/>
+            <Frame region="enemy-preparacion2"  delay="300"/>
             <Frame region="enemy-golpe" />
         </Animation>
     </Animations>
