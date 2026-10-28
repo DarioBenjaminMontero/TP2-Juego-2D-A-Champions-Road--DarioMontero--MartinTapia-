@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using MonoGameLibrary.Graphics;
 using MonoGameLibrary.Input; // Asegúrate de tener este using si tu KeyboardInfo está en ese namespace
 using Microsoft.Xna.Framework.Input;
+using System;
 namespace A_Champion_s_Road
 {
     public class Player
@@ -24,7 +25,8 @@ namespace A_Champion_s_Road
         public PlayerState CurrentState { get; set; } = PlayerState.Idle;
         public Direction CurrentDirectionPunch { get; set; } = Direction.None;
         public Direction CurrentDirectionDodge { get; set; } = Direction.None;
-
+        public bool IsDodgeFinished => _dodgeSprite.IsFinished;
+public int CurrentPunchFrame => _punchSprite.CurrentFrame;
         public Player(Animation idleAnim, Animation punchAnim, Animation dodgeAnim, Vector2 initialPosition, float limiteD, float limiteI)
         {
             Position = initialPosition;
@@ -53,6 +55,12 @@ namespace A_Champion_s_Road
                     Position = originalPosition;
                     _currentSprite = _idleAnim;
                     _cronometroEstado = 0f;
+
+                    float oscilacionPaso = (float)gameTime.TotalGameTime.TotalSeconds * 8f;
+    Position.X = originalPosition.X + (float)Math.Sin(oscilacionPaso) * 20f;
+float reboteY = Math.Abs((float)Math.Sin(oscilacionPaso)) * 6f;
+Position.Y = originalPosition.Y + reboteY;
+
 
                     // Usamos WasKeyJustPressed para mayor precisión en juegos de combate
                     if (keyboard.WasKeyJustPressed(Keys.O) || keyboard.WasKeyJustPressed(Keys.P))

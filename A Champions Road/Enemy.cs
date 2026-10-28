@@ -19,6 +19,9 @@ namespace A_Champion_s_Road
         public enum EnemyState { Idle, Punching, Vulnerable, Hurting }
         public EnemyState CurrentEnemyState { get; set; } = EnemyState.Idle;
         public bool IsCounterable { get; set; } = false;
+
+
+
 public int CurrentPunchFrame => _punchAnim.CurrentFrame;
 
 
@@ -33,31 +36,16 @@ public int CurrentPunchFrame => _punchAnim.CurrentFrame;
             _idleAnim.Scale = new Vector2(2.5f, 2.5f);
             _punchAnim.Scale = new Vector2(2.5f, 2.5f); // altura del tyke mason
         }
+        public void StartPunch()
+        {
+            CurrentEnemyState = EnemyState.Punching;
+            _punchAnim.Reset();
+            _cronometroEstado = 0f; // Por seguridad al cambiar de estado
+        }
         static Random aleatorio = new Random();
         public void Update(GameTime gameTime)
         {
-            float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            _currentSprite.Update(gameTime);
-
-            if (_currentSprite.Region != null)
-            {
-                _currentSprite.Origin = new Vector2(_currentSprite.Region.Width / 2f, _currentSprite.Region.Height);
-            }
-
-            if (CurrentEnemyState == EnemyState.Idle)
-            {
-                _cronometroIA += dt;
-                if (_cronometroIA >= _tiempoParaDecidir)
-                {
-                    _cronometroIA = 0f;
-                    int numeroAleatorio = aleatorio.Next(1, 5);
-                    if (numeroAleatorio == 3)
-                    {
-                        CurrentEnemyState = EnemyState.Punching;
-                        _punchAnim.Reset();
-                    }
-                }
-            }
+            float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;           
             switch (CurrentEnemyState)
             {
 
@@ -102,8 +90,11 @@ _cronometroEstado += dt;
                     
                     break;
             }
-
-
+_currentSprite.Update(gameTime);
+if (_currentSprite.Region != null)
+            {
+                _currentSprite.Origin = new Vector2(_currentSprite.Region.Width / 2f, _currentSprite.Region.Height);
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)

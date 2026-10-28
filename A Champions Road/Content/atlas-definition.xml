@@ -54,8 +54,6 @@
             <Frame region="enemy-preparacion" />
             <Frame region="enemy-preparacion2"  delay="500"/>
             <Frame region="enemy-golpe" />
-            <Frame region="enemy-quieto1" />
-            <Frame region="enemy-quieto2" />
         </Animation>
     </Animations>
 

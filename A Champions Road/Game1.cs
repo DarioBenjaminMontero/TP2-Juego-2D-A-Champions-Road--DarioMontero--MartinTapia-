@@ -16,6 +16,7 @@ namespace A_Champion_s_Road
         private Song backgroundMusic;
         private Texture2D _ring;
         private CombatSystem _combat;
+        private EnemyAI _enemyAI;
         
         // Declaramos el InputManager
         private InputManager _inputManager;
@@ -53,7 +54,7 @@ namespace A_Champion_s_Road
             Animation idleAnim = atlas.GetAnimation("idleAnimation");
             Animation punchAnim = atlas.GetAnimation("punchingAnimation");
             Animation dodgeAnim = atlas.GetAnimation("dodgingAnimation");
-
+_enemyAI = new EnemyAI();
             float playerX = Window.ClientBounds.Width * 0.5f;
             float playerY = Window.ClientBounds.Height;
 
@@ -84,7 +85,7 @@ namespace A_Champion_s_Road
 
             // 2. Le pasamos el KeyboardInfo al Update del jugador
             _player.Update(gameTime, _inputManager.Keyboard);
-
+_enemyAI.Update(gameTime, _enemy);
             _enemy.Update(gameTime);
             _combat.Update(gameTime);
             base.Update(gameTime);
