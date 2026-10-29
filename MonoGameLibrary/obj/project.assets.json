@@ -293,11 +293,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\alumno.ET26\\Desktop\\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\\MonoGameLibrary\\MonoGameLibrary.csproj",
+      "projectUniqueName": "C:\\Users\\alumno.ET26\\Downloads\\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\\MonoGameLibrary\\MonoGameLibrary.csproj",
       "projectName": "MonoGameLibrary",
-      "projectPath": "C:\\Users\\alumno.ET26\\Desktop\\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\\MonoGameLibrary\\MonoGameLibrary.csproj",
+      "projectPath": "C:\\Users\\alumno.ET26\\Downloads\\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\\MonoGameLibrary\\MonoGameLibrary.csproj",
       "packagesPath": "C:\\Users\\alumno.ET26\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\alumno.ET26\\Desktop\\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\\MonoGameLibrary\\obj\\",
+      "outputPath": "C:\\Users\\alumno.ET26\\Downloads\\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\\MonoGameLibrary\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\alumno.ET26\\AppData\\Roaming\\NuGet\\NuGet.Config",

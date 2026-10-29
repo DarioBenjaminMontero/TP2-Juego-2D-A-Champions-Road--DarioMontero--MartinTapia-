@@ -331,11 +331,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\alumno.ET26\\Desktop\\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\\A Champions Road\\A Champions Road.csproj",
+      "projectUniqueName": "C:\\Users\\alumno.ET26\\Downloads\\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\\A Champions Road\\A Champions Road.csproj",
       "projectName": "A Champions Road",
-      "projectPath": "C:\\Users\\alumno.ET26\\Desktop\\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\\A Champions Road\\A Champions Road.csproj",
+      "projectPath": "C:\\Users\\alumno.ET26\\Downloads\\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\\A Champions Road\\A Champions Road.csproj",
       "packagesPath": "C:\\Users\\alumno.ET26\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\alumno.ET26\\Desktop\\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\\A Champions Road\\obj\\",
+      "outputPath": "C:\\Users\\alumno.ET26\\Downloads\\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\\A Champions Road\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\alumno.ET26\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -353,8 +353,8 @@
           "framework": "net8.0",
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\alumno.ET26\\Desktop\\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\\MonoGameLibrary\\MonoGameLibrary.csproj": {
-              "projectPath": "C:\\Users\\alumno.ET26\\Desktop\\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\\MonoGameLibrary\\MonoGameLibrary.csproj"
+            "C:\\Users\\alumno.ET26\\Downloads\\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\\MonoGameLibrary\\MonoGameLibrary.csproj": {
+              "projectPath": "C:\\Users\\alumno.ET26\\Downloads\\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\\MonoGameLibrary\\MonoGameLibrary.csproj"
             }
           }
         }

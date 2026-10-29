@@ -184,3 +184,9 @@ C:\Users\alumno.ET26\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--Martin
 C:\Users\alumno.ET26\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\obj\Debug\net8.0\A Champions Road.pdb
 C:\Users\alumno.ET26\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\obj\Debug\net8.0\A Champions Road.genruntimeconfig.cache
 C:\Users\alumno.ET26\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\obj\Debug\net8.0\ref\A Champions Road.dll
+C:\Users\alumno.ET26\Downloads\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Content\atlas-definition.xml
+C:\Users\alumno.ET26\Downloads\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Content\animacionAgachado.xnb
+C:\Users\alumno.ET26\Downloads\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Content\atlasConEsquive.xnb
+C:\Users\alumno.ET26\Downloads\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Content\danteVegaAtlas.xnb
+C:\Users\alumno.ET26\Downloads\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Content\enemy1.xnb
+C:\Users\alumno.ET26\Downloads\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Content\enemy2.xnb
