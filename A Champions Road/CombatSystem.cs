@@ -9,29 +9,37 @@ using MonoGameLibrary.Input;
 using System;
 using System.Runtime.CompilerServices;
 
+
 public class CombatSystem
 {
+
 
     public Enemy _enemy { get; set; }
     public Player _player { get; set; }
 
+
     public CombatSystem(Enemy _enemy, Player _player)
     {
+
 
         this._enemy = _enemy;
         this._player = _player;
 
+
     }
+
 
     public void Update(GameTime gameTime)
     {
         int frameActualEnemigo = _enemy.CurrentPunchFrame;
         int frameActualJugador = _player.CurrentPunchFrame;
 
+
         switch ((_player.CurrentState, _enemy.CurrentEnemyState, _enemy.IsCounterable))
         {
             case (Player.PlayerState.Idle, Enemy.EnemyState.Punching, true):
                 break;
+
 
             case (Player.PlayerState.Punching, Enemy.EnemyState.Punching, true):
                 if (frameActualJugador == 2)
@@ -41,13 +49,16 @@ public class CombatSystem
                 }
                 break;
 
+
             case (Player.PlayerState.Dodging, Enemy.EnemyState.Punching, true):
+
 
                 if (_player.IsDodgeFinished)
                 {
-                    _player.Vulnerable = true;
+                    _player.HacerVulnerable();
                 }
                 break;
+
 
             case (Player.PlayerState.Dodging, Enemy.EnemyState.Punching, false):
                 if (frameActualEnemigo == 2 || frameActualEnemigo == 1)
@@ -56,11 +67,14 @@ public class CombatSystem
                 }
                 break;
 
+
             case (Player.PlayerState.Punching, Enemy.EnemyState.Punching, false):
                 // El jugador golpeó fuera de tiempo (cuando el enemigo ya no es counterable) -> El jugador recibe daño
                 _player.RecibirGolpe();
                 break;
-
+case(Player.PlayerState.Dodging, Enemy.EnemyState.Idle, false):
+_player.HacerVulnerable();
+break;
             default:
                 if (_enemy.CurrentEnemyState == Enemy.EnemyState.Punching && frameActualEnemigo == 2 && _player.CurrentState == Player.PlayerState.Idle)
                 {
@@ -70,14 +84,17 @@ public class CombatSystem
                     _enemy.CurrentEnemyState == Enemy.EnemyState.Punching &&
                     frameActualEnemigo == 2)
                 {
-        
+       
                     _player.RecibirGolpe();
                 }
 
-                
+
+               
                 break;
         }
     }
+
+
 
 
 }

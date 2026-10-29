@@ -1,3 +1,4 @@
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGameLibrary.Graphics;
@@ -11,16 +12,22 @@ namespace A_Champion_s_Road
         public Vector2 Position;
         private Vector2 originalPosition;
 
+
         private AnimatedSprite _punchSprite;
         private AnimatedSprite _dodgeSprite;
         private AnimatedSprite _idleAnim;
         private AnimatedSprite _currentSprite;
         private AnimatedSprite _hurtAnim;
-        private float _tiempoVulnerableMax = 1.0f;
+        AnimatedSprite _vulnerableAnim;
+        private float _tiempoVulnerableMax = 2.0f;
         private float _tiempoHurtingMax = 0.1f;
-        private float _cronometroEstado = 0f;
+       
+        private float _cronometroHurting = 0f;
+        private float _cronometroVulnerable = 0f;
+
 
         public float limiteIzquierda, limiteDerecha;
+
 
         public enum PlayerState { Idle, Punching, Dodging, Hurting }
         public bool Vulnerable = false;
@@ -30,58 +37,79 @@ namespace A_Champion_s_Road
         public Direction CurrentDirectionDodge { get; set; } = Direction.None;
         public bool IsDodgeFinished => _dodgeSprite.IsFinished;
         public int CurrentPunchFrame => _punchSprite.CurrentFrame;
-        public Player(Animation idleAnim, Animation punchAnim, Animation dodgeAnim, Animation hurtAnimation, Vector2 initialPosition, float limiteD, float limiteI)
+        public Player(Animation idleAnim, Animation punchAnim, Animation dodgeAnim, Animation hurtAnimation,Animation vulnerableAnim, Vector2 initialPosition, float limiteD, float limiteI)
         {
             Position = initialPosition;
             originalPosition = initialPosition;
             limiteDerecha = limiteD;
             limiteIzquierda = limiteI;
-
+_vulnerableAnim = new AnimatedSprite(vulnerableAnim, false);
             _idleAnim = new AnimatedSprite(idleAnim, true);
             _punchSprite = new AnimatedSprite(punchAnim, false);
             _dodgeSprite = new AnimatedSprite(dodgeAnim, false);
             _hurtAnim = new AnimatedSprite(hurtAnimation, false);
+
 
             _currentSprite = _idleAnim;
             _currentSprite.Scale = new Vector2(1.5f, 1.5f);
             _punchSprite.Scale = new Vector2(1.5f, 1.5f);
             _dodgeSprite.Scale = new Vector2(1.5f, 1.5f);
             _hurtAnim.Scale = new Vector2(1.5f, 1.5f);
+            _vulnerableAnim.Scale= new Vector2(1.5f, 1.5f);
         }
         public void RecibirGolpe()
         {
             CurrentState = PlayerState.Hurting;
-            _cronometroEstado = 0f;
+            _cronometroHurting = 0f;
             _hurtAnim.Reset();
             _currentSprite = _hurtAnim;
         }
+        public void HacerVulnerable()
+{
+    Vulnerable = true;
+    _cronometroVulnerable = 0f;
+    _vulnerableAnim.Reset();  
+}
         // Recibimos KeyboardInfo en lugar de consultar Keyboard.GetState() cada vez
        public void Update(GameTime gameTime, KeyboardInfo keyboard)
         {
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
+
             // 1. Gestionamos el temporizador de vulnerabilidad de forma independiente en segundo plano
             if (Vulnerable)
             {
-                _cronometroEstado += dt;
-                if (_cronometroEstado >= _tiempoVulnerableMax)
+                _cronometroVulnerable += dt;
+                if (_cronometroVulnerable >= _tiempoVulnerableMax)
                 {
-                    Vulnerable = false;     
-                    _cronometroEstado = 0f;  
+                    Vulnerable = false;      
+                    _cronometroVulnerable = 0f;  
                 }
             }
+
 
             switch (CurrentState)
             {
                 case PlayerState.Idle:
-                    Position = originalPosition;
-                    _currentSprite = _idleAnim;
 
-                   
-                    float oscilacionPaso = (float)gameTime.TotalGameTime.TotalSeconds * 8f;
-                    Position.X = originalPosition.X + (float)Math.Sin(oscilacionPaso) * 20f;
-                    float reboteY = Math.Abs((float)Math.Sin(oscilacionPaso)) * 6f;
-                    Position.Y = originalPosition.Y + reboteY;
+
+if (Vulnerable)
+            {
+                Position = originalPosition;
+                _currentSprite = _vulnerableAnim;
+                _vulnerableAnim.Update(gameTime);
+            }
+            else {// Comportamiento normal de Idle con movimiento y pasos
+                Position = originalPosition;
+                _currentSprite = _idleAnim;
+
+
+                float oscilacionPaso = (float)gameTime.TotalGameTime.TotalSeconds * 8f;
+                Position.X = originalPosition.X + (float)Math.Sin(oscilacionPaso) * 20f;
+                float reboteY = Math.Abs((float)Math.Sin(oscilacionPaso)) * 6f;
+                Position.Y = originalPosition.Y + reboteY;
+                }
+
 
                     // Usamos WasKeyJustPressed para mayor precisión en juegos de combate
                     if (keyboard.WasKeyJustPressed(Keys.O) || keyboard.WasKeyJustPressed(Keys.P))
@@ -90,6 +118,7 @@ namespace A_Champion_s_Road
                         CurrentDirectionDodge = Direction.None;
                         _punchSprite.Reset();
                         _currentSprite = _punchSprite;
+
 
                         if (keyboard.WasKeyJustPressed(Keys.P))
                         {
@@ -104,10 +133,13 @@ namespace A_Champion_s_Road
                     }
                     else if (keyboard.WasKeyJustPressed(Keys.A) || keyboard.WasKeyJustPressed(Keys.D))
                     {
-                        CurrentState = PlayerState.Dodging;
+                        if (!Vulnerable)
+                        {
+                            CurrentState = PlayerState.Dodging;
                         CurrentDirectionPunch = Direction.None;
                         _dodgeSprite.Reset();
                         _currentSprite = _dodgeSprite;
+
 
                         if (keyboard.WasKeyJustPressed(Keys.D))
                         {
@@ -121,6 +153,9 @@ namespace A_Champion_s_Road
                             Position.X = originalPosition.X - 45;
                             CurrentDirectionDodge = Direction.Left;
                         }
+
+
+                        }
                     }
                     else
                     {
@@ -129,6 +164,7 @@ namespace A_Champion_s_Road
                         _currentSprite.Effects = SpriteEffects.None;
                     }
                     break;
+
 
                 case PlayerState.Punching:
                     _currentSprite = _punchSprite;
@@ -140,6 +176,7 @@ namespace A_Champion_s_Road
                     }
                     break;
 
+
                 case PlayerState.Dodging:
                     _currentSprite = _dodgeSprite;
                     _dodgeSprite.Update(gameTime);
@@ -150,21 +187,23 @@ namespace A_Champion_s_Road
                     }
                     break;
 
+
                 case PlayerState.Hurting:
                     _currentSprite = _hurtAnim;
                     _hurtAnim.Update(gameTime);
 
-                    _cronometroEstado += dt;
 
-                    if (_cronometroEstado >= _tiempoHurtingMax || _hurtAnim.IsFinished)
+                    _cronometroHurting += dt;
+_vulnerableAnim.Update(gameTime);
+                    if (_cronometroHurting >= _tiempoHurtingMax || _hurtAnim.IsFinished)
                     {
                         _hurtAnim.Reset();
-                        CurrentState = PlayerState.Idle; 
-                        Vulnerable = true;              
-                        _cronometroEstado = 0f;        
+                        CurrentState = PlayerState.Idle;                                  
+                        _cronometroVulnerable = 0f; // Reiniciamos el contador específico de vulnerabilidad
                     }
                     break;
             }
+
 
             if (_currentSprite.Region != null)
             {
@@ -172,9 +211,11 @@ namespace A_Champion_s_Road
             }
         }
 
+
         public void Draw(SpriteBatch spriteBatch)
         {
             _currentSprite.Draw(spriteBatch, Position);
         }
     }
 }
+
