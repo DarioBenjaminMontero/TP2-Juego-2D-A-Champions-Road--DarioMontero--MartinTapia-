@@ -27,6 +27,9 @@
         <Animation name="idleAnimation" delay="100">
             <Frame region="quieto" />
         </Animation>
+        <Animation name="hurtAnimation" delay="200">
+            <Frame region="herido" />
+        </Animation>
 
         <Animation name="punchingAnimation" delay="100">
             <Frame region="quieto" />

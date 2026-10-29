@@ -45,7 +45,7 @@ public class CombatSystem
 
                 if (_player.IsDodgeFinished)
                 {
-                    _player.CurrentState = Player.PlayerState.Vulnerable;
+                    _player.Vulnerable = true;
                 }
                 break;
 
@@ -58,25 +58,23 @@ public class CombatSystem
 
             case (Player.PlayerState.Punching, Enemy.EnemyState.Punching, false):
                 // El jugador golpeó fuera de tiempo (cuando el enemigo ya no es counterable) -> El jugador recibe daño
-                _player.CurrentState = Player.PlayerState.Hurting;
+                _player.RecibirGolpe();
                 break;
 
             default:
                 if (_enemy.CurrentEnemyState == Enemy.EnemyState.Punching && frameActualEnemigo == 2 && _player.CurrentState == Player.PlayerState.Idle)
                 {
-                    _player.CurrentState = Player.PlayerState.Hurting;
+                    _player.RecibirGolpe();
                 }
-                if (_player.CurrentState == Player.PlayerState.Vulnerable &&
-    _enemy.CurrentEnemyState == Enemy.EnemyState.Punching &&
-    frameActualEnemigo == 2)
+                if (_player.Vulnerable &&
+                    _enemy.CurrentEnemyState == Enemy.EnemyState.Punching &&
+                    frameActualEnemigo == 2)
                 {
-                    _player.CurrentState = Player.PlayerState.Hurting;
+        
+                    _player.RecibirGolpe();
                 }
 
-                if (_player.CurrentState == Player.PlayerState.Vulnerable)
-                {
-                    _enemy.CurrentEnemyState = Enemy.EnemyState.Punching;
-                }
+                
                 break;
         }
     }

@@ -11,23 +11,23 @@ public class EnemyAI
     private float _cronometroIA = 0.0f;
     private Random _aleatorio = new Random();
 
-    public void Update(GameTime gameTime, Enemy enemy)
+    public void Update(GameTime gameTime, Enemy enemy, Player player)
     {
-        
         if (enemy.CurrentEnemyState != Enemy.EnemyState.Idle)
             return;
 
         float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
         _cronometroIA += dt;
 
-        if (_cronometroIA >= _tiempoParaDecidir)
+        float tiempoActualDecision = (player.Vulnerable) ? 0.2f : _tiempoParaDecidir;
+
+        if (_cronometroIA >= tiempoActualDecision)
         {
             _cronometroIA = 0f;
-            int numeroAleatorio = _aleatorio.Next(1, 3);
             
-            if (numeroAleatorio == 2)
+            if (player.Vulnerable || _aleatorio.Next(1, 3) == 2)
             {
-                enemy.StartPunch(); // Método dentro de Enemy para iniciar el ataque
+                enemy.StartPunch(); 
             }
         }
     }

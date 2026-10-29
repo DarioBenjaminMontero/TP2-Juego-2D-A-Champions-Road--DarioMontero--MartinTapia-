@@ -15,19 +15,22 @@ namespace A_Champion_s_Road
         private AnimatedSprite _dodgeSprite;
         private AnimatedSprite _idleAnim;
         private AnimatedSprite _currentSprite;
+        private AnimatedSprite _hurtAnim;
         private float _tiempoVulnerableMax = 1.0f;
+        private float _tiempoHurtingMax = 0.1f;
         private float _cronometroEstado = 0f;
 
         public float limiteIzquierda, limiteDerecha;
 
-        public enum PlayerState { Idle, Punching, Dodging, Vulnerable, Hurting }
+        public enum PlayerState { Idle, Punching, Dodging, Hurting }
+        public bool Vulnerable = false;
         public enum Direction { None, Left, Right }
         public PlayerState CurrentState { get; set; } = PlayerState.Idle;
         public Direction CurrentDirectionPunch { get; set; } = Direction.None;
         public Direction CurrentDirectionDodge { get; set; } = Direction.None;
         public bool IsDodgeFinished => _dodgeSprite.IsFinished;
-public int CurrentPunchFrame => _punchSprite.CurrentFrame;
-        public Player(Animation idleAnim, Animation punchAnim, Animation dodgeAnim, Vector2 initialPosition, float limiteD, float limiteI)
+        public int CurrentPunchFrame => _punchSprite.CurrentFrame;
+        public Player(Animation idleAnim, Animation punchAnim, Animation dodgeAnim, Animation hurtAnimation, Vector2 initialPosition, float limiteD, float limiteI)
         {
             Position = initialPosition;
             originalPosition = initialPosition;
@@ -37,30 +40,48 @@ public int CurrentPunchFrame => _punchSprite.CurrentFrame;
             _idleAnim = new AnimatedSprite(idleAnim, true);
             _punchSprite = new AnimatedSprite(punchAnim, false);
             _dodgeSprite = new AnimatedSprite(dodgeAnim, false);
+            _hurtAnim = new AnimatedSprite(hurtAnimation, false);
 
             _currentSprite = _idleAnim;
             _currentSprite.Scale = new Vector2(1.5f, 1.5f);
             _punchSprite.Scale = new Vector2(1.5f, 1.5f);
             _dodgeSprite.Scale = new Vector2(1.5f, 1.5f);
+            _hurtAnim.Scale = new Vector2(1.5f, 1.5f);
         }
-
+        public void RecibirGolpe()
+        {
+            CurrentState = PlayerState.Hurting;
+            _cronometroEstado = 0f;
+            _hurtAnim.Reset();
+            _currentSprite = _hurtAnim;
+        }
         // Recibimos KeyboardInfo en lugar de consultar Keyboard.GetState() cada vez
-        public void Update(GameTime gameTime, KeyboardInfo keyboard)
+       public void Update(GameTime gameTime, KeyboardInfo keyboard)
         {
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            // 1. Gestionamos el temporizador de vulnerabilidad de forma independiente en segundo plano
+            if (Vulnerable)
+            {
+                _cronometroEstado += dt;
+                if (_cronometroEstado >= _tiempoVulnerableMax)
+                {
+                    Vulnerable = false;     
+                    _cronometroEstado = 0f;  
+                }
+            }
 
             switch (CurrentState)
             {
                 case PlayerState.Idle:
                     Position = originalPosition;
                     _currentSprite = _idleAnim;
-                    _cronometroEstado = 0f;
 
+                   
                     float oscilacionPaso = (float)gameTime.TotalGameTime.TotalSeconds * 8f;
-    Position.X = originalPosition.X + (float)Math.Sin(oscilacionPaso) * 20f;
-float reboteY = Math.Abs((float)Math.Sin(oscilacionPaso)) * 6f;
-Position.Y = originalPosition.Y + reboteY;
-
+                    Position.X = originalPosition.X + (float)Math.Sin(oscilacionPaso) * 20f;
+                    float reboteY = Math.Abs((float)Math.Sin(oscilacionPaso)) * 6f;
+                    Position.Y = originalPosition.Y + reboteY;
 
                     // Usamos WasKeyJustPressed para mayor precisión en juegos de combate
                     if (keyboard.WasKeyJustPressed(Keys.O) || keyboard.WasKeyJustPressed(Keys.P))
@@ -129,19 +150,18 @@ Position.Y = originalPosition.Y + reboteY;
                     }
                     break;
 
-                case PlayerState.Vulnerable:
-                    _cronometroEstado += dt;
-                    if (_cronometroEstado >= _tiempoVulnerableMax)
-                    {
-                        CurrentState = PlayerState.Idle;
-                    }
-                    break;
-
                 case PlayerState.Hurting:
+                    _currentSprite = _hurtAnim;
+                    _hurtAnim.Update(gameTime);
+
                     _cronometroEstado += dt;
-                    if (_cronometroEstado >= _tiempoVulnerableMax)
+
+                    if (_cronometroEstado >= _tiempoHurtingMax || _hurtAnim.IsFinished)
                     {
-                        CurrentState = PlayerState.Idle;
+                        _hurtAnim.Reset();
+                        CurrentState = PlayerState.Idle; 
+                        Vulnerable = true;              
+                        _cronometroEstado = 0f;        
                     }
                     break;
             }

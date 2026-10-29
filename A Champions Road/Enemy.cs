@@ -37,11 +37,12 @@ public int CurrentPunchFrame => _punchAnim.CurrentFrame;
             _punchAnim.Scale = new Vector2(2.5f, 2.5f); // altura del tyke mason
         }
         public void StartPunch()
-        {
-            CurrentEnemyState = EnemyState.Punching;
-            _punchAnim.Reset();
-            _cronometroEstado = 0f; // Por seguridad al cambiar de estado
-        }
+{
+    CurrentEnemyState = EnemyState.Punching;
+    _punchAnim.Reset();
+    _cronometroEstado = 0f;
+    IsCounterable = true; 
+}
         static Random aleatorio = new Random();
         public void Update(GameTime gameTime)
         {

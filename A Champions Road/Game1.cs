@@ -54,6 +54,7 @@ namespace A_Champion_s_Road
             Animation idleAnim = atlas.GetAnimation("idleAnimation");
             Animation punchAnim = atlas.GetAnimation("punchingAnimation");
             Animation dodgeAnim = atlas.GetAnimation("dodgingAnimation");
+            Animation hurtAnim = atlas.GetAnimation("hurtAnimation");
 _enemyAI = new EnemyAI();
             float playerX = Window.ClientBounds.Width * 0.5f;
             float playerY = Window.ClientBounds.Height;
@@ -62,6 +63,7 @@ _enemyAI = new EnemyAI();
                 idleAnim,
                 punchAnim,
                 dodgeAnim,
+                hurtAnim,
                 new Vector2(playerX, playerY),
                 Window.ClientBounds.Width * 0.75f,
                 Window.ClientBounds.Width * 0.25f
@@ -85,7 +87,7 @@ _enemyAI = new EnemyAI();
 
             // 2. Le pasamos el KeyboardInfo al Update del jugador
             _player.Update(gameTime, _inputManager.Keyboard);
-_enemyAI.Update(gameTime, _enemy);
+_enemyAI.Update(gameTime, _enemy, _player);
             _enemy.Update(gameTime);
             _combat.Update(gameTime);
             base.Update(gameTime);
