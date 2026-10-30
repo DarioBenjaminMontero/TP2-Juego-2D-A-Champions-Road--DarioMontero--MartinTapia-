@@ -72,24 +72,24 @@ public class CombatSystem
                 // El jugador golpeó fuera de tiempo (cuando el enemigo ya no es counterable) -> El jugador recibe daño
                 _player.RecibirGolpe();
                 break;
-case(Player.PlayerState.Dodging, Enemy.EnemyState.Idle, false):
-_player.HacerVulnerable();
-break;
+            case (Player.PlayerState.Dodging, Enemy.EnemyState.Idle, false):
+                _player.HacerVulnerable();
+                break;
             default:
                 if (_enemy.CurrentEnemyState == Enemy.EnemyState.Punching && frameActualEnemigo == 2 && _player.CurrentState == Player.PlayerState.Idle)
                 {
                     _player.RecibirGolpe();
                 }
                 if (_player.Vulnerable &&
-                    _enemy.CurrentEnemyState == Enemy.EnemyState.Punching &&
-                    frameActualEnemigo == 2)
-                {
-       
-                    _player.RecibirGolpe();
-                }
+                _enemy.CurrentEnemyState == Enemy.EnemyState.Punching &&
+                frameActualEnemigo >= 2 &&
+                _player.CurrentState != Player.PlayerState.Hurting)
+            {
+                _player.RecibirGolpe();
+            }
 
 
-               
+
                 break;
         }
     }

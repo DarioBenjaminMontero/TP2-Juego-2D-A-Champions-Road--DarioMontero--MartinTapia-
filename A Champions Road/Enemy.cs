@@ -33,8 +33,8 @@ public int CurrentPunchFrame => _punchAnim.CurrentFrame;
             _idleAnim = new AnimatedSprite(idleAnim, true);
             _punchAnim = new AnimatedSprite(punchAnim, false); // No se repite
             _currentSprite = _idleAnim;
-            _idleAnim.Scale = new Vector2(2.5f, 2.5f);
-            _punchAnim.Scale = new Vector2(2.5f, 2.5f); // altura del tyke mason
+            _idleAnim.Scale = new Vector2(3.5f, 3.5f);
+            _punchAnim.Scale = new Vector2(3.5f, 3.5f); // altura del tyke mason
         }
         public void StartPunch()
 {
@@ -43,7 +43,6 @@ public int CurrentPunchFrame => _punchAnim.CurrentFrame;
     _cronometroEstado = 0f;
     IsCounterable = true; 
 }
-        static Random aleatorio = new Random();
         public void Update(GameTime gameTime)
         {
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;           

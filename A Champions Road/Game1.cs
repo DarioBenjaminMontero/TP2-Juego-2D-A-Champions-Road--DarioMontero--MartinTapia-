@@ -85,7 +85,7 @@ _enemyAI = new EnemyAI();
             Animation enemyIdleAnim = atlas.GetAnimation("enemyIdle");
             Animation enemyPunchAnim = atlas.GetAnimation("enemyPunch");
             float enemyX = Window.ClientBounds.Width * 0.5f;
-            float enemyY = Window.ClientBounds.Height * 0.95f;
+            float enemyY = Window.ClientBounds.Height * 0.8f;
             _enemy = new Enemy(enemyIdleAnim, enemyPunchAnim, new Vector2(enemyX, enemyY));
             _combat = new CombatSystem(_enemy, _player);
         }

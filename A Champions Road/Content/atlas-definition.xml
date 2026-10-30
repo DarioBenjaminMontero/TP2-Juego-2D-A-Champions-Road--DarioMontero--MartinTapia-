@@ -67,7 +67,7 @@
         </Animation>
 
 
-        <Animation name ="enemyPunch" delay="600">
+        <Animation name ="enemyPunch" delay="400">
             <Frame region="enemy-preparacion" />
             <Frame region="enemy-preparacion2"  delay="300"/>
             <Frame region="enemy-golpe" />

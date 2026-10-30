@@ -20,8 +20,8 @@ namespace A_Champion_s_Road
         private AnimatedSprite _hurtAnim;
         AnimatedSprite _vulnerableAnim;
         private float _tiempoVulnerableMax = 2.0f;
-        private float _tiempoHurtingMax = 0.1f;
-       
+        private float _tiempoHurtingMax = 0.2f;
+
         private float _cronometroHurting = 0f;
         private float _cronometroVulnerable = 0f;
 
@@ -37,13 +37,13 @@ namespace A_Champion_s_Road
         public Direction CurrentDirectionDodge { get; set; } = Direction.None;
         public bool IsDodgeFinished => _dodgeSprite.IsFinished;
         public int CurrentPunchFrame => _punchSprite.CurrentFrame;
-        public Player(Animation idleAnim, Animation punchAnim, Animation dodgeAnim, Animation hurtAnimation,Animation vulnerableAnim, Vector2 initialPosition, float limiteD, float limiteI)
+        public Player(Animation idleAnim, Animation punchAnim, Animation dodgeAnim, Animation hurtAnimation, Animation vulnerableAnim, Vector2 initialPosition, float limiteD, float limiteI)
         {
             Position = initialPosition;
             originalPosition = initialPosition;
             limiteDerecha = limiteD;
             limiteIzquierda = limiteI;
-_vulnerableAnim = new AnimatedSprite(vulnerableAnim, false);
+            _vulnerableAnim = new AnimatedSprite(vulnerableAnim, true);
             _idleAnim = new AnimatedSprite(idleAnim, true);
             _punchSprite = new AnimatedSprite(punchAnim, false);
             _dodgeSprite = new AnimatedSprite(dodgeAnim, false);
@@ -51,165 +51,162 @@ _vulnerableAnim = new AnimatedSprite(vulnerableAnim, false);
 
 
             _currentSprite = _idleAnim;
-            _currentSprite.Scale = new Vector2(1.5f, 1.5f);
-            _punchSprite.Scale = new Vector2(1.5f, 1.5f);
-            _dodgeSprite.Scale = new Vector2(1.5f, 1.5f);
-            _hurtAnim.Scale = new Vector2(1.5f, 1.5f);
-            _vulnerableAnim.Scale= new Vector2(1.5f, 1.5f);
+            _currentSprite.Scale = new Vector2(2.3f, 2.3f);
+            _punchSprite.Scale = new Vector2(2.3f, 2.3f);
+            _dodgeSprite.Scale = new Vector2(2.3f, 2.3f);
+            _hurtAnim.Scale = new Vector2(2.3f, 2.3f);
+            _vulnerableAnim.Scale = new Vector2(2.3f, 2.3f);
         }
         public void RecibirGolpe()
-        {
-            CurrentState = PlayerState.Hurting;
-            _cronometroHurting = 0f;
-            _hurtAnim.Reset();
-            _currentSprite = _hurtAnim;
-        }
-        public void HacerVulnerable()
 {
-    Vulnerable = true;
+    CurrentState = PlayerState.Hurting;
+    Vulnerable = false; 
+    _cronometroHurting = 0f;
     _cronometroVulnerable = 0f;
-    _vulnerableAnim.Reset();  
+    _hurtAnim.Reset();
+    _currentSprite = _hurtAnim;
 }
-        // Recibimos KeyboardInfo en lugar de consultar Keyboard.GetState() cada vez
-       public void Update(GameTime gameTime, KeyboardInfo keyboard)
+        public void HacerVulnerable()
         {
-            float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            Vulnerable = true;
+            _cronometroVulnerable = 0f;
+            _vulnerableAnim.Reset();
+        }
+        // Recibimos KeyboardInfo en lugar de consultar Keyboard.GetState() cada vez
+        public void Update(GameTime gameTime, KeyboardInfo keyboard)
+{
+    float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
+    // 1. Gestionamos el temporizador de vulnerabilidad en segundo plano
+    if (Vulnerable)
+    {
+        _cronometroVulnerable += dt;
+        if (_cronometroVulnerable >= _tiempoVulnerableMax)
+        {
+            Vulnerable = false;      
+            _cronometroVulnerable = 0f;  
+        }
+    }
 
-            // 1. Gestionamos el temporizador de vulnerabilidad de forma independiente en segundo plano
+if(CurrentState == PlayerState.Hurting){
+
+_currentSprite = _hurtAnim;
+    _hurtAnim.Update(gameTime);
+
+    _cronometroHurting += dt;
+
+    if (_cronometroHurting >= _tiempoHurtingMax || _hurtAnim.IsFinished)
+    {
+        _hurtAnim.Reset();
+        CurrentState = PlayerState.Idle;
+        _cronometroVulnerable = 0f;
+    }
+} 
+    
+    // 2. Máquina de estados principal
+    switch (CurrentState)
+    {
+        case PlayerState.Idle:
+            Position = originalPosition;
+
+            // El sprite vulnerable solo aplica si estamos en Idle real y somos vulnerables
             if (Vulnerable)
             {
-                _cronometroVulnerable += dt;
-                if (_cronometroVulnerable >= _tiempoVulnerableMax)
-                {
-                    Vulnerable = false;      
-                    _cronometroVulnerable = 0f;  
-                }
-            }
-
-
-            switch (CurrentState)
-            {
-                case PlayerState.Idle:
-
-
-if (Vulnerable)
-            {
-                Position = originalPosition;
                 _currentSprite = _vulnerableAnim;
                 _vulnerableAnim.Update(gameTime);
             }
-            else {// Comportamiento normal de Idle con movimiento y pasos
-                Position = originalPosition;
+            else 
+            {
                 _currentSprite = _idleAnim;
-
 
                 float oscilacionPaso = (float)gameTime.TotalGameTime.TotalSeconds * 8f;
                 Position.X = originalPosition.X + (float)Math.Sin(oscilacionPaso) * 20f;
                 float reboteY = Math.Abs((float)Math.Sin(oscilacionPaso)) * 6f;
                 Position.Y = originalPosition.Y + reboteY;
-                }
+            }
 
+            // Entradas de teclado para Punch o Dodge...
+            if (keyboard.WasKeyJustPressed(Keys.O) || keyboard.WasKeyJustPressed(Keys.P))
+            {
+                if (!Vulnerable)
+                {
+                    CurrentState = PlayerState.Punching;
+                    CurrentDirectionDodge = Direction.None;
+                    _punchSprite.Reset();
+                    _currentSprite = _punchSprite;
 
-                    // Usamos WasKeyJustPressed para mayor precisión en juegos de combate
-                    if (keyboard.WasKeyJustPressed(Keys.O) || keyboard.WasKeyJustPressed(Keys.P))
+                    if (keyboard.WasKeyJustPressed(Keys.P))
                     {
-                        CurrentState = PlayerState.Punching;
-                        CurrentDirectionDodge = Direction.None;
-                        _punchSprite.Reset();
-                        _currentSprite = _punchSprite;
-
-
-                        if (keyboard.WasKeyJustPressed(Keys.P))
-                        {
-                            CurrentDirectionPunch = Direction.Right;
-                            _currentSprite.Effects = SpriteEffects.FlipHorizontally;
-                        }
-                        else if (keyboard.WasKeyJustPressed(Keys.O))
-                        {
-                            CurrentDirectionPunch = Direction.Left;
-                            _currentSprite.Effects = SpriteEffects.None;
-                        }
+                        CurrentDirectionPunch = Direction.Right;
+                        _currentSprite.Effects = SpriteEffects.FlipHorizontally;
                     }
-                    else if (keyboard.WasKeyJustPressed(Keys.A) || keyboard.WasKeyJustPressed(Keys.D))
+                    else if (keyboard.WasKeyJustPressed(Keys.O))
                     {
-                        if (!Vulnerable)
-                        {
-                            CurrentState = PlayerState.Dodging;
-                        CurrentDirectionPunch = Direction.None;
-                        _dodgeSprite.Reset();
-                        _currentSprite = _dodgeSprite;
-
-
-                        if (keyboard.WasKeyJustPressed(Keys.D))
-                        {
-                            _currentSprite.Effects = SpriteEffects.FlipHorizontally;
-                            Position.X = originalPosition.X + 45;
-                            CurrentDirectionDodge = Direction.Right;
-                        }
-                        else if (keyboard.WasKeyJustPressed(Keys.A))
-                        {
-                            _currentSprite.Effects = SpriteEffects.None;
-                            Position.X = originalPosition.X - 45;
-                            CurrentDirectionDodge = Direction.Left;
-                        }
-
-
-                        }
-                    }
-                    else
-                    {
-                        CurrentDirectionPunch = Direction.None;
-                        CurrentDirectionDodge = Direction.None;
+                        CurrentDirectionPunch = Direction.Left;
                         _currentSprite.Effects = SpriteEffects.None;
                     }
-                    break;
-
-
-                case PlayerState.Punching:
-                    _currentSprite = _punchSprite;
-                    _punchSprite.Update(gameTime);
-                    if (_punchSprite.IsFinished)
-                    {
-                        _punchSprite.Reset();
-                        CurrentState = PlayerState.Idle;
-                    }
-                    break;
-
-
-                case PlayerState.Dodging:
-                    _currentSprite = _dodgeSprite;
-                    _dodgeSprite.Update(gameTime);
-                    if (_dodgeSprite.IsFinished)
-                    {
-                        _dodgeSprite.Reset();
-                        CurrentState = PlayerState.Idle;
-                    }
-                    break;
-
-
-                case PlayerState.Hurting:
-                    _currentSprite = _hurtAnim;
-                    _hurtAnim.Update(gameTime);
-
-
-                    _cronometroHurting += dt;
-_vulnerableAnim.Update(gameTime);
-                    if (_cronometroHurting >= _tiempoHurtingMax || _hurtAnim.IsFinished)
-                    {
-                        _hurtAnim.Reset();
-                        CurrentState = PlayerState.Idle;                                  
-                        _cronometroVulnerable = 0f; // Reiniciamos el contador específico de vulnerabilidad
-                    }
-                    break;
+                }
             }
-
-
-            if (_currentSprite.Region != null)
+            else if (keyboard.WasKeyJustPressed(Keys.A) || keyboard.WasKeyJustPressed(Keys.D))
             {
-                _currentSprite.Origin = new Vector2(_currentSprite.Region.Width / 2f, _currentSprite.Region.Height);
+                if (!Vulnerable)
+                {
+                    CurrentState = PlayerState.Dodging;
+                    CurrentDirectionPunch = Direction.None;
+                    _dodgeSprite.Reset();
+                    _currentSprite = _dodgeSprite;
+
+                    if (keyboard.WasKeyJustPressed(Keys.D))
+                    {
+                        _currentSprite.Effects = SpriteEffects.FlipHorizontally;
+                        Position.X = originalPosition.X + 45;
+                        CurrentDirectionDodge = Direction.Right;
+                    }
+                    else if (keyboard.WasKeyJustPressed(Keys.A))
+                    {
+                        _currentSprite.Effects = SpriteEffects.None;
+                        Position.X = originalPosition.X - 45;
+                        CurrentDirectionDodge = Direction.Left;
+                    }
+                }
             }
-        }
+            else
+            {
+                CurrentDirectionPunch = Direction.None;
+                CurrentDirectionDodge = Direction.None;
+                _currentSprite.Effects = SpriteEffects.None;
+            }
+            break;
+
+        case PlayerState.Punching:
+            _currentSprite = _punchSprite;
+            _punchSprite.Update(gameTime);
+            if (_punchSprite.IsFinished)
+            {
+                _punchSprite.Reset();
+                CurrentState = PlayerState.Idle;
+            }
+            break;
+
+        case PlayerState.Dodging:
+            _currentSprite = _dodgeSprite;
+            _dodgeSprite.Update(gameTime);
+            if (_dodgeSprite.IsFinished)
+            {
+                _dodgeSprite.Reset();
+                CurrentState = PlayerState.Idle;
+            }
+            break;
+
+        
+    
+    }
+
+    if (_currentSprite.Region != null)
+    {
+        _currentSprite.Origin = new Vector2(_currentSprite.Region.Width / 2f, _currentSprite.Region.Height);
+    }
+}
 
 
         public void Draw(SpriteBatch spriteBatch)
