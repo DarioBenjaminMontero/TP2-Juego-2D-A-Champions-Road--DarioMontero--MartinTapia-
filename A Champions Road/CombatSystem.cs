@@ -48,6 +48,12 @@ public class CombatSystem
                     _enemy.IsCounterable = false;
                 }
                 break;
+            case (Player.PlayerState.Punching, Enemy.EnemyState.Idle, false):
+                if (frameActualJugador == 2)
+                {
+                    _enemy.RecibirGolpe();
+                }
+                break;
 
 
             case (Player.PlayerState.Dodging, Enemy.EnemyState.Punching, true):
@@ -61,9 +67,15 @@ public class CombatSystem
 
 
             case (Player.PlayerState.Dodging, Enemy.EnemyState.Punching, false):
-                if (frameActualEnemigo == 2 || frameActualEnemigo == 1)
+                if (_player.Vulnerable)
                 {
-                    _enemy.CurrentEnemyState = Enemy.EnemyState.Vulnerable;
+                    if (frameActualEnemigo == 2)
+                        _player.RecibirGolpe();
+                }
+                else if (frameActualEnemigo == 1 || frameActualEnemigo == 2)
+                {
+                    _enemy.Vulnerable = true;
+                    _enemy.CurrentEnemyState = Enemy.EnemyState.Idle;
                 }
                 break;
 
@@ -73,7 +85,9 @@ public class CombatSystem
                 _player.RecibirGolpe();
                 break;
             case (Player.PlayerState.Dodging, Enemy.EnemyState.Idle, false):
-                _player.HacerVulnerable();
+                if (!_enemy.Vulnerable)
+                    _player.HacerVulnerable();
+
                 break;
             default:
                 if (_enemy.CurrentEnemyState == Enemy.EnemyState.Punching && frameActualEnemigo == 2 && _player.CurrentState == Player.PlayerState.Idle)
@@ -84,9 +98,9 @@ public class CombatSystem
                 _enemy.CurrentEnemyState == Enemy.EnemyState.Punching &&
                 frameActualEnemigo >= 2 &&
                 _player.CurrentState != Player.PlayerState.Hurting)
-            {
-                _player.RecibirGolpe();
-            }
+                {
+                    _player.RecibirGolpe();
+                }
 
 
 

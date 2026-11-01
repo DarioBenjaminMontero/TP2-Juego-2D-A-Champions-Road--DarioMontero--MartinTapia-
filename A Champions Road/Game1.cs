@@ -1,5 +1,4 @@
-﻿
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
@@ -19,7 +18,7 @@ namespace A_Champion_s_Road
         private Texture2D _ring;
         private CombatSystem _combat;
         private EnemyAI _enemyAI;
-       
+
         // Declaramos el InputManager
         private InputManager _inputManager;
 
@@ -59,13 +58,19 @@ namespace A_Champion_s_Road
             TextureAtlas atlas = TextureAtlas.FromFile(Content, "atlas-definition.xml");
 
 
+            // CAMBIO: factor de escala según el alto de la pantalla.
+            // Las escalas originales (2.3f y 3.5f) estaban pensadas para 720 px de alto.
+            float escala = MathHelper.Clamp(Graphics.PreferredBackBufferHeight / 720f, 0.5f, 3f);
+Console.WriteLine($"Backbuffer: {Graphics.PreferredBackBufferWidth}x{Graphics.PreferredBackBufferHeight} | escala: {escala}");
+
+
             // Animaciones del Player
             Animation idleAnim = atlas.GetAnimation("idleAnimation");
             Animation punchAnim = atlas.GetAnimation("punchingAnimation");
             Animation dodgeAnim = atlas.GetAnimation("dodgingAnimation");
             Animation hurtAnim = atlas.GetAnimation("hurtAnimation");
             Animation vulnerableAnim = atlas.GetAnimation("vulnerableAnimation");
-_enemyAI = new EnemyAI();
+            _enemyAI = new EnemyAI();
             float playerX = Window.ClientBounds.Width * 0.5f;
             float playerY = Window.ClientBounds.Height;
 
@@ -78,15 +83,17 @@ _enemyAI = new EnemyAI();
                 vulnerableAnim,
                 new Vector2(playerX, playerY),
                 Window.ClientBounds.Width * 0.75f,
-                Window.ClientBounds.Width * 0.25f
+                Window.ClientBounds.Width * 0.25f,
+                escala 
             );
 
 
             Animation enemyIdleAnim = atlas.GetAnimation("enemyIdle");
             Animation enemyPunchAnim = atlas.GetAnimation("enemyPunch");
+            Animation enemyHurtAnim = atlas.GetAnimation("enemyHurt");
             float enemyX = Window.ClientBounds.Width * 0.5f;
-            float enemyY = Window.ClientBounds.Height * 0.8f;
-            _enemy = new Enemy(enemyIdleAnim, enemyPunchAnim, new Vector2(enemyX, enemyY));
+            float enemyY = Window.ClientBounds.Height * 0.9f;
+            _enemy = new Enemy(enemyIdleAnim, enemyPunchAnim, enemyHurtAnim, new Vector2(enemyX, enemyY), escala); // CAMBIO: nuevo parámetro
             _combat = new CombatSystem(_enemy, _player);
         }
 
@@ -103,7 +110,7 @@ _enemyAI = new EnemyAI();
 
             // 2. Le pasamos el KeyboardInfo al Update del jugador
             _player.Update(gameTime, _inputManager.Keyboard);
-_enemyAI.Update(gameTime, _enemy, _player);
+            _enemyAI.Update(gameTime, _enemy, _player);
             _enemy.Update(gameTime);
             _combat.Update(gameTime);
             base.Update(gameTime);

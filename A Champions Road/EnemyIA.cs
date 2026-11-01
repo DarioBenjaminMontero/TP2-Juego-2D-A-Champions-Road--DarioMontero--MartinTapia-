@@ -13,6 +13,8 @@ public class EnemyAI
 
     public void Update(GameTime gameTime, Enemy enemy, Player player)
     {
+        if (enemy.CurrentEnemyState != Enemy.EnemyState.Idle || enemy.Vulnerable)
+    return;
         if (enemy.CurrentEnemyState != Enemy.EnemyState.Idle)
             return;
 
