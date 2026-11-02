@@ -190,3 +190,14 @@ C:\Users\alumno.ET26\Downloads\TP2-Juego-2D-A-Champions-Road--DarioMontero--Mart
 C:\Users\alumno.ET26\Downloads\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Content\danteVegaAtlas.xnb
 C:\Users\alumno.ET26\Downloads\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Content\enemy1.xnb
 C:\Users\alumno.ET26\Downloads\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Content\enemy2.xnb
+C:\Users\PC Humilde\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Content\background.xnb
+C:\Users\PC Humilde\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Content\danteVegaAtlas.xnb
+C:\Users\PC Humilde\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Content\enemy2.xnb
+C:\Users\PC Humilde\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Content\texto.xnb
+C:\Users\PC Humilde\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Content\textoTitulo.xnb
+C:\Users\PC Humilde\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\CsvHelper.dll
+C:\Users\PC Humilde\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\GumCommon.dll
+C:\Users\PC Humilde\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\FlatRedBall.InterpolationCore.dll
+C:\Users\PC Humilde\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\MonoGameGum.dll
+C:\Users\PC Humilde\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\PC Humilde\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\TextCopy.dll
