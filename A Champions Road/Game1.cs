@@ -3,25 +3,20 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using MonoGameLibrary;
+using Gum.Forms;
+using Gum.Forms.Controls;
+using MonoGameGum;
 using MonoGameLibrary.Graphics;
 using MonoGameLibrary.Input;
 using System;
+using A_Champion_s_Road.Scenes;
 
 
 namespace A_Champion_s_Road
 {
     public class Game1 : Core
     {
-        private Player _player;
-        private Enemy _enemy;
         private Song backgroundMusic;
-        private Texture2D _ring;
-        private CombatSystem _combat;
-        private EnemyAI _enemyAI;
-private TextureRegion _vidaVerde;
-private TextureRegion _vidaRoja;
-        // Declaramos el InputManager
-        private InputManager _inputManager;
 
 
         public Game1() : base("A Champions Road", 1280, 720, false)
@@ -33,16 +28,29 @@ private TextureRegion _vidaRoja;
             Graphics.HardwareModeSwitch = false;
             Graphics.IsFullScreen = true;
             Graphics.ApplyChanges();
-
-
-            // Inicializamos el InputManager en el constructor
-            _inputManager = new InputManager();
         }
+        private void InitializeGum()
+        {
 
+            GumService.Default.Initialize(this, DefaultVisualsVersion.V3);
+            GumService.Default.ContentLoader.XnaContentManager = Core.Content;
+            FrameworkElement.KeyboardsForUiControl.Add(GumService.Default.Keyboard);
+            FrameworkElement.GamePadsForUiControl.AddRange(GumService.Default.Gamepads); // TODO ESTO ES LO ESENCIAL PARA QUE GUM ARRANQUE
+            FrameworkElement.TabReverseKeyCombos.Add(
+            new KeyCombo() { PushedKey = Microsoft.Xna.Framework.Input.Keys.Up });
+            FrameworkElement.TabKeyCombos.Add(
+            new KeyCombo() { PushedKey = Microsoft.Xna.Framework.Input.Keys.Down });
+            GumService.Default.CanvasWidth = GraphicsDevice.PresentationParameters.BackBufferWidth / 4.0f;
+            GumService.Default.CanvasHeight = GraphicsDevice.PresentationParameters.BackBufferHeight / 4.0f;
+            GumService.Default.Renderer.Camera.Zoom = 4.0f;
+        }
 
         protected override void Initialize()
         {
             base.Initialize();
+
+            InitializeGum();
+            ChangeScene(new MenuScene()); // nada mas arranca, pal menu
         }
 
 
@@ -51,121 +59,8 @@ private TextureRegion _vidaRoja;
             backgroundMusic = Content.Load<Song>("Ten_Counts_to_Glory");
             MediaPlayer.Play(backgroundMusic);
             MediaPlayer.IsRepeating = true;
-
-
-            _ring = Content.Load<Texture2D>("ring3");
-
-
-            TextureAtlas atlas = TextureAtlas.FromFile(Content, "atlas-definition.xml");
-
-
-            // CAMBIO: factor de escala según el alto de la pantalla.
-            // Las escalas originales (2.3f y 3.5f) estaban pensadas para 720 px de alto.
-            float escala = MathHelper.Clamp(Graphics.PreferredBackBufferHeight / 720f, 0.5f, 3f);
-Console.WriteLine($"Backbuffer: {Graphics.PreferredBackBufferWidth}x{Graphics.PreferredBackBufferHeight} | escala: {escala}");
-
-
-            // Animaciones del Player
-            Animation idleAnim = atlas.GetAnimation("idleAnimation");
-            Animation punchAnim = atlas.GetAnimation("punchingAnimation");
-            Animation dodgeAnim = atlas.GetAnimation("dodgingAnimation");
-            Animation hurtAnim = atlas.GetAnimation("hurtAnimation");
-            Animation vulnerableAnim = atlas.GetAnimation("vulnerableAnimation");
-            
-            _enemyAI = new EnemyAI();
-            float playerX = Window.ClientBounds.Width * 0.5f;
-            float playerY = Window.ClientBounds.Height;
-
-
-            _player = new Player(
-                idleAnim,
-                punchAnim,
-                dodgeAnim,
-                hurtAnim,
-                vulnerableAnim,
-                new Vector2(playerX, playerY),
-                Window.ClientBounds.Width * 0.75f,
-                Window.ClientBounds.Width * 0.25f,
-                escala 
-            );
-
-_vidaVerde = atlas.GetRegion("vidaVerde");
-_vidaRoja = atlas.GetRegion("vidaRoja");
-
-
-            Animation enemyIdleAnim = atlas.GetAnimation("enemyIdle");
-            Animation enemyPunchAnim = atlas.GetAnimation("enemyPunch");
-            Animation enemyHurtAnim = atlas.GetAnimation("enemyHurt");
-            float enemyX = Window.ClientBounds.Width * 0.5f;
-            float enemyY = Window.ClientBounds.Height * 0.9f;
-            _enemy = new Enemy(enemyIdleAnim, enemyPunchAnim, enemyHurtAnim, new Vector2(enemyX, enemyY), escala); // CAMBIO: nuevo parámetro
-            _combat = new CombatSystem(_enemy, _player);
         }
 
 
-        protected override void Update(GameTime gameTime)
-        {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
-
-            // 1. Actualizamos el administrador de entradas primero
-            _inputManager.Update(gameTime);
-
-
-            // 2. Le pasamos el KeyboardInfo al Update del jugador
-            _player.Update(gameTime, _inputManager.Keyboard);
-            _enemyAI.Update(gameTime, _enemy, _player);
-            _enemy.Update(gameTime);
-            _combat.Update(gameTime);
-            base.Update(gameTime);
-        }
-
-private const int AnchoBarraVida = 220;
-private const int AltoBarraVida = 18;
-
-private void DibujarBarraVida(int vida, int vidaMaxima, Vector2 posicion)
-{
-    int anchoVerde = (int)(AnchoBarraVida *
-        MathHelper.Clamp((float)vida / vidaMaxima, 0f, 1f));
-
-    SpriteBatch.Draw(
-        _vidaRoja.Texture,
-        new Rectangle((int)posicion.X, (int)posicion.Y, AnchoBarraVida, AltoBarraVida),
-        _vidaRoja.SourceRectangle,
-        Color.White);
-
-    if (anchoVerde > 0)
-    {
-        SpriteBatch.Draw(
-            _vidaVerde.Texture,
-            new Rectangle((int)posicion.X, (int)posicion.Y, anchoVerde, AltoBarraVida),
-            _vidaVerde.SourceRectangle,
-            Color.White);
-    }
-}
-
-        protected override void Draw(GameTime gameTime)
-        {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-            SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
-
-
-            Rectangle fullscreenBounds = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
-            SpriteBatch.Draw(_ring, fullscreenBounds, Color.White);
-
-
-            _enemy.Draw(SpriteBatch);
-            _player.Draw(SpriteBatch);
-            
-DibujarBarraVida(_player.vidaActual, Player.vidaMaxima, new Vector2(30, 30));
-
-DibujarBarraVida(
-    _enemy.vidaActual,
-    Enemy.vidaMaxima,
-    new Vector2(GraphicsDevice.Viewport.Width - AnchoBarraVida - 30, 30));
-            SpriteBatch.End();
-            base.Draw(gameTime);
-        }
     }
 }

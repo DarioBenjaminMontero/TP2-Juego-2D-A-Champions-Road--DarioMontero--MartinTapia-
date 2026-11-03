@@ -58,7 +58,8 @@ public class MenuScene : Scene
         // Boton Jugar
         var botonJugar = new Button();
         botonJugar.Anchor(Gum.Wireframe.Anchor.Center); 
-        botonJugar.Y = -30;                   
+        botonJugar.Y = 30;
+        botonJugar.X = -90;                   
         botonJugar.Width = 70;
         botonJugar.Text = "Jugar";
         botonJugar.Click += JugarFuncion; // lo que hace el boton (evidentemente llama al loop jugable, no hay mucha magia)
@@ -67,8 +68,9 @@ public class MenuScene : Scene
         // Botón de Opciones
         var botonOpciones = new Button();
         botonOpciones.Anchor(Gum.Wireframe.Anchor.Center);
-        botonOpciones.Y = 0;
-        botonOpciones.Width = 70;
+        botonOpciones.Y = 30;
+        botonOpciones.X = 0;
+        botonOpciones.Width = 80;
         botonOpciones.Text = "Opciones";
         // botonOpciones.Click += (por ahora no hay escena, asi que el boton es inutil, lo dejo asi hasta mañana)
         _panelMenu.AddChild(botonOpciones);     
@@ -77,6 +79,7 @@ public class MenuScene : Scene
         var botonSalir = new Button();
         botonSalir.Anchor(Gum.Wireframe.Anchor.Center);
         botonSalir.Y = 30;
+        botonSalir.X = 90;
         botonSalir.Width = 70;
         botonSalir.Text = "Salir";
         botonSalir.Click += SalirFuncion;
@@ -87,7 +90,7 @@ public class MenuScene : Scene
 
     private void JugarFuncion(object sender, EventArgs e)
     {
-         //Core.ChangeScene(new GameScene()); // ASI ESTA EN LA GUIA MONOGAME, FALTA HACER GAME1 UNA ESCENA 
+        Core.ChangeScene(new FightScene()); // ASI ESTA EN LA GUIA MONOGAME, FALTA HACER GAME1 UNA ESCENA 
     }
 
     private void SalirFuncion(object sender, EventArgs e)

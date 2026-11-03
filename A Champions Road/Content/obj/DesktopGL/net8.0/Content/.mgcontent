@@ -4,18 +4,18 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/Julio/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/vida.png</File>
-    <File>C:/Users/Julio/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/animacionAgachado.png</File>
-    <File>C:/Users/Julio/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/atlasConEsquive.png</File>
-    <File>C:/Users/Julio/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/background.png</File>
-    <File>C:/Users/Julio/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/danteVegaAtlas.png</File>
-    <File>C:/Users/Julio/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/enemy1.png</File>
-    <File>C:/Users/Julio/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/enemy2.png</File>
-    <File>C:/Users/Julio/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/punch-danteVega.png</File>
-    <File>C:/Users/Julio/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/ring3.png</File>
-    <File>C:/Users/Julio/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/Ten_Counts_to_Glory.mp3</File>
-    <File>C:/Users/Julio/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/texto.spritefont</File>
-    <File>C:/Users/Julio/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/textoTitulo.spritefont</File>
+    <File>C:/Users/PC Humilde/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A champions road/Content/vida.png</File>
+    <File>C:/Users/PC Humilde/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A champions road/Content/animacionAgachado.png</File>
+    <File>C:/Users/PC Humilde/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A champions road/Content/atlasConEsquive.png</File>
+    <File>C:/Users/PC Humilde/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A champions road/Content/background.png</File>
+    <File>C:/Users/PC Humilde/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A champions road/Content/danteVegaAtlas.png</File>
+    <File>C:/Users/PC Humilde/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A champions road/Content/enemy1.png</File>
+    <File>C:/Users/PC Humilde/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A champions road/Content/enemy2.png</File>
+    <File>C:/Users/PC Humilde/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A champions road/Content/punch-danteVega.png</File>
+    <File>C:/Users/PC Humilde/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A champions road/Content/ring3.png</File>
+    <File>C:/Users/PC Humilde/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A champions road/Content/Ten_Counts_to_Glory.mp3</File>
+    <File>C:/Users/PC Humilde/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A champions road/Content/texto.spritefont</File>
+    <File>C:/Users/PC Humilde/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A champions road/Content/textoTitulo.spritefont</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />
