@@ -1,3 +1,4 @@
+using CsvHelper;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGameLibrary.Graphics;
@@ -11,8 +12,9 @@ namespace A_Champion_s_Road
         private AnimatedSprite _punchAnim;
         private AnimatedSprite _hurtAnim;
         private AnimatedSprite _currentSprite;
-        float _tiempoParaDecidir = 1.0f;
-        float _cronometroIA = 0.0f;
+
+public const int vidaMaxima = 1000;
+public int vidaActual {get; set;} = vidaMaxima;
         private float _tiempoVulnerableMax = 2.0f;
         private float _cronometroEstado = 0f;
 
@@ -60,9 +62,13 @@ namespace A_Champion_s_Road
         {
             if (Vulnerable)
             {
-                return;
+                
             }
             CurrentEnemyState = EnemyState.Hurting;
+if (vidaActual <= 0)
+    return;
+
+vidaActual = Math.Max(0, vidaActual - 10);
             Vulnerable = false;
             _cronometroHurting = 0f;
             _cronometroVulnerable = 0f;
@@ -127,7 +133,6 @@ namespace A_Champion_s_Road
                     if (_punchAnim.IsFinished)
                     {
                         CurrentEnemyState = EnemyState.Idle;
-                        _cronometroIA = 0f;
                     }
 
                     break;

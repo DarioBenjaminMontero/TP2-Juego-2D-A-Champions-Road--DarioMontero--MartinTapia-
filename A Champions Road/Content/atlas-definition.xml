@@ -25,6 +25,11 @@
         <Region name="enemy-golpe" x="333" y="476" width="221" height="460" />
         <Region name="enemy-herido" x="633" y="471" width="233" height="465" />
     </Regions>
+    <Texture>vida</Texture>
+    <Regions>
+        <Region name="vidaVerde" x="0" y="28" width="99" height="9" />
+        <Region name="vidaRoja" x="0" y="45" width="99" height="9" />
+    </Regions>
 
 
 
@@ -71,7 +76,7 @@
         <Animation name ="enemyPunch" delay="400">
             <Frame region="enemy-preparacion" />
             <Frame region="enemy-preparacion2"  delay="300"/>
-            <Frame region="enemy-golpe" />
+            <Frame region="enemy-golpe" delay = "150"/>
         </Animation>
         <Animation name ="enemyHurt" delay="200">
             <Frame region="enemy-herido" />

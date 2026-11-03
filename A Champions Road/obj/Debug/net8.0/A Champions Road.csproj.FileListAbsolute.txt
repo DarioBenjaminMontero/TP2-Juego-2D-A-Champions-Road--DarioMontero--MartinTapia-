@@ -201,3 +201,13 @@ C:\Users\PC Humilde\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinT
 C:\Users\PC Humilde\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\MonoGameGum.dll
 C:\Users\PC Humilde\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 C:\Users\PC Humilde\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\TextCopy.dll
+C:\Users\Julio\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Content\background.xnb
+C:\Users\Julio\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Content\texto.xnb
+C:\Users\Julio\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Content\textoTitulo.xnb
+C:\Users\Julio\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\CsvHelper.dll
+C:\Users\Julio\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\GumCommon.dll
+C:\Users\Julio\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\FlatRedBall.InterpolationCore.dll
+C:\Users\Julio\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\MonoGameGum.dll
+C:\Users\Julio\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Julio\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\TextCopy.dll
+C:\Users\Julio\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Content\vida.xnb

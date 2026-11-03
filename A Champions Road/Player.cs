@@ -18,7 +18,9 @@ namespace A_Champion_s_Road
         private AnimatedSprite _currentSprite;
         private AnimatedSprite _hurtAnim;
         AnimatedSprite _vulnerableAnim;
-        private float _tiempoVulnerableMax = 2.0f;
+        public const int vidaMaxima = 100;
+        public int vidaActual { get; set; } = vidaMaxima;
+        private float _tiempoVulnerableMax = 3.0f;
         private float _tiempoHurtingMax = 0.2f;
 
         private float _cronometroHurting = 0f;
@@ -64,9 +66,12 @@ namespace A_Champion_s_Road
         public void RecibirGolpe()
         {
             CurrentState = PlayerState.Hurting;
-            Vulnerable = false;
+            if (vidaActual <= 0)
+                return;
+
+            vidaActual = Math.Max(0, vidaActual - 10);
+
             _cronometroHurting = 0f;
-            _cronometroVulnerable = 0f;
             _hurtAnim.Reset();
             _currentSprite = _hurtAnim;
         }
@@ -104,8 +109,9 @@ namespace A_Champion_s_Road
                 {
                     _hurtAnim.Reset();
                     CurrentState = PlayerState.Idle;
-                    _cronometroVulnerable = 0f;
+
                 }
+
             }
 
             // 2. Máquina de estados principal

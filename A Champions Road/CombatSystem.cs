@@ -16,6 +16,7 @@ public class CombatSystem
 
     public Enemy _enemy { get; set; }
     public Player _player { get; set; }
+    public bool impacto = false;
 
 
     public CombatSystem(Enemy _enemy, Player _player)
@@ -34,6 +35,10 @@ public class CombatSystem
         int frameActualEnemigo = _enemy.CurrentPunchFrame;
         int frameActualJugador = _player.CurrentPunchFrame;
 
+if (_enemy.CurrentEnemyState != Enemy.EnemyState.Punching || frameActualEnemigo == 0)
+        {
+            impacto = false;
+        }
 
         switch ((_player.CurrentState, _enemy.CurrentEnemyState, _enemy.IsCounterable))
         {
@@ -70,7 +75,15 @@ public class CombatSystem
                 if (_player.Vulnerable)
                 {
                     if (frameActualEnemigo == 2)
-                        _player.RecibirGolpe();
+                    {
+                        if (impacto == false)
+                        {
+                            _player.RecibirGolpe(); 
+impacto = true;
+                        }
+                    
+                    }
+                        
                 }
                 else if (frameActualEnemigo == 1 || frameActualEnemigo == 2)
                 {
@@ -82,7 +95,11 @@ public class CombatSystem
 
             case (Player.PlayerState.Punching, Enemy.EnemyState.Punching, false):
                 // El jugador golpeó fuera de tiempo (cuando el enemigo ya no es counterable) -> El jugador recibe daño
-                _player.RecibirGolpe();
+                if (impacto == false)
+                        {
+                            _player.RecibirGolpe(); 
+impacto = true;
+                        }
                 break;
             case (Player.PlayerState.Dodging, Enemy.EnemyState.Idle, false):
                 if (!_enemy.Vulnerable)
@@ -92,14 +109,22 @@ public class CombatSystem
             default:
                 if (_enemy.CurrentEnemyState == Enemy.EnemyState.Punching && frameActualEnemigo == 2 && _player.CurrentState == Player.PlayerState.Idle)
                 {
-                    _player.RecibirGolpe();
+                    if (impacto == false)
+                        {
+                            _player.RecibirGolpe(); 
+impacto = true;
+                        }
                 }
                 if (_player.Vulnerable &&
                 _enemy.CurrentEnemyState == Enemy.EnemyState.Punching &&
                 frameActualEnemigo >= 2 &&
                 _player.CurrentState != Player.PlayerState.Hurting)
                 {
-                    _player.RecibirGolpe();
+                    if (impacto == false)
+                        {
+                            _player.RecibirGolpe(); 
+impacto = true;
+                        }
                 }
 
 

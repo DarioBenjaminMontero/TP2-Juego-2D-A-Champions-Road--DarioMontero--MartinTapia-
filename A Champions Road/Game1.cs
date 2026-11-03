@@ -18,7 +18,8 @@ namespace A_Champion_s_Road
         private Texture2D _ring;
         private CombatSystem _combat;
         private EnemyAI _enemyAI;
-
+private TextureRegion _vidaVerde;
+private TextureRegion _vidaRoja;
         // Declaramos el InputManager
         private InputManager _inputManager;
 
@@ -70,6 +71,7 @@ Console.WriteLine($"Backbuffer: {Graphics.PreferredBackBufferWidth}x{Graphics.Pr
             Animation dodgeAnim = atlas.GetAnimation("dodgingAnimation");
             Animation hurtAnim = atlas.GetAnimation("hurtAnimation");
             Animation vulnerableAnim = atlas.GetAnimation("vulnerableAnimation");
+            
             _enemyAI = new EnemyAI();
             float playerX = Window.ClientBounds.Width * 0.5f;
             float playerY = Window.ClientBounds.Height;
@@ -86,6 +88,9 @@ Console.WriteLine($"Backbuffer: {Graphics.PreferredBackBufferWidth}x{Graphics.Pr
                 Window.ClientBounds.Width * 0.25f,
                 escala 
             );
+
+_vidaVerde = atlas.GetRegion("vidaVerde");
+_vidaRoja = atlas.GetRegion("vidaRoja");
 
 
             Animation enemyIdleAnim = atlas.GetAnimation("enemyIdle");
@@ -116,6 +121,29 @@ Console.WriteLine($"Backbuffer: {Graphics.PreferredBackBufferWidth}x{Graphics.Pr
             base.Update(gameTime);
         }
 
+private const int AnchoBarraVida = 220;
+private const int AltoBarraVida = 18;
+
+private void DibujarBarraVida(int vida, int vidaMaxima, Vector2 posicion)
+{
+    int anchoVerde = (int)(AnchoBarraVida *
+        MathHelper.Clamp((float)vida / vidaMaxima, 0f, 1f));
+
+    SpriteBatch.Draw(
+        _vidaRoja.Texture,
+        new Rectangle((int)posicion.X, (int)posicion.Y, AnchoBarraVida, AltoBarraVida),
+        _vidaRoja.SourceRectangle,
+        Color.White);
+
+    if (anchoVerde > 0)
+    {
+        SpriteBatch.Draw(
+            _vidaVerde.Texture,
+            new Rectangle((int)posicion.X, (int)posicion.Y, anchoVerde, AltoBarraVida),
+            _vidaVerde.SourceRectangle,
+            Color.White);
+    }
+}
 
         protected override void Draw(GameTime gameTime)
         {
@@ -129,8 +157,13 @@ Console.WriteLine($"Backbuffer: {Graphics.PreferredBackBufferWidth}x{Graphics.Pr
 
             _enemy.Draw(SpriteBatch);
             _player.Draw(SpriteBatch);
+            
+DibujarBarraVida(_player.vidaActual, Player.vidaMaxima, new Vector2(30, 30));
 
-
+DibujarBarraVida(
+    _enemy.vidaActual,
+    Enemy.vidaMaxima,
+    new Vector2(GraphicsDevice.Viewport.Width - AnchoBarraVida - 30, 30));
             SpriteBatch.End();
             base.Draw(gameTime);
         }
