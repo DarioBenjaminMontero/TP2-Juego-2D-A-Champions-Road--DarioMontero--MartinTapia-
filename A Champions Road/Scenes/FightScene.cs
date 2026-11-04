@@ -23,11 +23,16 @@ public class FightScene : Scene // COMO NO HEREDA DE CORE (porque es escena ahor
         private EnemyAI _enemyAI;
         private TextureRegion _vidaVerde;
         private TextureRegion _vidaRoja;
+        private TextureRegion _barraAmarilla;
+        private TextureRegion _barraRoja;
         private InputManager _inputManager;
         private TextureAtlas _atlas;
 
     private const int AnchoBarraVida = 220;
     private const int AltoBarraVida = 18;
+
+    private const int AnchoStamina = 196;
+    private const int AltoStamina = 15;
 
     public override void Initialize()
     {
@@ -79,6 +84,10 @@ public class FightScene : Scene // COMO NO HEREDA DE CORE (porque es escena ahor
             // interfaz de vida
             _vidaVerde = atlas.GetRegion("vidaVerde");
             _vidaRoja = atlas.GetRegion("vidaRoja");
+
+            // interfaz de stamina
+            _barraAmarilla = atlas.GetRegion("staminaAmarilla");
+            _barraRoja = atlas.GetRegion("staminaRoja");
 
             // animaciones del enemigo
             Animation enemyIdleAnim = atlas.GetAnimation("enemyIdle");
@@ -132,6 +141,23 @@ public class FightScene : Scene // COMO NO HEREDA DE CORE (porque es escena ahor
         }
     }
 
+    private void BarraStamina()
+    {
+        Core.SpriteBatch.Draw(
+            _barraRoja.Texture,
+            new Rectangle(32, 60, AnchoStamina, AltoStamina),
+            _barraRoja.SourceRectangle,
+            Color.White
+        );
+
+        // Core.SpriteBatch.Draw(
+        //     _barraAmarilla.Texture,
+        //     new Rectangle(32, 60, AnchoStamina, AnchoStamina),
+        //     _barraAmarilla.SourceRectangle,
+        //     Color.White
+        // );
+    } 
+
             public override void Draw(GameTime gameTime) // lo pase de protected a public porque tiraba un error
             {
                 Core.GraphicsDevice.Clear(Color.CornflowerBlue);
@@ -153,6 +179,8 @@ public class FightScene : Scene // COMO NO HEREDA DE CORE (porque es escena ahor
                     Enemy.vidaMaxima,
                     new Vector2(Core.GraphicsDevice.Viewport.Width - AnchoBarraVida - 30, 30)
                 );
+
+                BarraStamina();
                         
                 Core.SpriteBatch.End();
                 base.Draw(gameTime);

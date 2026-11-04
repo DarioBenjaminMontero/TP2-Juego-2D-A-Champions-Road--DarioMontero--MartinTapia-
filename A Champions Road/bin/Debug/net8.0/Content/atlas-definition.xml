@@ -31,7 +31,11 @@
         <Region name="vidaRoja" x="0" y="45" width="99" height="9" />
     </Regions>
 
-
+    <Texture>stamina</Texture>
+    <Regions>
+        <Region name="staminaAmarilla" x="1" y="1" width="97" height="12" />
+        <Region name="staminaRoja" x="1" y="16" width="97" height="12" />
+    </Regions>
 
 
     <Animations>
