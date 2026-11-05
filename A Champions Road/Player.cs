@@ -71,7 +71,7 @@ namespace A_Champion_s_Road
         public void RecibirGolpe()
         {
             CurrentState = PlayerState.Hurting;
-            if (vidaActual <= 0)
+            if (vidaActual <= 0) 
                 return;
 
             vidaActual = Math.Max(0, vidaActual - 10);

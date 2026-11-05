@@ -225,3 +225,4 @@ C:\Users\alumno.ET26\Downloads\TP2-Juego-2D-A-Champions-Road--DarioMontero--Mart
 C:\Users\alumno.ET26\Downloads\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Content\stamina.xnb
 C:\Users\PC Humilde\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\a champions road\bin\Debug\net8.0\Content\stamina.xnb
 C:\Users\PC Humilde\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A champions road\bin\Debug\net8.0\Content\inicioCombateTexto.xnb
+C:\Users\PC Humilde\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Content\gameover.xnb

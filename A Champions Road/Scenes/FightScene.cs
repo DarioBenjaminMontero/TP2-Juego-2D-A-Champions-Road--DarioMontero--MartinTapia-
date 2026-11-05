@@ -27,9 +27,9 @@ public class FightScene : Scene // COMO NO HEREDA DE CORE (porque es escena ahor
         private TextureRegion _barraRoja;
         private InputManager _inputManager;
         private TextureAtlas _atlas;
-        private AnimatedSprite _textoInicio;
-        private float _tiempoTextoInicio;
-        private bool _mostrandoTextoInicio = true;
+        private AnimatedSprite _textoInicio; // animacion texto
+        private float _tiempoTextoInicio; // el tiempo
+        private bool _mostrandoTextoInicio = true; // si se muestra o no
 
     private const int AnchoBarraVida = 220;
     private const int AltoBarraVida = 18;
@@ -125,15 +125,22 @@ public class FightScene : Scene // COMO NO HEREDA DE CORE (porque es escena ahor
             _enemyAI.Update(gameTime, _enemy, _player);
             _enemy.Update(gameTime);
             _combat.Update(gameTime);
+
+            if (_player.vidaActual <= 0)
+            {
+                Core.ChangeScene(new GameOver());
+                return;
+            }
+
             base.Update(gameTime);
 
-            if (_mostrandoTextoInicio)
+            if (_mostrandoTextoInicio) // si el booleano es true, lo muestra
             {
                 _textoInicio.Update(gameTime);
-                _tiempoTextoInicio -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+                _tiempoTextoInicio -= (float)gameTime.ElapsedGameTime.TotalSeconds; // se resta el tiempo con gameTime
 
                 if (_tiempoTextoInicio <= 0f)
-                    _mostrandoTextoInicio = false;   // ya pasó una vuelta completa, se apaga
+                    _mostrandoTextoInicio = false;   // ya se mostró, lo apaga (solo se tiene que mostrar una vez y al inicio)
             }
     }
 
@@ -213,7 +220,7 @@ public class FightScene : Scene // COMO NO HEREDA DE CORE (porque es escena ahor
                         Core.GraphicsDevice.Viewport.Width * 0.5f,
                         Core.GraphicsDevice.Viewport.Height * 0.5f);
 
-                    _textoInicio.Draw(Core.SpriteBatch, centro);
+                    _textoInicio.Draw(Core.SpriteBatch, centro); // lo dibuja al medio
                 }
                 
                 Core.SpriteBatch.End();
