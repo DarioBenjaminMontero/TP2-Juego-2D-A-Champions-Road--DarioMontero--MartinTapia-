@@ -153,10 +153,11 @@ namespace A_Champion_s_Road
                             }
                             if(staminaActual >= costoGolpe)
                             {
-                            CurrentState = PlayerState.Punching;
-                            CurrentDirectionDodge = Direction.None;
-                            _punchSprite.Reset();
-                            _currentSprite = _punchSprite;
+                                staminaActual -= costoGolpe;
+                                CurrentState = PlayerState.Punching;
+                                CurrentDirectionDodge = Direction.None;
+                                _punchSprite.Reset();
+                                _currentSprite = _punchSprite;
                             }
                                 if (keyboard.WasKeyJustPressed(Keys.P))
                                 {

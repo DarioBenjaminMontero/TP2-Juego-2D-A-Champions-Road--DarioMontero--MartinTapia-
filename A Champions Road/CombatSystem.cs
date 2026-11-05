@@ -51,20 +51,20 @@ if (_enemy.CurrentEnemyState != Enemy.EnemyState.Punching || frameActualEnemigo 
                 {
                     _enemy.CurrentEnemyState = Enemy.EnemyState.Hurting;
                     _enemy.IsCounterable = false;
-                    if(_player.staminaActual >= 10)
-                    {
-                    _player.staminaActual -= 10;
-                    }
+                    // if(_player.staminaActual >= 10)
+                    // {
+                    // _player.staminaActual -= 10;
+                    // }
                 }
                 break;
             case (Player.PlayerState.Punching, Enemy.EnemyState.Idle, false):
                 if (frameActualJugador == 2)
                 {
                     _enemy.RecibirGolpe();
-                    if(_player.staminaActual >= 10)
-                    {
-                    _player.staminaActual -= 10;
-                    }
+                    // if(_player.staminaActual >= 10)
+                    // {
+                    // _player.staminaActual -= 10;
+                    // }
                 }
                 break;
 
