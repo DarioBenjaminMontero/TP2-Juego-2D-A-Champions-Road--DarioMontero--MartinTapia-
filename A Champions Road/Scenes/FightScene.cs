@@ -128,8 +128,30 @@ public class FightScene : Scene // COMO NO HEREDA DE CORE (porque es escena ahor
 
             if (_player.vidaActual <= 0)
             {
-                Core.ChangeScene(new GameOver());
-                return;
+                if(_enemy.roundsGanados < 3)
+                {
+                    _enemy.roundsGanados ++;
+                    _player.vidaActual = 50;
+                }
+                if(_enemy.roundsGanados == 3)
+                {
+                    Core.ChangeScene(new GameOver());
+                    return;
+                }
+            }
+
+            if (_enemy.vidaActual <= 0)
+            {
+                if(_player.roundsGanados < 3)
+                {
+                    _player.roundsGanados ++;
+                    _enemy.vidaActual = 100;
+                }
+                if(_player.roundsGanados == 3)
+                {
+                    Core.ChangeScene(new MenuScene()); // pongo menu scene para diferenciar
+                    return;
+                }
             }
 
             base.Update(gameTime);

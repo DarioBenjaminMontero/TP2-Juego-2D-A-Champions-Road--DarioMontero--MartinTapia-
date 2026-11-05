@@ -14,7 +14,7 @@ namespace A_Champion_s_Road.Scenes;
 
 public class Options : Scene
 {
-    private Texture2D _gameOver; 
+    private Texture2D _opciones; 
     private Panel _panelMenu;
     private Rectangle _pantallaCompleta; 
     public override void Initialize()
@@ -28,7 +28,7 @@ public class Options : Scene
 
     public override void LoadContent()
     {
-        _gameOver = Content.Load<Texture2D>("gameover");
+        _opciones = Content.Load<Texture2D>("opciones");
     }
 
     private void IniciarUI()
@@ -86,10 +86,10 @@ public class Options : Scene
         float centroX = Core.GraphicsDevice.Viewport.Width * 0.5f;
         float centroY = Core.GraphicsDevice.Viewport.Height * 0.5f;
 
-        Vector2 origen = new Vector2(_gameOver.Width * 0.5f, _gameOver.Height);
+        Vector2 origen = new Vector2(_opciones.Width * 0.5f, _opciones.Height);
 
         Core.SpriteBatch.Draw(
-            _gameOver,
+            _opciones,
             new Vector2(centroX, centroY - 50), // 20 pixeles por encima de los botones
             null,
             Color.White,

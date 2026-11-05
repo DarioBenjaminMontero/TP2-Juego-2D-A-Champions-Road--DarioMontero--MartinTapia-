@@ -4,6 +4,8 @@ using MonoGameLibrary.Graphics;
 using MonoGameLibrary.Input; // Asegúrate de tener este using si tu KeyboardInfo está en ese namespace
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Formats.Asn1;
+using System.Security.Cryptography.X509Certificates;
 namespace A_Champion_s_Road
 {
     public class Player
@@ -24,7 +26,7 @@ namespace A_Champion_s_Road
         public int staminaActual { get; set; } = staminaMaxima;
         public int costoGolpe = 10;
         public int boostEsquive = 5;
-        public bool PuedeGolpear;
+        public int roundsGanados { get; set; } = 0;
         private float _tiempoVulnerableMax = 3.0f;
         private float _tiempoHurtingMax = 0.2f;
 

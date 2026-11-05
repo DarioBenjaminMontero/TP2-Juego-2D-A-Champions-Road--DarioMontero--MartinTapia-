@@ -42,15 +42,12 @@ public class MenuScene : Scene
 
     private void IniciarUI()
     {
-        GumService.Default.Root.Children.Clear(); // borra la UI de la escena anterior (si es que hay, no sé Loop > Menu principal por decir algo)
-        EscenaMenu(); // UI Actual, la función de mas adelante
+        GumService.Default.Root.Children.Clear();
+        EscenaMenu(); 
     }
 
     private void EscenaMenu()
     {
-        // CHE BENJA, si llegas a hacer alguna escena acordate de hacer el panel y agregar botones como hijos con AddChild del panel
-
-        // Panel de toda la pantalla
         _panelMenu = new Panel();
         _panelMenu.Dock(Gum.Wireframe.Dock.Fill);
         _panelMenu.AddToRoot();
@@ -62,7 +59,7 @@ public class MenuScene : Scene
         botonJugar.X = -90;                   
         botonJugar.Width = 70;
         botonJugar.Text = "Jugar";
-        botonJugar.Click += JugarFuncion; // lo que hace el boton (evidentemente llama al loop jugable, no hay mucha magia)
+        botonJugar.Click += JugarFuncion;
         _panelMenu.AddChild(botonJugar);
 
         // Botón de Opciones
@@ -72,7 +69,7 @@ public class MenuScene : Scene
         botonOpciones.X = 0;
         botonOpciones.Width = 80;
         botonOpciones.Text = "Opciones";
-        // botonOpciones.Click += (por ahora no hay escena, asi que el boton es inutil, lo dejo asi hasta mañana)
+        botonOpciones.Click += OpcionesFuncion;
         _panelMenu.AddChild(botonOpciones);     
 
         // --- Botón SALIR ---
@@ -90,12 +87,17 @@ public class MenuScene : Scene
 
     private void JugarFuncion(object sender, EventArgs e)
     {
-        Core.ChangeScene(new FightScene()); // ASI ESTA EN LA GUIA MONOGAME, FALTA HACER GAME1 UNA ESCENA 
+        Core.ChangeScene(new FightScene()); 
+    }
+
+    private void OpcionesFuncion(object sender, EventArgs e)
+    {
+        Core.ChangeScene(new Options());
     }
 
     private void SalirFuncion(object sender, EventArgs e)
     {
-        Core.Instance.Exit(); // cierra el juego
+        Core.Instance.Exit(); 
     }
 
     public override void Update(GameTime gameTime)

@@ -14,11 +14,10 @@ namespace A_Champion_s_Road
         private AnimatedSprite _currentSprite;
 
 public const int vidaMaxima = 1000;
-public int vidaActual {get; set;} = vidaMaxima;
+        public int vidaActual {get; set;} = vidaMaxima;
         private float _tiempoVulnerableMax = 2.0f;
         private float _cronometroEstado = 0f;
-
-
+        public int roundsGanados { get; set; } = 0;
         private float _tiempoHurtingMax = 0.2f;
 
         private float _cronometroHurting = 0f;
