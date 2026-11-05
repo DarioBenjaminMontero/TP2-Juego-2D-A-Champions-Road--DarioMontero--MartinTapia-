@@ -51,12 +51,20 @@ if (_enemy.CurrentEnemyState != Enemy.EnemyState.Punching || frameActualEnemigo 
                 {
                     _enemy.CurrentEnemyState = Enemy.EnemyState.Hurting;
                     _enemy.IsCounterable = false;
+                    if(_player.staminaActual >= 10)
+                    {
+                    _player.staminaActual -= 10;
+                    }
                 }
                 break;
             case (Player.PlayerState.Punching, Enemy.EnemyState.Idle, false):
                 if (frameActualJugador == 2)
                 {
                     _enemy.RecibirGolpe();
+                    if(_player.staminaActual >= 10)
+                    {
+                    _player.staminaActual -= 10;
+                    }
                 }
                 break;
 
@@ -72,6 +80,7 @@ if (_enemy.CurrentEnemyState != Enemy.EnemyState.Punching || frameActualEnemigo 
 
 
             case (Player.PlayerState.Dodging, Enemy.EnemyState.Punching, false):
+
                 if (_player.Vulnerable)
                 {
                     if (frameActualEnemigo == 2)
@@ -79,7 +88,7 @@ if (_enemy.CurrentEnemyState != Enemy.EnemyState.Punching || frameActualEnemigo 
                         if (impacto == false)
                         {
                             _player.RecibirGolpe(); 
-impacto = true;
+                        impacto = true;
                         }
                     
                     }
@@ -89,6 +98,10 @@ impacto = true;
                 {
                     _enemy.Vulnerable = true;
                     _enemy.CurrentEnemyState = Enemy.EnemyState.Idle;
+                    if(_player.staminaActual <= 95)
+                    {
+                        _player.staminaActual += 5;
+                    }
                 }
                 break;
 
@@ -98,7 +111,7 @@ impacto = true;
                 if (impacto == false)
                         {
                             _player.RecibirGolpe(); 
-impacto = true;
+                        impacto = true;
                         }
                 break;
             case (Player.PlayerState.Dodging, Enemy.EnemyState.Idle, false):

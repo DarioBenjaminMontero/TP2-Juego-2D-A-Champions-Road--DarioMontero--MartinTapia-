@@ -20,6 +20,11 @@ namespace A_Champion_s_Road
         AnimatedSprite _vulnerableAnim;
         public const int vidaMaxima = 100;
         public int vidaActual { get; set; } = vidaMaxima;
+        public const int staminaMaxima = 100;
+        public int staminaActual { get; set; } = staminaMaxima;
+        public int costoGolpe = 10;
+        public int boostEsquive = 5;
+        public bool PuedeGolpear;
         private float _tiempoVulnerableMax = 3.0f;
         private float _tiempoHurtingMax = 0.2f;
 
@@ -75,6 +80,7 @@ namespace A_Champion_s_Road
             _hurtAnim.Reset();
             _currentSprite = _hurtAnim;
         }
+
         public void HacerVulnerable()
         {
             Vulnerable = true;
@@ -141,25 +147,33 @@ namespace A_Champion_s_Road
                     {
                         if (!Vulnerable)
                         {
+                            if(staminaActual < costoGolpe)
+                            {
+                                HacerVulnerable();
+                            }
+                            if(staminaActual >= costoGolpe)
+                            {
                             CurrentState = PlayerState.Punching;
                             CurrentDirectionDodge = Direction.None;
                             _punchSprite.Reset();
                             _currentSprite = _punchSprite;
-
-                            if (keyboard.WasKeyJustPressed(Keys.P))
-                            {
-                                CurrentDirectionPunch = Direction.Right;
-                                _currentSprite.Effects = SpriteEffects.FlipHorizontally;
                             }
-                            else if (keyboard.WasKeyJustPressed(Keys.O))
-                            {
-                                CurrentDirectionPunch = Direction.Left;
-                                _currentSprite.Effects = SpriteEffects.None;
-                            }
+                                if (keyboard.WasKeyJustPressed(Keys.P))
+                                {
+                                    CurrentDirectionPunch = Direction.Right;
+                                    _currentSprite.Effects = SpriteEffects.FlipHorizontally;
+                                }
+                                else if (keyboard.WasKeyJustPressed(Keys.O))
+                                {
+                                    CurrentDirectionPunch = Direction.Left;
+                                    _currentSprite.Effects = SpriteEffects.None;
+                                }
+                            
                         }
                     }
                     else if (keyboard.WasKeyJustPressed(Keys.A) || keyboard.WasKeyJustPressed(Keys.D))
                     {
+
                         if (!Vulnerable)
                         {
                             CurrentState = PlayerState.Dodging;

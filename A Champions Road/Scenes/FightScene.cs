@@ -141,21 +141,26 @@ public class FightScene : Scene // COMO NO HEREDA DE CORE (porque es escena ahor
         }
     }
 
-    private void BarraStamina()
+    private void BarraStamina(int stamina, int staminaMaxima, Vector2 posicion)
     {
+        int anchoAmarillo = (int)(AnchoStamina * MathHelper.Clamp((float)stamina / staminaMaxima, 0f, 1f));
+
         Core.SpriteBatch.Draw(
             _barraRoja.Texture,
-            new Rectangle(32, 60, AnchoStamina, AltoStamina),
+            new Rectangle((int)posicion.X, (int)posicion.Y, AnchoStamina, AltoStamina),
             _barraRoja.SourceRectangle,
             Color.White
         );
 
-        // Core.SpriteBatch.Draw(
-        //     _barraAmarilla.Texture,
-        //     new Rectangle(32, 60, AnchoStamina, AnchoStamina),
-        //     _barraAmarilla.SourceRectangle,
-        //     Color.White
-        // );
+        if (anchoAmarillo > 0)
+        {
+            Core.SpriteBatch.Draw(
+                _barraAmarilla.Texture,
+                new Rectangle((int)posicion.X, (int)posicion.Y, anchoAmarillo, AltoStamina),
+                _barraAmarilla.SourceRectangle,
+                Color.White
+            );
+        }
     } 
 
             public override void Draw(GameTime gameTime) // lo pase de protected a public porque tiraba un error
@@ -180,7 +185,7 @@ public class FightScene : Scene // COMO NO HEREDA DE CORE (porque es escena ahor
                     new Vector2(Core.GraphicsDevice.Viewport.Width - AnchoBarraVida - 30, 30)
                 );
 
-                BarraStamina();
+                BarraStamina(_player.staminaActual, Player.staminaMaxima, new Vector2(30, 60));
                         
                 Core.SpriteBatch.End();
                 base.Draw(gameTime);
