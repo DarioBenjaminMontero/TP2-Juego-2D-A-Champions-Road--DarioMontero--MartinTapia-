@@ -70,6 +70,15 @@ namespace A_Champion_s_Road
             _hurtAnim.Scale = escalaFinal;
             _vulnerableAnim.Scale = escalaFinal;
         }
+        public void ReiniciarRound()
+        {
+            CurrentState = PlayerState.Idle;
+            Vulnerable = false;
+            staminaActual = staminaMaxima;
+            _cronometroHurting = 0f;
+            _cronometroVulnerable = 0f;
+            _currentSprite = _idleAnim;
+        }
         public void RecibirGolpe()
         {
             CurrentState = PlayerState.Hurting;

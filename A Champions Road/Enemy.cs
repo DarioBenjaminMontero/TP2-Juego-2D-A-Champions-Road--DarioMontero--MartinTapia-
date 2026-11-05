@@ -50,6 +50,15 @@ public const int vidaMaxima = 1000;
             _punchAnim.Scale = escalaFinal;
             _hurtAnim.Scale = escalaFinal; // antes no tenía escala asignada
         }
+        public void ReiniciarRound()
+        {
+            CurrentEnemyState = EnemyState.Idle;
+            Vulnerable = false;
+            IsCounterable = false;
+            _cronometroHurting = 0f;
+            _cronometroVulnerable = 0f;
+            _currentSprite = _idleAnim;
+        }
         public void StartPunch()
         {
             CurrentEnemyState = EnemyState.Punching;

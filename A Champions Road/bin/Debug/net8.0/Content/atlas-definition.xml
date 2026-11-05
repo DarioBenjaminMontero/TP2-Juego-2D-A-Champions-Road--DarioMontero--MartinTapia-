@@ -46,10 +46,17 @@
         <Region name="textoCompleto" x="2" y="202" width="208" height="34" />
     </Regions>
 
+    <Texture>textoRondas</Texture>
+    <Regions>
+        <Region name="ronda1" x="4" y="0" width="336" height="67"/>
+        <Region name="ronda2" x="4" y="68" width="336" height="67"/>
+        <Region name="ronda3" x="4" y="136" width="336" height="67"/>
+        <Region name="ronda4" x="4" y="204" width="336" height="67"/>
+        <Region name="ronda5" x="4" y="272" width="336" height="67"/>
+    </Regions>
 
     <Animations>
-
-        <Animation name="textoInicio" delay="100">
+        <Animation name="textoInicio" delay="300">
             <Frame region="intermedio1" />
             <Frame region="intermedio2" />
             <Frame region="intermedio3" />
