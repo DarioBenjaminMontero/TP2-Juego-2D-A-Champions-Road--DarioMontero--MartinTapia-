@@ -27,6 +27,9 @@ public class FightScene : Scene // COMO NO HEREDA DE CORE (porque es escena ahor
         private TextureRegion _barraRoja;
         private InputManager _inputManager;
         private TextureAtlas _atlas;
+        private AnimatedSprite _textoInicio;
+        private float _tiempoTextoInicio;
+        private bool _mostrandoTextoInicio = true;
 
     private const int AnchoBarraVida = 220;
     private const int AltoBarraVida = 18;
@@ -96,7 +99,15 @@ public class FightScene : Scene // COMO NO HEREDA DE CORE (porque es escena ahor
             float enemyX = Core.Instance.Window.ClientBounds.Width * 0.5f;
             float enemyY = Core.Instance.Window.ClientBounds.Height * 0.9f;
             _enemy = new Enemy(enemyIdleAnim, enemyPunchAnim, enemyHurtAnim, new Vector2(enemyX, enemyY), escala); // CAMBIO: nuevo parámetro
-            _combat = new CombatSystem(_enemy, _player);   
+            _combat = new CombatSystem(_enemy, _player);
+
+            Animation textoAnim = atlas.GetAnimation("textoInicio");
+            _textoInicio = new AnimatedSprite(textoAnim);
+            _textoInicio.CenterOrigin();   // para que el centro del sprite quede en la posición que le pases
+            _textoInicio.Scale = new Vector2(escala, escala);
+
+            // duración total = delay de cada frame * cantidad de frames
+            _tiempoTextoInicio = (float)(textoAnim.Delay.TotalSeconds * textoAnim.Frames.Count);
     }
 
     public override void Update(GameTime gameTime)
@@ -115,6 +126,15 @@ public class FightScene : Scene // COMO NO HEREDA DE CORE (porque es escena ahor
             _enemy.Update(gameTime);
             _combat.Update(gameTime);
             base.Update(gameTime);
+
+            if (_mostrandoTextoInicio)
+            {
+                _textoInicio.Update(gameTime);
+                _tiempoTextoInicio -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                if (_tiempoTextoInicio <= 0f)
+                    _mostrandoTextoInicio = false;   // ya pasó una vuelta completa, se apaga
+            }
     }
 
     private void DibujarBarraVida(int vida, int vidaMaxima, Vector2 posicion)
@@ -186,7 +206,16 @@ public class FightScene : Scene // COMO NO HEREDA DE CORE (porque es escena ahor
                 );
 
                 BarraStamina(_player.staminaActual, Player.staminaMaxima, new Vector2(30, 60));
-                        
+                
+                if (_mostrandoTextoInicio)
+                {
+                    Vector2 centro = new Vector2(
+                        Core.GraphicsDevice.Viewport.Width * 0.5f,
+                        Core.GraphicsDevice.Viewport.Height * 0.5f);
+
+                    _textoInicio.Draw(Core.SpriteBatch, centro);
+                }
+                
                 Core.SpriteBatch.End();
                 base.Draw(gameTime);
             }

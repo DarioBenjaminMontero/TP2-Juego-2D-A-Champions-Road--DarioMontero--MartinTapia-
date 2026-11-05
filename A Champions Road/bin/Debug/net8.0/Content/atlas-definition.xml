@@ -37,8 +37,30 @@
         <Region name="staminaRoja" x="1" y="16" width="97" height="12" />
     </Regions>
 
+    <Texture>inicioCombateTexto</Texture> 
+    <Regions>
+        <Region name="intermedio1" x="2" y="42" width="208" height="34" />
+        <Region name="intermedio2" x="2" y="82" width="208" height="34" />
+        <Region name="intermedio3" x="2" y="122" width="208" height="34" />
+        <Region name="intermedio4" x="2" y="162" width="208" height="34" />
+        <Region name="textoCompleto" x="2" y="202" width="208" height="34" />
+    </Regions>
+
 
     <Animations>
+
+        <Animation name="textoInicio" delay="100">
+            <Frame region="intermedio1" />
+            <Frame region="intermedio2" />
+            <Frame region="intermedio3" />
+            <Frame region="intermedio4" />
+            <Frame region="textoCompleto" />
+            <Frame region="intermedio4" />
+            <Frame region="intermedio3" />
+            <Frame region="intermedio2" />
+            <Frame region="intermedio1" />
+        </Animation>
+
         <Animation name="idleAnimation" delay="100">
             <Frame region="quieto" />
         </Animation>

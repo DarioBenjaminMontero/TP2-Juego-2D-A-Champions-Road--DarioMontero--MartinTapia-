@@ -10,6 +10,7 @@
     <File>C:/Users/PC Humilde/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A champions road/Content/danteVegaAtlas.png</File>
     <File>C:/Users/PC Humilde/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A champions road/Content/enemy1.png</File>
     <File>C:/Users/PC Humilde/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A champions road/Content/enemy2.png</File>
+    <File>C:/Users/PC Humilde/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A champions road/Content/inicioCombateTexto.png</File>
     <File>C:/Users/PC Humilde/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A champions road/Content/punch-danteVega.png</File>
     <File>C:/Users/PC Humilde/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A champions road/Content/ring3.png</File>
     <File>C:/Users/PC Humilde/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A champions road/Content/stamina.png</File>
@@ -19,6 +20,7 @@
     <File>C:/Users/PC Humilde/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A champions road/Content/vida.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
