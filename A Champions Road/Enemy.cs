@@ -15,7 +15,7 @@ namespace A_Champion_s_Road
         private AnimatedSprite _punchRightAnim;
         private AnimatedSprite _currentSprite;
 
-public const int vidaMaxima = 1000;
+public const int vidaMaxima = 200;
         public int vidaActual {get; set;} = vidaMaxima;
         private float _tiempoVulnerableMax = 2.0f;
         private float _cronometroEstado = 0f;

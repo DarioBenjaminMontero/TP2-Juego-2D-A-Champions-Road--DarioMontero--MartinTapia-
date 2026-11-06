@@ -40,6 +40,8 @@ namespace A_Champion_s_Road
             new KeyCombo() { PushedKey = Microsoft.Xna.Framework.Input.Keys.Up });
             FrameworkElement.TabKeyCombos.Add(
             new KeyCombo() { PushedKey = Microsoft.Xna.Framework.Input.Keys.Down });
+            FrameworkElement.TabReverseKeyCombos.Add( new KeyCombo() { PushedKey = Keys.Left });
+            FrameworkElement.TabKeyCombos.Add( new KeyCombo() { PushedKey = Keys.Right });
             GumService.Default.CanvasWidth = GraphicsDevice.PresentationParameters.BackBufferWidth / 4.0f;
             GumService.Default.CanvasHeight = GraphicsDevice.PresentationParameters.BackBufferHeight / 4.0f;
             GumService.Default.Renderer.Camera.Zoom = 4.0f;

@@ -60,6 +60,7 @@ public class MenuScene : Scene
         botonJugar.Width = 70;
         botonJugar.Text = "Jugar";
         botonJugar.Click += JugarFuncion;
+        botonJugar.IsFocused = true;
         _panelMenu.AddChild(botonJugar);
 
         // Botón de Opciones
@@ -70,7 +71,7 @@ public class MenuScene : Scene
         botonOpciones.Width = 80;
         botonOpciones.Text = "Opciones";
         botonOpciones.Click += OpcionesFuncion;
-        _panelMenu.AddChild(botonOpciones);     
+        _panelMenu.AddChild(botonOpciones);  
 
         // --- Botón SALIR ---
         var botonSalir = new Button();
@@ -80,7 +81,7 @@ public class MenuScene : Scene
         botonSalir.Width = 70;
         botonSalir.Text = "Salir";
         botonSalir.Click += SalirFuncion;
-        _panelMenu.AddChild(botonSalir);           
+        _panelMenu.AddChild(botonSalir);       
     }
 
     // funciones de cada boton a llamar
@@ -110,7 +111,7 @@ public class MenuScene : Scene
         Core.GraphicsDevice.Clear(Color.Black);
 
         Core.SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
-        Core.SpriteBatch.Draw(_fondo, _pantallaCompleta, Color.White);
+        Core.SpriteBatch.Draw(_fondo, _pantallaCompleta, new Color(160, 160, 160));
         Core.SpriteBatch.End();
 
         GumService.Default.Draw();
