@@ -34,7 +34,7 @@ public class Options : Scene
         _posTitulo = new Vector2(_pantallaCompleta.Width * 0.5f, _pantallaCompleta.Height * 0.5f - _pantallaCompleta.Height * 0.2f);
         _origenTitulo = new Vector2(_opciones.Width * 0.5f, _opciones.Height);
 
-        _posVolumen = new Vector2(_pantallaCompleta.Width * 0.225f, _pantallaCompleta.Height * 0.75f);
+        _posVolumen = new Vector2(_pantallaCompleta.Width * 0.15f, _pantallaCompleta.Height * 0.7f);
         _origenVolumen = _texto.MeasureString(ETIQUETA) * 0.5f;
         _nivelVolumen = (int)Math.Round(MediaPlayer.Volume * 10);
 
