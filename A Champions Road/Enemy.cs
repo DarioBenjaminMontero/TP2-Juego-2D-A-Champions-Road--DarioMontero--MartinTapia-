@@ -11,6 +11,8 @@ namespace A_Champion_s_Road
         private AnimatedSprite _idleAnim;
         private AnimatedSprite _punchAnim;
         private AnimatedSprite _hurtAnim;
+        private AnimatedSprite _blockAnim;
+        private AnimatedSprite _punchRightAnim;
         private AnimatedSprite _currentSprite;
 
 public const int vidaMaxima = 1000;
@@ -24,7 +26,7 @@ public const int vidaMaxima = 1000;
         private float _cronometroVulnerable = 0f;
         public bool Vulnerable = false;
 
-        public enum EnemyState { Idle, Punching, Hurting }
+        public enum EnemyState { Idle, Punching, PunchingRight, Hurting }
         public EnemyState CurrentEnemyState { get; set; } = EnemyState.Idle;
         public bool IsCounterable { get; set; } = false;
 
@@ -34,21 +36,25 @@ public const int vidaMaxima = 1000;
 
 
         // CAMBIO: nuevo parámetro "escala" (factor según la pantalla)
-        public Enemy(Animation idleAnim, Animation punchAnim, Animation hurtAnim, Vector2 initialPosition, float escala = 1f)
+        public Enemy(Animation idleAnim, Animation punchAnim, Animation hurtAnim,Animation blockAnim,Animation rightPunchAnim, Vector2 initialPosition, float escala = 1f)
         {
             Position = initialPosition;
 
             // Creamos la animación en bucle (true)
-            _idleAnim = new AnimatedSprite(idleAnim, true);
+            _idleAnim = new AnimatedSprite(idleAnim, true); 
             _punchAnim = new AnimatedSprite(punchAnim, false); // No se repite
-            _hurtAnim = new AnimatedSprite(hurtAnim, false);
+            _hurtAnim = new AnimatedSprite(hurtAnim, false); 
+            _blockAnim = new AnimatedSprite(blockAnim, false); 
+            _punchRightAnim = new AnimatedSprite(rightPunchAnim, false); 
             _currentSprite = _idleAnim;
 
             // CAMBIO: la escala base (3.5f) se multiplica por el factor de pantalla
             Vector2 escalaFinal = new Vector2(1.2f * escala, 1.2f * escala);
-            _idleAnim.Scale = escalaFinal;
-            _punchAnim.Scale = escalaFinal;
+            _idleAnim.Scale = escalaFinal; 
+            _punchAnim.Scale = escalaFinal; 
             _hurtAnim.Scale = escalaFinal; // antes no tenía escala asignada
+            _blockAnim.Scale = escalaFinal; 
+            _punchRightAnim.Scale = escalaFinal; 
         }
         public void ReiniciarRound()
         {
@@ -62,6 +68,13 @@ public const int vidaMaxima = 1000;
         public void StartPunch()
         {
             CurrentEnemyState = EnemyState.Punching;
+            _punchAnim.Reset();
+            _cronometroEstado = 0f;
+            IsCounterable = true;
+        }
+        public void StartPunchRight()
+        {  
+            CurrentEnemyState = EnemyState.PunchingRight;
             _punchAnim.Reset();
             _cronometroEstado = 0f;
             IsCounterable = true;

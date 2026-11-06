@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/PC Humilde/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/punch-danteVega.png</SourceFile>
-  <SourceTime>2026-11-05T19:51:12.9107734-03:00</SourceTime>
-  <DestFile>C:/Users/PC Humilde/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/bin/DesktopGL/Content/punch-danteVega.xnb</DestFile>
-  <DestTime>2026-11-05T20:15:43.0020157-03:00</DestTime>
+  <SourceFile>C:/Users/Julio/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/punch-danteVega.png</SourceFile>
+  <SourceTime>2026-11-05T19:01:36.7103724-03:00</SourceTime>
+  <DestFile>C:/Users/Julio/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/bin/DesktopGL/Content/punch-danteVega.xnb</DestFile>
+  <DestTime>2026-11-05T22:48:38.2026051-03:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2026-08-14T18:50:10-03:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

@@ -110,9 +110,11 @@ public class FightScene : Scene // COMO NO HEREDA DE CORE (porque es escena ahor
             Animation enemyIdleAnim = atlas.GetAnimation("enemyIdle");
             Animation enemyPunchAnim = atlas.GetAnimation("enemyPunch");
             Animation enemyHurtAnim = atlas.GetAnimation("enemyHurt");
+            Animation enemyBlock = atlas.GetAnimation("enemyBlockAnimation");
+            Animation enemyPunchRight = atlas.GetAnimation("enemyPunchRightAnimation");
             float enemyX = Core.Instance.Window.ClientBounds.Width * 0.5f;
             float enemyY = Core.Instance.Window.ClientBounds.Height * 0.9f;
-            _enemy = new Enemy(enemyIdleAnim, enemyPunchAnim, enemyHurtAnim, new Vector2(enemyX, enemyY), escala); // CAMBIO: nuevo parámetro
+            _enemy = new Enemy(enemyIdleAnim, enemyPunchAnim, enemyHurtAnim,enemyBlock,enemyPunchRight, new Vector2(enemyX, enemyY), escala); // CAMBIO: nuevo parámetro
             _combat = new CombatSystem(_enemy, _player);
 
             
