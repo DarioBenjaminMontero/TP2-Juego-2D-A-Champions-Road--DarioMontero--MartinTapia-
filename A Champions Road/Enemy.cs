@@ -66,6 +66,7 @@ public int CurrentAttackFrame =>
         }
         public void ReiniciarRound()
         {
+            vidaActual = 1000;
             CurrentEnemyState = EnemyState.Idle;
             Vulnerable = false;
             IsCounterable = false;

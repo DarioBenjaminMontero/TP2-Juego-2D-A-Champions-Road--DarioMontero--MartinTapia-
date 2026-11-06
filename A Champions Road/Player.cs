@@ -72,6 +72,7 @@ namespace A_Champion_s_Road
         }
         public void ReiniciarRound()
         {
+            vidaActual = 100;
             CurrentState = PlayerState.Idle;
             Vulnerable = false;
             staminaActual = staminaMaxima;

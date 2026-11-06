@@ -150,7 +150,6 @@ public class FightScene : Scene // COMO NO HEREDA DE CORE (porque es escena ahor
                     if(_enemy.roundsGanados < 3)
                     {
                         _enemy.roundsGanados ++;
-                        _player.vidaActual = 50;
                             _player.ReiniciarRound();
                             _enemy.ReiniciarRound();
                             _textoInicio.Reset();
@@ -169,7 +168,6 @@ public class FightScene : Scene // COMO NO HEREDA DE CORE (porque es escena ahor
                     if(_player.roundsGanados < 3)
                     {
                         _player.roundsGanados ++;
-                        _enemy.vidaActual = 100;
                             _player.ReiniciarRound();
                             _enemy.ReiniciarRound();
                             _textoInicio.Reset();

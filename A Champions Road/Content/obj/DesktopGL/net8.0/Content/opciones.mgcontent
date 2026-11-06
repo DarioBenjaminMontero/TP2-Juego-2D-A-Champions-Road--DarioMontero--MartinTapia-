@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/Julio/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/opciones.png</SourceFile>
-  <SourceTime>2026-11-05T19:01:36.709375-03:00</SourceTime>
-  <DestFile>C:/Users/Julio/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/bin/DesktopGL/Content/opciones.xnb</DestFile>
-  <DestTime>2026-11-05T22:48:38.1158381-03:00</DestTime>
+  <SourceFile>C:/Users/PC Humilde/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/opciones.png</SourceFile>
+  <SourceTime>2026-11-06T01:26:37.4554074-03:00</SourceTime>
+  <DestFile>C:/Users/PC Humilde/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/bin/DesktopGL/Content/opciones.xnb</DestFile>
+  <DestTime>2026-11-06T01:29:18.2981336-03:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2026-08-14T18:50:10-03:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
