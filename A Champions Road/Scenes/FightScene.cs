@@ -37,6 +37,8 @@ public class FightScene : Scene // COMO NO HEREDA DE CORE (porque es escena ahor
 
         private enum EstadoPelea { Intro, Peleando, Caida }
         private EstadoPelea _estado = EstadoPelea.Intro;
+        private bool _pausado;
+        private Panel _panelPausa;
 
     private const int AnchoBarraVida = 220;
     private const int AltoBarraVida = 18;
@@ -45,6 +47,7 @@ public class FightScene : Scene // COMO NO HEREDA DE CORE (porque es escena ahor
 
     public override void Initialize()
     {
+        Core.ExitOnEscape = false;
         base.Initialize();
         _inputManager = new InputManager();
     }
@@ -127,6 +130,15 @@ public class FightScene : Scene // COMO NO HEREDA DE CORE (porque es escena ahor
 
     public override void Update(GameTime gameTime)
     {
+Core.ExitOnEscape = false;
+        if (Core.Input.Keyboard.WasKeyJustPressed(Keys.Escape))
+            CambiarPausa(!_pausado);
+
+        if (_pausado)
+        {
+            GumService.Default.Update(gameTime);
+            return;
+        }
                 _enemy.Update(gameTime);
                 _player.Update(gameTime, _inputManager.Keyboard);
                 _inputManager.Update(gameTime);
@@ -182,6 +194,54 @@ public class FightScene : Scene // COMO NO HEREDA DE CORE (porque es escena ahor
         base.Update(gameTime);
     }
 
+
+ private void CambiarPausa(bool pausar)
+    {
+        if (_pausado == pausar)
+            return;
+
+        _pausado = pausar;
+
+        if (_pausado)
+        {
+            MediaPlayer.Pause();
+            MostrarMenuPausa();
+        }
+        else
+        {
+            GumService.Default.Root.Children.Clear();
+            MediaPlayer.Resume();
+        }
+    }
+
+    private void MostrarMenuPausa()
+    {
+        GumService.Default.Root.Children.Clear();
+
+        _panelPausa = new Panel();
+        _panelPausa.Dock(Gum.Wireframe.Dock.Fill);
+        _panelPausa.AddToRoot();
+
+        var botonContinuar = new Button();
+        botonContinuar.Anchor(Gum.Wireframe.Anchor.Center);
+        botonContinuar.Y = 10;
+        botonContinuar.Width = 120;
+        botonContinuar.Text = "Continuar";
+        botonContinuar.Click += (sender, args) => CambiarPausa(false);
+        _panelPausa.AddChild(botonContinuar);
+
+        var botonMenu = new Button();
+        botonMenu.Anchor(Gum.Wireframe.Anchor.Center);
+        botonMenu.Y = 40;
+        botonMenu.Width = 150;
+        botonMenu.Text = "Volver al menu";
+        botonMenu.Click += (sender, args) =>
+        {
+            MediaPlayer.Resume();
+            Core.ChangeScene(new MenuScene());
+        };
+        _panelPausa.AddChild(botonMenu);
+    }
     private void DibujarBarraVida(int vida, int vidaMaxima, Vector2 posicion)
     {
         int anchoVerde = (int)(AnchoBarraVida *
@@ -328,6 +388,8 @@ public class FightScene : Scene // COMO NO HEREDA DE CORE (porque es escena ahor
                 }
                 
                 Core.SpriteBatch.End();
+                if (_pausado)
+                    GumService.Default.Draw();
                 base.Draw(gameTime);
             }
     }
