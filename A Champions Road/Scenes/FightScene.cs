@@ -147,38 +147,34 @@ public class FightScene : Scene // COMO NO HEREDA DE CORE (porque es escena ahor
 
                 if (_player.vidaActual <= 0)
                 {
-                    if(_enemy.roundsGanados < 3)
-                    {
-                        _enemy.roundsGanados ++;
-                            _player.ReiniciarRound();
-                            _enemy.ReiniciarRound();
-                            _textoInicio.Reset();
-                        _estado = EstadoPelea.Intro;
-                        break;
-                    }
-                    if(_enemy.roundsGanados == 3)
+                    _enemy.roundsGanados ++;
+
+                    if(_enemy.roundsGanados >= 3)
                     {
                         Core.ChangeScene(new GameOver());
                         return;
                     }
+                        _player.ReiniciarRound();
+                        _enemy.ReiniciarRound();
+                        _textoInicio.Reset();
+                        _estado = EstadoPelea.Intro;
+                        break;
                 }
 
                 if (_enemy.vidaActual <= 0)
                 {
-                    if(_player.roundsGanados < 3)
+                    _player.roundsGanados ++;
+                    
+                    if(_player.roundsGanados >= 3)
                     {
-                        _player.roundsGanados ++;
-                            _player.ReiniciarRound();
-                            _enemy.ReiniciarRound();
-                            _textoInicio.Reset();
-                        _estado = EstadoPelea.Intro;
-                        break;
-                    }
-                    if(_player.roundsGanados == 3)
-                    {
-                        Core.ChangeScene(new MenuScene()); // pongo menu scene para diferenciar, pero seria gameOver
+                        Core.ChangeScene(new GameOver()); // pongo menu scene para diferenciar, pero seria gameOver
                         return;
                     }
+                        _player.ReiniciarRound();
+                        _enemy.ReiniciarRound();
+                        _textoInicio.Reset();
+                        _estado = EstadoPelea.Intro;
+                        break;
                 }
 
             break;
