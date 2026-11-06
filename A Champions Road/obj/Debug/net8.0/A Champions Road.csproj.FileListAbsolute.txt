@@ -236,3 +236,4 @@ C:\Users\Julio\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-
 C:\Users\Julio\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Content\opciones.xnb
 C:\Users\Julio\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Content\stamina.xnb
 C:\Users\Julio\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Content\textoRondas.xnb
+C:\Users\Julio\Desktop\TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-\A Champions Road\bin\Debug\net8.0\Content\enemigo3.xnb

@@ -17,8 +17,8 @@
 
     <Texture>enemigo3</Texture>
     <Regions>
-        <Region name="enemy-quieto1" x="355" y="49" width="179" height="373" />
-        <Region name="enemy-quieto2" x="665" y="49" width="179" height="373" />
+        <Region name="enemy-quieto1" x="345" y="49" width="200" height="374" />
+        <Region name="enemy-quieto2" x="655" y="49" width="200" height="374" />
         <Region name="enemy-quieto3" x="955" y="49" width="200" height="374" />
         <Region name="enemy-preparacion" x="65" y="516" width="145" height="375" />
         <Region name="enemy-preparacion2" x="65" y="516" width="145" height="375" />
@@ -118,9 +118,9 @@
         </Animation>
 
 
-        <Animation name ="enemyPunch" delay="400">
+        <Animation name ="enemyPunch" delay="200">
             <Frame region="enemy-preparacion" />
-            <Frame region="enemy-preparacion2"  delay="300"/>
+            <Frame region="enemy-preparacion2"  delay="200"/>
             <Frame region="enemy-golpe" delay = "150"/>
         </Animation>
         <Animation name ="enemyHurt" delay="200">
@@ -130,5 +130,4 @@
 
 
 </TextureAtlas>
-
 

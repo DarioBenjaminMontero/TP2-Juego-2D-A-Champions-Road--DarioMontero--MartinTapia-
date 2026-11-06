@@ -26,14 +26,22 @@ public const int vidaMaxima = 1000;
         private float _cronometroVulnerable = 0f;
         public bool Vulnerable = false;
 
-        public enum EnemyState { Idle, Punching, PunchingRight, Hurting }
+        public enum EnemyState { Idle, Punching, PunchingRight, Hurting, Blocking }
         public EnemyState CurrentEnemyState { get; set; } = EnemyState.Idle;
         public bool IsCounterable { get; set; } = false;
 
 
 
         public int CurrentPunchFrame => _punchAnim.CurrentFrame;
+        public int CurrentIdleFrame => _idleAnim.CurrentFrame;
 
+public int CurrentAttackFrame =>
+    CurrentEnemyState switch
+    {
+        EnemyState.Punching => _punchAnim.CurrentFrame,
+        EnemyState.PunchingRight => _punchRightAnim.CurrentFrame,
+        _ => -1
+    };
 
         // CAMBIO: nuevo parámetro "escala" (factor según la pantalla)
         public Enemy(Animation idleAnim, Animation punchAnim, Animation hurtAnim,Animation blockAnim,Animation rightPunchAnim, Vector2 initialPosition, float escala = 1f)
@@ -75,27 +83,36 @@ public const int vidaMaxima = 1000;
         public void StartPunchRight()
         {  
             CurrentEnemyState = EnemyState.PunchingRight;
-            _punchAnim.Reset();
+            _punchRightAnim.Reset();
             _cronometroEstado = 0f;
             IsCounterable = true;
         }
-        public void RecibirGolpe()
+        public void Bloquear()
         {
-            if (Vulnerable)
-            {
-                
-            }
-            CurrentEnemyState = EnemyState.Hurting;
-if (vidaActual <= 0)
-    return;
-
-vidaActual = Math.Max(0, vidaActual - 10);
-            Vulnerable = false;
-            _cronometroHurting = 0f;
-            _cronometroVulnerable = 0f;
-            _hurtAnim.Reset();
-            _currentSprite = _hurtAnim;
+            CurrentEnemyState = EnemyState.Blocking;
+_blockAnim.Reset();
         }
+        public void HacerseVulnerable()
+{
+    Vulnerable = true;
+    _cronometroVulnerable = 0f;
+
+    CurrentEnemyState = EnemyState.Idle;
+    IsCounterable = false;
+}
+        public void RecibirGolpe()
+{
+    if (!Vulnerable || vidaActual <= 0)
+        return;
+
+    CurrentEnemyState = EnemyState.Hurting;
+
+    vidaActual = Math.Max(0, vidaActual - 10);
+
+    _cronometroHurting = 0f;
+    _hurtAnim.Reset();
+    _currentSprite = _hurtAnim;
+}
         public void Update(GameTime gameTime)
         {
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -115,16 +132,15 @@ vidaActual = Math.Max(0, vidaActual - 10);
             {
 
                 _currentSprite = _hurtAnim;
-                _hurtAnim.Update(gameTime);
+    _hurtAnim.Update(gameTime);
 
-                _cronometroHurting += dt;
+    _cronometroHurting += dt;
 
-                if (_cronometroHurting >= _tiempoHurtingMax || _hurtAnim.IsFinished)
-                {
-                    _hurtAnim.Reset();
-                    CurrentEnemyState = EnemyState.Idle;
-                    _cronometroVulnerable = 0f;
-                }
+    if (_hurtAnim.IsFinished)
+    {
+        CurrentEnemyState = EnemyState.Idle;
+        _currentSprite = _idleAnim;
+    }
             }
 
 
@@ -132,31 +148,41 @@ vidaActual = Math.Max(0, vidaActual - 10);
             {
 
                 case EnemyState.Idle:
-                    if (Vulnerable)
-                    {
-                    }
-                    else
-                    {
-                        _currentSprite = _idleAnim;
-                    }
+                     if (!Vulnerable)
+    {
+        _currentSprite = _idleAnim;
+    }
                     break;
                 case EnemyState.Punching:
-                    _currentSprite = _punchAnim;
-                    if (_punchAnim.CurrentFrame == 0)
-                    {
-                        IsCounterable = true;
-                    }
-                    else
-                    {
-                        IsCounterable = false;
-                    }
+    _currentSprite = _punchAnim;
 
-                    if (_punchAnim.IsFinished)
-                    {
-                        CurrentEnemyState = EnemyState.Idle;
-                    }
+    IsCounterable = _punchAnim.CurrentFrame == 0;
 
-                    break;
+    if (_punchAnim.IsFinished)
+    {
+        CurrentEnemyState = EnemyState.Idle;
+        IsCounterable = false;
+    }
+    break;
+
+case EnemyState.PunchingRight:
+    _currentSprite = _punchRightAnim;
+
+    IsCounterable = _punchRightAnim.CurrentFrame == 0;
+
+    if (_punchRightAnim.IsFinished)
+    {
+        CurrentEnemyState = EnemyState.Idle;
+        IsCounterable = false;
+    }
+    break;
+    case EnemyState.Blocking:
+_currentSprite = _blockAnim;
+if (_blockAnim.IsFinished)
+    {
+        CurrentEnemyState = EnemyState.Idle;
+    }
+    break;
             }
             _currentSprite.Update(gameTime);
             if (_currentSprite.Region != null)

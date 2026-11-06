@@ -1,152 +1,170 @@
+
 using A_Champion_s_Road;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
-using MonoGameLibrary;
-using MonoGameLibrary.Graphics;
-using MonoGameLibrary.Input;
-using System;
-using System.Runtime.CompilerServices;
-
 
 public class CombatSystem
 {
-
-
     public Enemy _enemy { get; set; }
     public Player _player { get; set; }
+
     public bool impacto = false;
 
 
-    public CombatSystem(Enemy _enemy, Player _player)
+    private bool _impactoJugador = false;
+    private bool _impactoEnemigo = false;
+
+    public CombatSystem(Enemy enemy, Player player)
     {
-
-
-        this._enemy = _enemy;
-        this._player = _player;
-
-
+        _enemy = enemy;
+        _player = player;
     }
-
 
     public void Update(GameTime gameTime)
     {
-        int frameActualEnemigo = _enemy.CurrentPunchFrame;
+        int frameActualEnemigo = _enemy.CurrentAttackFrame;
         int frameActualJugador = _player.CurrentPunchFrame;
 
-if (_enemy.CurrentEnemyState != Enemy.EnemyState.Punching || frameActualEnemigo == 0)
+     
+        bool enemigoAtacando =
+            _enemy.CurrentEnemyState == Enemy.EnemyState.Punching ||
+            _enemy.CurrentEnemyState == Enemy.EnemyState.PunchingRight;
+
+        bool enemigoCounterable =
+            enemigoAtacando && _enemy.IsCounterable;
+
+
+        if (!enemigoAtacando || frameActualEnemigo != 2)
         {
+            _impactoJugador = false;
             impacto = false;
         }
 
-        switch ((_player.CurrentState, _enemy.CurrentEnemyState, _enemy.IsCounterable))
+        if (_player.CurrentState != Player.PlayerState.Punching ||
+            frameActualJugador != 2)
         {
-            case (Player.PlayerState.Idle, Enemy.EnemyState.Punching, true):
-                break;
+            _impactoEnemigo = false;
+        }
 
 
-            case (Player.PlayerState.Punching, Enemy.EnemyState.Punching, true):
-                if (frameActualJugador == 2)
+
+        if (_player.CurrentState == Player.PlayerState.Punching)
+        {
+            if (frameActualJugador == 2 && !_impactoEnemigo)
+            {
+                if (enemigoAtacando && enemigoCounterable)
                 {
+               
                     _enemy.CurrentEnemyState = Enemy.EnemyState.Hurting;
-                    _enemy.IsCounterable = false;
-                    // if(_player.staminaActual >= 10)
-                    // {
-                    // _player.staminaActual -= 10;
-                    // }
-                }
-                break;
-            case (Player.PlayerState.Punching, Enemy.EnemyState.Idle, false):
-                if (frameActualJugador == 2)
-                {
                     _enemy.RecibirGolpe();
-                    // if(_player.staminaActual >= 10)
-                    // {
-                    // _player.staminaActual -= 10;
-                    // }
+                    _enemy.RecibirGolpe();
+                    _enemy.IsCounterable = false;
+
+                    _impactoEnemigo = true;
                 }
-                break;
-
-
-            case (Player.PlayerState.Dodging, Enemy.EnemyState.Punching, true):
-
-
-                if (_player.IsDodgeFinished)
+                else if (_enemy.CurrentEnemyState == Enemy.EnemyState.Idle && _enemy.Vulnerable == false)
                 {
-                    _player.HacerVulnerable();
+                
+                    _enemy.Bloquear();
+
+                    _impactoEnemigo = true;
                 }
-                break;
-
-
-            case (Player.PlayerState.Dodging, Enemy.EnemyState.Punching, false):
-
-                if (_player.Vulnerable)
+                else if (_enemy.Vulnerable)
                 {
-                    if (frameActualEnemigo == 2)
-                    {
-                        if (impacto == false)
-                        {
-                            _player.RecibirGolpe(); 
-                        impacto = true;
-                        }
                     
-                    }
-                        
+                    _enemy.RecibirGolpe();
+                    _impactoEnemigo = true;
                 }
-                else if (frameActualEnemigo == 1 || frameActualEnemigo == 2)
+                else if (enemigoAtacando && !enemigoCounterable)
                 {
-                    _enemy.Vulnerable = true;
-                    _enemy.CurrentEnemyState = Enemy.EnemyState.Idle;
-                    if(_player.staminaActual <= 95)
+   
+                    if (!_impactoJugador)
                     {
-                        _player.staminaActual += 5;
+                        _player.RecibirGolpe();
+                        _impactoJugador = true;
+                        impacto = true;
                     }
                 }
-                break;
+            }
+
+            return;
+        }
 
 
-            case (Player.PlayerState.Punching, Enemy.EnemyState.Punching, false):
-                // El jugador golpeó fuera de tiempo (cuando el enemigo ya no es counterable) -> El jugador recibe daño
-                if (impacto == false)
+
+        if (_player.CurrentState == Player.PlayerState.Dodging)
+        {
+            if (enemigoAtacando)
+            {
+                if (enemigoCounterable)
+                {
+                    if (_player.IsDodgeFinished)
+                    {
+                        _player.HacerVulnerable();
+                    }
+                }
+                else
+                {
+                    if (_player.Vulnerable)
+                    {
+                        if (frameActualEnemigo == 2 &&
+                            !_impactoJugador)
                         {
-                            _player.RecibirGolpe(); 
-                        impacto = true;
+                            _player.RecibirGolpe();
+                            _impactoJugador = true;
+                            impacto = true;
                         }
-                break;
-            case (Player.PlayerState.Dodging, Enemy.EnemyState.Idle, false):
+                    }
+                    else if (frameActualEnemigo == 1 ||
+                             frameActualEnemigo == 2)
+                    {
+
+                        _enemy.HacerseVulnerable();
+
+                        if (_player.staminaActual <= 95)
+                        {
+                            _player.staminaActual += 5;
+                        }
+                    }
+                }
+            }
+            else if (_enemy.CurrentEnemyState == Enemy.EnemyState.Idle)
+            {
                 if (!_enemy.Vulnerable)
+                {
                     _player.HacerVulnerable();
-
-                break;
-            default:
-                if (_enemy.CurrentEnemyState == Enemy.EnemyState.Punching && frameActualEnemigo == 2 && _player.CurrentState == Player.PlayerState.Idle)
-                {
-                    if (impacto == false)
-                        {
-                            _player.RecibirGolpe(); 
-impacto = true;
-                        }
                 }
-                if (_player.Vulnerable &&
-                _enemy.CurrentEnemyState == Enemy.EnemyState.Punching &&
-                frameActualEnemigo >= 2 &&
-                _player.CurrentState != Player.PlayerState.Hurting)
-                {
-                    if (impacto == false)
-                        {
-                            _player.RecibirGolpe(); 
-impacto = true;
-                        }
-                }
+            }
+
+            return;
+        }
 
 
 
-                break;
+        if (_player.CurrentState == Player.PlayerState.Idle)
+        {
+            if (enemigoAtacando &&
+                !enemigoCounterable &&
+                frameActualEnemigo == 2 &&
+                !_impactoJugador)
+            {
+                _player.RecibirGolpe();
+
+                _impactoJugador = true;
+                impacto = true;
+            }
+        }
+
+
+        if (_player.Vulnerable &&
+            enemigoAtacando &&
+            frameActualEnemigo >= 2 &&
+            _player.CurrentState != Player.PlayerState.Hurting &&
+            !_impactoJugador)
+        {
+            _player.RecibirGolpe();
+
+            _impactoJugador = true;
+            impacto = true;
         }
     }
-
-
-
-
 }

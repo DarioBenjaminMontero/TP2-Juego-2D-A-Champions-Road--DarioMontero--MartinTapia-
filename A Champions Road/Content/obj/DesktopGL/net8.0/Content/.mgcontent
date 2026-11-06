@@ -10,6 +10,7 @@
     <File>C:/Users/Julio/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/danteVegaAtlas.png</File>
     <File>C:/Users/Julio/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/enemy1.png</File>
     <File>C:/Users/Julio/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/enemy2.png</File>
+    <File>C:/Users/Julio/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/enemigo3.png</File>
     <File>C:/Users/Julio/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/gameover.png</File>
     <File>C:/Users/Julio/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/inicioCombateTexto.png</File>
     <File>C:/Users/Julio/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/opciones.png</File>
@@ -23,6 +24,7 @@
     <File>C:/Users/Julio/Desktop/TP2-Juego-2D-A-Champions-Road--DarioMontero--MartinTapia-/A Champions Road/Content/vida.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
