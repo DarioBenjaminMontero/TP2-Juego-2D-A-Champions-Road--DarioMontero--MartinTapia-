@@ -20,7 +20,6 @@ public class GameOver : Scene
     public override void Initialize()
     {
         base.Initialize();
-        Core.ExitOnEscape = true; // apreto ESC y se cierra el juego
 
         _pantallaCompleta = Core.GraphicsDevice.PresentationParameters.Bounds;
         IniciarUI();
@@ -50,6 +49,7 @@ public class GameOver : Scene
         botonRetry.Width = 90;
         botonRetry.Text = "Reintentar";
         botonRetry.Click += RetryFuncion;
+        botonRetry.IsFocused = true;
         _panelMenu.AddChild(botonRetry);
 
         var botonMenu = new Button();
