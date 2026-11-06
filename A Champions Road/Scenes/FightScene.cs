@@ -167,7 +167,7 @@ Core.ExitOnEscape = false;
                         return;
                     }
                         _player.ReiniciarRound();
-                        _enemy.ReiniciarRound();
+                        _enemy.vidaActual = 200;
                         _textoInicio.Reset();
                         _estado = EstadoPelea.Intro;
                         break;
